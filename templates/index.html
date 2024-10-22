@@ -5,30 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/style.css"> 
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="navbar__logo">
-            <a href="/">Ewha Market</a>
+            <a href="index.html">Ewha Market</a>
         </div>
         <ul class="navbar__menu">
-            <li><a href="/category">카테고리</a></li>
-            <li><a href="/best_review">베스트리뷰</a></li>
-            <li><a href="/mypage">마이페이지</a></li>
-            <li><a href="/submit_item">판매하기</a></li>
+            <li><a href="category.html">카테고리</a></li>
+            <li><a href="best_review.html">베스트리뷰</a></li>
+            <li><a href="mypage.html">마이페이지</a></li>
+            <li><a href="reg_items.html">판매하기</a></li>
         </ul>
         <a href="#" class="navbar__toogleBtn">
             <i class="fas fa-bars"></i>
         </a>
     </nav>
-    <section>
-        {% block section %}
+<section>
+    {% block section %}
 
-        {% endblock section %}
-    </section>
+    {% endblock section %}
+</section>
 </body>
 
 </html>

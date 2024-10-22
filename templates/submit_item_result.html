@@ -1,12 +1,27 @@
-{% extends "index.html" %}
+{%extends "index_ewhamarket.html"%}
 
 {% block section %}
-<p>
-    Seller {{data.seller}} sells {{data.name}} and its category is {{data.category}}.
-</p>
-<p>
-    Contact via {{data.email}} or {{data.phone}}
-    if you are interested!
-</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='style_ewhamarket.css') }}">
+<script src="{{ url_for('static', filename='main.js') }}" defer></script>
+
+
+<div class="product-container">
+    <div class="image-box">
+        <img src="{{ img_path }}" class="product-image"/>
+    </div>
+
+    <div class="info-box">
+        <h1 class="item-name">{{ data.name }}</h1>
+        <ul>
+            <li>판매자: {{ data.seller }}</li>
+            <li>카테고리: {{ data.category }}</li>
+            <li>{{ data.price }}원</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="product-description">
+    <p>상품 정보: {{ data.info }}</p>
 
 {% endblock section %}
