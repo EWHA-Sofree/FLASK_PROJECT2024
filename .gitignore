@@ -1,2 +1,43 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Flask
+instance/
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# JavaScript
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Firebase
+firebase-debug.log
+.firebaserc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
