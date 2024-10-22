@@ -1,0 +1,40 @@
+{%extends "index_ewhamarket.html"%}
+
+{% block section %}
+<div class="reg_items_form">
+    <form action="/submit_item_post" method="post" enctype="multipart/form-data">
+        <h1>상품 판매하기</h1>
+        <div><br><br>
+            <label for="name">상품 이름 </label>
+            <textarea name="name" id="name" rows="1" cols="50" required></textarea><br><br>
+        </div>
+        <div>
+            <label for="seller">판매자ID </label>
+            <input type="text" name="seller" id="seller" required><br><br>
+        </div>
+        <div>
+            <label for="price">가격(원) </label>
+            <input type="text" name="price" id="price" required><br><br>
+        </div>
+        <div>
+            <label for="info">상품 정보 </label><br>
+            <textarea name="info" id="info" rows="5" cols="50" required></textarea><br><br>
+        </div>
+        <div>
+            <label for="category">카테고리 </label>
+            <select id="category" name="category">
+                <option value="Accessory" selected>악세서리</option>
+                <option value="HomeDeco">홈데코</option>
+                <option value="Stationery">문구</option>
+                <option value="Clothes">의류</option>
+                <option value="Digital">디지털</option>
+            </select><br><br>
+        </div>
+
+        <div>
+            <label for="img">대표사진 </label>
+            <input type="file" name="file" /><br><br>
+        </div>
+        <input type="submit" value="Submit!"><br><br>
+    </form>
+    {% endblock section %}
