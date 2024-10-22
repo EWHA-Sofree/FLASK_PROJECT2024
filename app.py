@@ -37,7 +37,7 @@ def reg_item_submit_post():
     print(f"Form data: {data}")
     
     return render_template(
-        "submit_item_result.html",
+        "result.html",
         data=data,
         img_path="static/image/{}".format(image_file.filename),
     )
