@@ -9,8 +9,9 @@ def hello():
   return render_template("index.html") 
 
 @application.route("/category")
-def view_category():
-  return render_template("category.html")
+@application.route("/category/<category_name>")
+def view_category(category_name="stationery"):
+    return render_template("category.html", category_name=category_name)
 
 @application.route("/best_review")
 def view_review():
