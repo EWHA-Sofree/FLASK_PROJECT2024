@@ -21,7 +21,7 @@
                     <img src="{{ url_for('static', filename='image/login_icon.png') }}" alt="Login Icon" class="icon">
                     로그인/회원가입
                 </a>
-                <a href="/reg_items" class="header__link">
+                <a href="/reg_item" class="header__link">
                     <img src="{{ url_for('static', filename='image/sell_icon.png') }}" alt="Sell Icon" class="icon">
                     판매하기
                 </a>
@@ -43,7 +43,7 @@
                 </ul>
             
             </li>
-            <li><a href="/best_review">베스트리뷰</a></li>
+            <li><a href="/reviews_list">베스트리뷰</a></li>
             <li><a href="/mypage">마이페이지</a></li>
         </ul>
         <a href="#" class="navbar__toggleBtn">
@@ -52,7 +52,7 @@
     
     <section>
         {% block section %}
-
+        
         {% endblock section %}
     </section>
 </body>
