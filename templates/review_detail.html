@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block section %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="review-container">
+    <h1 class="product-name">{{ data.product_name }}</h1>
+    <div class="rating">별점: {{ data.rating }} / 5</div>
+    
+    <div class="review-text">
+        <p>{{ data.review_text }}</p>
+    </div>
+    
+    <div class="review-image">
+        <img src="{{ data.review_image }}" alt="리뷰 이미지">
+    </div>
+</div>
+{% endblock section %}
