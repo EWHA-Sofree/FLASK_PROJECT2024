@@ -1,18 +1,51 @@
 {% extends "index.html" %}
 
 {% block section %}
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/review_detail.css') }}">
 
 <div class="review-container">
-    <h1 class="product-name">{{ data.product_name }}</h1>
-    <div class="rating">별점: {{ data.rating }} / 5</div>
+
+    <h2 class="review-title">리뷰 상세</h2>
+    <div class="product-name">{{ data.product_name }}</div>
     
-    <div class="review-text">
-        <p>{{ data.review_text }}</p>
+    <div class="review-user-info">
+        <div class="user-info">
+            <span class="id-label">ID:</span> 
+            <span class="id-value">{{ data.user_id }}</span>
+        </div>
+        <div class="rating">
+            {% for i in range(data.rating) %}
+                ★
+            {% endfor %}
+            {% for i in range(5 - data.rating) %}
+                ☆
+            {% endfor %}
+        </div>
     </div>
-    
+
+    <hr class="divider">
+
     <div class="review-image">
-        <img src="{{ data.review_image }}" alt="리뷰 이미지">
+        {% if data.review_image %}
+            <img src="{{ url_for('static', filename=data.review_image) }}" alt="리뷰 이미지">
+        {% else %}
+            <div class="no-image-placeholder">
+                이미지가 첨부되지 않았습니다.
+            </div>
+        {% endif %}
+    </div>
+
+    <hr class="divider">
+
+    <div class="review-content">
+        <p class="review-text">{{ data.review_text }}</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="button-container">
+        <input type="button" class="btn previous" value="이전으로" onclick="window.history.back();">
     </div>
 </div>
+
 {% endblock section %}

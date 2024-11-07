@@ -1,26 +1,37 @@
 {%extends "index.html"%}
 
 {% block section %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_review.css') }}">
 
 <div class="review-container">
+
     <h2 class="review-title">리뷰 작성하기</h2>
     <div class="product-name">[사계절 햇빛차단🌟] 시어링 팔토시 핸드워머</div>
     
     <div class="review-section">
-        <label for="review-text">별점</label>
-        <textarea id="review-text" rows="5" placeholder="소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!&#10;여름에 발열 입거나 방가을 겹칠 때 착용할 것 같아요 ^ㅇ^"></textarea>
+
+        <label for="review-text">상품 별점 : </label>
+        <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+            <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+            <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+            <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+            <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+        </div>
+        
+        <textarea id="review-text" name="review" rows="5" placeholder="리뷰를 작성해주세요">소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!&#10;여름에 반팔 입거나 봄가을 환절기 때 잘 착용할 것 같아요 ^ㅇ^</textarea>
+
     </div>
     
     <div class="photo-section">
         <label for="file-input">사진 첨부</label>
-        <input id="file-input" type="text" placeholder="팔토시후기.png" readonly />
+        <input id="file-input" type="file" />
     </div>
 
     <div class="button-container">
-        <button class="btn previous">이전으로</button>
-        <button class="btn submit">등록</button>
+        <input type="button" class="btn previous" value="이전으로">
+        <input type="submit" class="btn submit" value="등록">
     </div>
 </div>
-
 
 {% endblock section %}

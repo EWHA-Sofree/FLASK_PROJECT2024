@@ -1,0 +1,210 @@
+/* 마이페이지 화면 정렬*/
+.wrap{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding-top: 10px;
+}
+
+.mypage{
+    width: 100%;
+    max-width: 600px; 
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 내 정보 섹션 */
+.my_info{
+    display: inline-flex;
+    width: 100%;
+    border: 1px solid gray;
+}
+
+.pfimg{
+    width: 130px;
+    height: 130px;
+    padding: 20px 20px 0;
+}
+
+.profile{
+    padding: 5px;
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+.info_container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.info_header{
+    margin: 0px 15px 10px;
+    border-bottom: 1px solid #035A3C;
+    width: 385px;
+    display: flex;  /* title과 수정하기 버튼 정렬 */
+    justify-content: space-between;
+}
+
+.info_header h2{
+    padding-left: 5px;
+}
+
+.info_container table{
+    font-weight: 600;
+    text-align: left;
+    padding: 15px 15px 25px;
+}
+
+td{
+    padding: 5px;
+}
+
+/* 버튼 스타일 */
+.btn{
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #035A3C;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    width : 100px;
+    height: 28px;
+}
+
+.btn:hover{
+    background-color: #028b53;
+}
+
+
+/* 구매내역 섹션 */
+.purchase_history{
+    padding: 20px 0px 20px; /* 위아래 섹션과 겹치치 않도록 간격 설정 */
+}
+
+.purchase_header{
+    display:flex;   /* title과 리뷰쓰기 버튼 정렬 */
+    justify-content: space-between;
+}
+
+/* 상품 UI 카드 정렬 */
+.ui_grid{
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+ul{
+   padding-left: 0;
+    list-style: none;
+   display: flex;
+   justify-content: center;
+}
+
+a{
+   text-decoration: none;  
+   color: black;
+}
+
+/* 상품 UI 카드 스타일 */
+.ui_card__imgcover img{
+    display: block;
+    width: 142px; 
+    height: 142px;
+
+}
+
+.ui_card__imgcover, .ui_card__info{
+    flex: 1 1 142px;    /* 상품 카드 초기 크기 설정 */
+    padding-bottom: 10px;
+}
+
+.ui_card__info{
+    padding: 0px 5px 10px;
+}
+
+.ui_card__price{
+    font-weight: bold;
+}
+
+.ui_grid ul{
+    margin-top: 0;
+}
+
+.ui_card{
+    margin-right:10px;
+    border: 1px solid #e6e6e6;
+    background-color: white;
+}
+
+.ui_card:hover{
+    background-color: #e6e6e6;
+}
+
+/* 판매내역 섹션 */
+.sales_history p{
+    text-align: center;
+    margin: 80px;
+}
+
+/* 위시리스트 섹션과 나의 리뷰 섹션을 수평으로 정렬 */
+.wish-review{
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+/* 위시리스트 섹션 */
+.wishlist{
+    flex: 1 1 290px;  /* 섹션 초기 크기 설정 */
+    padding-right: 10px;    /* 섹션 간 간격 설정 */
+}
+
+/* 나의 리뷰 섹션 */
+.my_review{
+    flex: 1 1 290px;  
+}
+
+
+.my_review td{
+    background-color: #e6e6e6;  /* 리뷰 카드 스타일 */
+    border: 1px solid #e6e6e6;  
+    border-radius: 5px;
+}
+
+.my_review td:hover{
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+
+.my_review table{
+    border-collapse: separate;  /* 테이블 셀 간격 추가 */
+    border-spacing: 8px;
+}
+
+.review_content{
+    padding: 3px;
+}
+
+
+.review_content p{
+    margin: 0;
+}
+
+.date{
+    float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
+    color: gray;
+    padding-left: 20px;
+    font-weight: 500;
+}
+
+.rating{
+   float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
+    color:#035A3C;
+}
+
+.text {
+   clear:left;
+}
+
