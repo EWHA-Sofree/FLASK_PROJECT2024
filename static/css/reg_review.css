@@ -1,0 +1,113 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* 리뷰 작성 섹션 */
+.review-container {
+    width: 70%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.review-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    color: #666;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 별점 */
+.star-rating {
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    order: 1;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+    color: #f5b301;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffa500; 
+}
+
+/* 텍스트 입력 */
+#review-text {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e9e9e9;
+    resize: none;
+}
+
+/* 사진 첨부 */
+.photo-section input[type="file"] {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e9e9e9;
+    text-align: center;
+}
+
+/* 버튼 */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn.previous {
+    background-color: #ccc;
+    color: #333;
+}
+
+.btn.previous:hover {
+    background-color: #bbb;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn.submit {
+    background-color: #005a37;
+    color: white;
+    margin-right: -20px;
+}
+
+.btn.submit:hover {
+    background-color: #004d2f;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
