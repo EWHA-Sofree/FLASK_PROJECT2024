@@ -1,27 +1,50 @@
-{%extends "index.html"%}
+{% extends "index.html" %}
 
 {% block section %}
-<link rel="stylesheet" href="{{ url_for('static', filename='item_detail_style.css') }}">
-<script src="{{ url_for('static', filename='main.js') }}" defer></script>
-
+<link rel="stylesheet" href="{{ url_for('static/css', filename='css/item_detail.css') }}">
+<script src="{{ url_for('static/css', filename='main.js') }}" defer></script>
 
 <div class="product-container">
     <div class="image-box">
-        <img src="{{ img_path }}" class="product-image"/>
+        <img src="{{ img_path }}" class="product-image" />
     </div>
 
     <div class="info-box">
         <h1 class="item-name">{{ data.name }}</h1>
+        <div class="separator"></div>
         <ul>
             <li>판매자: {{ data.seller }}</li>
             <li>카테고리: {{ data.category }}</li>
-            <li>{{ data.price }}원</li>
         </ul>
+        <div class="separator"></div>
+        <div class="price">{{ data.price }}원</div>
+
+        <!-- 위시리스트와 구매하기 버튼 추가 -->
+        <div class="buttons">
+            <button class="wishlist-btn">위시리스트 ♥</button>
+            <button class="buy-btn">구매하기</button>
+        </div>
     </div>
 </div>
 
-
+<!-- 상품 정보 -->
+<h2 class="info-title">상품 정보</h2>
 <div class="product-description">
-    <p>상품 정보: {{ data.info }}</p>
+    <div class="product-info">
+        <p>{{ data.info }}</p>
+    </div>
+</div>
 
+<!-- 리뷰 박스 생성 -->
+<div class="reviews">
+    <h2 class="review-title">상품에 달린 리뷰</h2>
+    <div class="review-box">
+        <div class="review-item">
+            <strong>아이디: 예지</strong>
+            <p>구매 상품: [사계절 햇빛차단☀️] 시어링 팔토시 핸드워머</p>
+            <div class="separator"></div>
+            <p>겨울에 잘 사용했어요ㅎㅎ 색 배색이 이쁘고 좋았구, 쫀쫀해서 더 좋았어요 :)</p>
+        </div>
+    </div>
+</div>
 {% endblock section %}
