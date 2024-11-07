@@ -1,10 +1,13 @@
-{%extends "index.html"%}
+{% extends "index.html" %}
 
 {% block section %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_item.css') }}">
+<script src="{{ url_for('static', filename='main.js') }}" defer></script>
+
 <div class="reg_items_form">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
-        <h1>상품 판매하기</h1>
-        <div><br><br>
+        <h1 class="form-title">상품 판매하기</h1>
+        <div>
             <label for="name">상품 이름 </label>
             <textarea name="name" id="name" rows="1" cols="50" required></textarea><br><br>
         </div>
@@ -21,20 +24,24 @@
             <textarea name="info" id="info" rows="5" cols="50" required></textarea><br><br>
         </div>
         <div>
-            <label for="category">카테고리 </label>
-            <select id="category" name="category">
-                <option value="Accessory" selected>악세서리</option>
-                <option value="Homedeco">홈데코</option>
-                <option value="Stationery">문구</option>
-                <option value="Clothes">의류</option>
-                <option value="Digital">디지털</option>
-            </select><br><br>
+            <label for="category">카테고리</label><br>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="category" value="Accessory"> 악세서리</label>
+                <label><input type="checkbox" name="category" value="Homedeco"> 홈데코</label>
+                <label><input type="checkbox" name="category" value="Stationery"> 문구</label>
+                <label><input type="checkbox" name="category" value="Clothes"> 의류</label>
+                <label><input type="checkbox" name="category" value="Digital"> 디지털</label>
+            </div>
+            <br><br>
         </div>
 
         <div>
             <label for="img">대표사진 </label>
             <input type="file" name="file" /><br><br>
         </div>
-        <input type="submit" value="Submit!"><br><br>
+        <div class="button-container">
+            <input type="submit" value="판매 상품 등록" class="submit-btn">
+        </div>
     </form>
-    {% endblock section %}
+</div>
+{% endblock section %}
