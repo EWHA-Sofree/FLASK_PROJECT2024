@@ -1,6 +1,9 @@
 {%extends "index.html"%}
 
 {% block section %}
+<link rel="stylesheet" href="{{ url_for('static', filename='reg_item_style.css') }}">
+<script src="{{ url_for('static', filename='main.js') }}" defer></script>
+
 <div class="reg_items_form">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
         <h1>상품 판매하기</h1>

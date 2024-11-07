@@ -33,10 +33,19 @@ body {
     color: white;
     text-decoration: none;
     font-size: 14px;
+    display: flex;
+    flex-direction: column; /* 아이콘을 위, 텍스트를 아래에 배치 */
+    align-items: center; /* 아이콘과 텍스트를 수직 중앙 정렬 */
+    gap: 5px; /* 아이콘과 텍스트 사이 간격 */
 }
 
 .header__link:hover {
     text-decoration: underline;
+}
+
+.header__link img.icon {
+    width: 40px;
+    height: 40px;
 }
 
 /* 네비게이션 바 스타일 */
@@ -56,6 +65,10 @@ body {
     padding: 0;
 }
 
+.navbar__menu li {
+    position: relative; /* 하위 메뉴 위치 설정을 위해 추가 */
+}
+
 .navbar__menu a {
     color: #035A3C;
     text-decoration: none;
@@ -67,100 +80,38 @@ body {
     color: #028b53;
 }
 
-
-/* 상품 등록 화면 */
-.reg_items_form {
+/* 드롭다운 메뉴 스타일 */
+.navbar__menu li:hover .submenu {
     display: flex;
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 정렬을 상단으로 설정 */
-    padding-top: 10px; /* 네비게이션 바와 겹치지 않도록 상단 여백 추가 */
+    justify-content: space-around;
 }
 
-form {
-    width: 100%;
-    max-width: 600px; /* 최대 너비 설정 */
-    padding: 20px;
-    background-color: #f9f9f9; /* 배경색 (선택 사항) */
-    border-radius: 8px; /* 모서리를 둥글게 */
-}
-
-/* 폼 요소 간의 간격 설정 */
-form div, form input, form textarea {
-    width: 100%; /* 폼 요소가 전체 너비를 차지하도록 */
-    margin-bottom: 2px; /* 요소 간 간격 */
-}
-
-form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* 카테고리 선택란의 너비 조정 */
-select#category {
-    width: auto; /* 기본 너비 설정 (너무 길지 않도록) */
-    max-width: 200px; /* 최대 너비 제한 */
-}
-
-
-
-/*상품 조회 화면*/
-.product-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 350px;
+    background-color: white;
     border: 1px solid #ddd;
-    margin: 20px auto; /* 상하 마진은 20px, 좌우 마진은 자동으로 설정 */
-    background-color: #f9f9f9;
-    gap: 20px;
-    max-width: 650px; /* 최대 너비를 설정하여 중앙에 고정 */
-    width: 100%; /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none; /* 동그라미 제거 */
 }
 
-.image-box {
-    margin-right: 20px;
+.submenu li {
+    padding: 5px 15px;
+    white-space: nowrap;
 }
 
-/* 상품 정보 사진 크기 조정*/ 
-.product-image {
-    width: 300px; /* 이미지의 너비를 300px로 고정 */
-    height: auto; /* 비율을 유지하면서 높이를 자동으로 조정 */
+.submenu li a {
+    color: #035A3C;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.item-name {
-    font-size: px; /* 원하는 글씨 크기 */
-    font-weight: bold; /* 굵은 글씨 */
-    color: #111715; /* 초록색 또는 원하는 색상 */
-    margin-bottom: 10px; /* 아래 여백 추가 */
-}
-
-.info-box {
-    flex: 1; /* 정보 박스도 너비를 자유롭게 조정 */
-    padding: 10px;
-    background-color: #e6e6e6; /* 배경색 설정 */
-    border-radius: 8px; /* 모서리 둥글게 */
-}
-
-.info-box ul {
-    list-style-type: none; /* 목록 스타일 제거 */
-    padding: 0;
-    margin: 0;
-}
-
-.info-box li {
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-/* 상품 정보 부분 */
-.product-description {
-    margin: 20px auto;
-    text-align: center; /* 중앙 정렬 */
-    padding: 10px;
-    background-color: #ffffff; /* 내부 배경색을 흰색으로 설정 */
-    border: 1px solid #035A3C; /* 테두리를 초록색(#035A3C)으로 설정 */
-    border-radius: 8px; /* 모서리를 둥글게 설정 */
-    max-width: 650px; /* 최대 너비를 설정하여 중앙에 고정 */
-    width: 100%; /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
+.submenu li a:hover {
+    color: #028b53;
+    background-color: #f5f5f5;
 }

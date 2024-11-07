@@ -1,0 +1,26 @@
+{%extends "index.html"%}
+
+{% block section %}
+
+<div class="review-container">
+    <h2 class="review-title">리뷰 작성하기</h2>
+    <div class="product-name">[사계절 햇빛차단🌟] 시어링 팔토시 핸드워머</div>
+    
+    <div class="review-section">
+        <label for="review-text">별점</label>
+        <textarea id="review-text" rows="5" placeholder="소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!&#10;여름에 발열 입거나 방가을 겹칠 때 착용할 것 같아요 ^ㅇ^"></textarea>
+    </div>
+    
+    <div class="photo-section">
+        <label for="file-input">사진 첨부</label>
+        <input id="file-input" type="text" placeholder="팔토시후기.png" readonly />
+    </div>
+
+    <div class="button-container">
+        <button class="btn previous">이전으로</button>
+        <button class="btn submit">등록</button>
+    </div>
+</div>
+
+
+{% endblock section %}

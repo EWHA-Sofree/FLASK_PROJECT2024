@@ -13,10 +13,18 @@
     <!--상단 배너-->
     <header class="header">
         <div class="header__container">
-            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="EwhaMarket Logo" class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="EwhaMarket Logo" class="logo">
+            </a>
             <div class="header__actions">
-                <a href="/login" class="header__link">로그인/회원가입</a>
-                <a href="/reg_items" class="header__link">판매하기</a>
+                <a href="/login" class="header__link">
+                    <img src="{{ url_for('static', filename='image/login_icon.png') }}" alt="Login Icon" class="icon">
+                    로그인/회원가입
+                </a>
+                <a href="/reg_item" class="header__link">
+                    <img src="{{ url_for('static', filename='image/sell_icon.png') }}" alt="Sell Icon" class="icon">
+                    판매하기
+                </a>
             </div>
         </div>
     </header>
@@ -24,16 +32,27 @@
     <!--네비게이션바-->
     <nav class="navbar">
         <ul class="navbar__menu">
-            <li><a href="/category">카테고리</a></li>
-            <li><a href="/best_review">베스트리뷰</a></li>
+            <li>
+                <a href="/category">카테고리</a>
+                <ul class="submenu">
+                    <li><a href="/category/stationery">문구</a></li>
+                    <li><a href="/category/accessories">액세서리</a></li>
+                    <li><a href="/category/digital">디지털</a></li>
+                    <li><a href="/category/clothing">의류</a></li>
+                    <li><a href="/category/homedeco">홈데코</a></li>
+                </ul>
+            
+            </li>
+            <li><a href="/reviews_list">베스트리뷰</a></li>
             <li><a href="/mypage">마이페이지</a></li>
         </ul>
         <a href="#" class="navbar__toggleBtn">
             <i class="fas fa-bars"></i> </a>
     </nav>
+    
     <section>
         {% block section %}
-
+        
         {% endblock section %}
     </section>
 </body>
