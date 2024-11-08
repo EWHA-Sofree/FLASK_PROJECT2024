@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     margin: 20px auto; 
     background-color: #f9f9f9;
@@ -132,7 +132,7 @@ body {
 .review-title {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 20px;    
+    margin-bottom: 10px;    
     text-align: left;
 }
 
@@ -145,10 +145,32 @@ body {
     border-radius: 8px;
 }
 
+.rating {
+    font-size: 1rem;
+    color: #f5b301;
+    text-align: left;
+}
+
+.review-mini-image {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+
+.review-mini-image img{
+    height: 80px;
+    max-width: 80px;
+}
+
 .review-item {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .review-text {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start; /* 아이템들이 위쪽에 맞춰 정렬되도록 설정 */
+    gap: 20px; /* 이미지와 텍스트 사이의 간격 설정 */
     color: #727272;
+    margin: 0; /* 여백 제거 */
 }
