@@ -1,0 +1,70 @@
+/* Centering the login container */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Styling the title */
+.login-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Input label styling */
+.input-label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input field styling */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Login button styling */
+.login-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: #006400;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Signup button styling */
+.signup-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: white;
+    color: #006400;
+    border: 1px solid #006400;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Remove underline from signup link */
+.signup-link {
+    text-decoration: none;
+}
