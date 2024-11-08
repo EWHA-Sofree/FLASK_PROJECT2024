@@ -1,6 +1,82 @@
 {% extends "index.html" %}
 
 {% block section %}
-    <h1>메인 페이지 콘텐츠</h1>
-    <p>여기에 메인 페이지의 내용이 들어갑니다.</p>
-{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='main.js') }}" defer></script>
+
+<!-- 프로모션 영역 -->
+<div class="mainpage">
+    <div class="main-slider-promotion">
+        <div class="main-slider">
+            <div class="main-slide">
+                <img src="static/image/main.png" alt="Slide 1">
+            </div>
+            <div class="main-slide">
+                <img src="static/image/main2.png" alt="Slide 2">
+            </div>
+        </div>
+    </div>
+
+    <div class="all_item">
+        <div class="all_item_title">
+            <h2>전체상품</h2>
+        </div>
+        <div class="ui_grid">
+            <ul class="ui_grid__cols--4">
+                <li class="ui_grid__item">
+                    <div class="ui_card">
+                        <div class="ui_card__imgcover">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='image/product1.png') }}" alt="product1">
+                            </a>
+                        </div>
+                        <div class="ui_card__info">
+                            <a href="#" class="ui_card__title" target="_blank">[데일리템⭐]투톤 체크 스크런치 </a><br>
+                            <a href="#" class="ui_card__price" target="_blank">4,000원</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="ui_grid__item">
+                    <div class="ui_card">
+                        <div class="ui_card__imgcover">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='image/product2.png') }}" alt="product2">
+                            </a>
+                        </div>
+                        <div class="ui_card__info">
+                            <a href="#" class="ui_card__title" target="_blank">💡뜨개 무드등(갓+전구 set) </a><br>
+                            <a href="#" class="ui_card__price" target="_blank">11,000원</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="ui_grid__item">
+                    <div class="ui_card">
+                        <div class="ui_card__imgcover">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='image/product3.png') }}" alt="product3">
+                            </a>
+                        </div>
+                        <div class="ui_card__info">
+                            <a href="#" class="ui_card__title" target="_blank">커스텀 자수🧶앞치마[3종류] </a><br>
+                            <a href="#" class="ui_card__price" target="_blank">23,000원</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="ui_grid__item">
+                    <div class="ui_card">
+                        <div class="ui_card__imgcover">
+                            <a href="#">
+                                <img src="{{ url_for('static', filename='image/product4.png') }}" alt="product4">
+                            </a>
+                        </div>
+                        <div class="ui_card__info">
+                            <a href="#" class="ui_card__title" target="_blank">손뜨개 달개비🪻책갈피 </a><br>
+                            <a href="#" class="ui_card__price" target="_blank">9,500원</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    {% endblock %}
