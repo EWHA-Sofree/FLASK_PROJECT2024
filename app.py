@@ -28,7 +28,7 @@ def view_review_list():
 def view_mypage():
   return render_template("mypage.html")
 
-@application.route("/reg_item") #판매하기
+@application.route("/reg_item")
 def reg_item():
     return render_template("reg_item.html")
   
@@ -37,7 +37,7 @@ def reg_review():
     return render_template("reg_review.html")
 
 @application.route("/login")
-def log_in():
+def login():
     return render_template("login.html")
   
 @application.route("/sign_up")
