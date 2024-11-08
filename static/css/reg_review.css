@@ -5,8 +5,8 @@ body {
 
 /* 리뷰 작성 섹션 */
 .review-container {
-    margin: 20px;
-    padding: 10px;
+    margin: 20px auto;
+    padding: 20px;
     max-width: 600px;
     width: 100%;
 }

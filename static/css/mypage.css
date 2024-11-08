@@ -181,7 +181,6 @@ a{
 
 .my_review table{
     border-collapse: separate;  /* 테이블 셀 간격 추가 */
-    border-spacing: 8px;
 }
 
 .review_content{
