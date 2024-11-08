@@ -1,0 +1,75 @@
+/* Centering the login container */
+.login-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* padding을 포함한 크기 조정 */
+}
+
+/* Styling the title */
+.login-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Input label styling */
+.input-label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Input field styling */
+.input-field {
+    width: 100%; /* 컨테이너 너비에 맞춤 */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* padding을 포함한 크기 조정 */
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Login button styling */
+.login-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: #006400;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Signup button styling */
+.signup-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: white;
+    color: #006400;
+    border: 1px solid #006400;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Remove underline from signup link */
+.signup-link {
+    text-decoration: none;
+}
