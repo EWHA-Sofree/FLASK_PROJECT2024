@@ -1,11 +1,12 @@
 /* Centering the login container */
 .login-container {
+    max-width: 400px;
     margin: 20px auto;
-    padding: 10px;
-    max-width: 600px;
+    padding: 20px;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
+    box-sizing: border-box; /* padding을 포함한 크기 조정 */
 }
 
 /* Styling the title */
@@ -28,13 +29,13 @@
 
 /* Input field styling */
 .input-field {
-    width: 100%;
+    width: 100%; /* 컨테이너 너비에 맞춤 */
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 16px;
+    box-sizing: border-box; /* padding을 포함한 크기 조정 */
 }
 
 /* Button container */
