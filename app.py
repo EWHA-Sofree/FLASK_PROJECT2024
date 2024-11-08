@@ -37,7 +37,7 @@ def reg_review():
     return render_template("reg_review.html")
 
 @application.route("/login")
-def log_in():
+def login():
     return render_template("login.html")
   
 @application.route("/sign_up")
@@ -73,6 +73,7 @@ def item_preview():
     
     return render_template("item_detail.html", data=data, img_path=img_path)
   
+  
 @application.route("/review_preview")
 def review_preview():
     # 임시 미리보기 리뷰 데이터
@@ -85,7 +86,6 @@ def review_preview():
     }
     
     return render_template("review_detail.html", data=review_data)
-
 
 if __name__ == "__main__":
     application.run(host="0.0.0.0")
