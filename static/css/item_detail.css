@@ -12,10 +12,10 @@ body {
     align-items: flex-start;
     padding: 20px;
     border: 1px solid #ddd;
-    margin: 20px auto; /* 상하 마진은 20px, 좌우 마진은 자동으로 설정 */
+    margin: 20px auto; 
     background-color: #f9f9f9;
     gap: 10px;
-    max-width: 650px; /* 최대 너비를 설정하여 중앙에 고정 */
+    max-width: 600px; /* 최대 너비를 설정하여 중앙에 고정 */
     width: 100%; /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
 }
 
@@ -26,7 +26,7 @@ body {
 
 /* 상품 정보 사진 크기 조정 */ 
 .product-image {
-    width: 300px; /* 이미지의 너비를 300px로 고정 */
+    width: 300px;
     height: auto; /* 비율을 유지하면서 높이를 자동으로 조정 */
 }
 
@@ -61,14 +61,14 @@ body {
 }
 
 .info-box ul {
-    list-style-type: none; /* 목록 스타일 제거 */
+    list-style-type: none; 
     padding: 0;
     margin: 0;
 }
 
 .info-box li {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .buttons {
@@ -96,7 +96,7 @@ body {
 }
 
 .info-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px; 
     text-align: left;
@@ -105,25 +105,24 @@ body {
     margin-right: auto; /* 중앙 정렬을 위한 설정 */
 }
 
-
 /* 상품 정보 부분 */
 .product-description {
-    margin: 10px auto; /* 위쪽 마진을 줄여 헤더와 간격 조정 */
-    text-align: center; /* 중앙 정렬 */
-    padding: 40px;
-    background-color: #ffffff; /* 내부 배경색을 흰색으로 설정 */
-    border: 1px solid #035A3C; /* 테두리를 초록색(#035A3C)으로 설정 */
-    border-radius: 8px; /* 모서리를 둥글게 설정 */
+    margin: 10px auto; 
+    text-align: center; 
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #035A3C; 
+    border-radius: 8px;
     max-width: 600px; /* 최대 너비를 설정하여 중앙에 고정 */
-    width: 100%; /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
+    width: 100%; 
 }
 
 /* 리뷰 섹션 */
 .reviews {
     margin: 40px auto;
-    max-width: 650px;
+    max-width: 600px;
     background-color: #f5f5f5;
-    padding: 15px;
+    padding: 10px;
     border-radius: 8px;
     text-align: center;
     border: 1px solid #f5f5f5;
@@ -131,21 +130,25 @@ body {
 
 /* 리뷰 박스 내부 아이템 */
 .review-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 20px;    
     text-align: left;
 }
 
 .review-box {
-    text-align: left; /* 리뷰 내용은 왼쪽 정렬 */
-    margin: 0 auto; /* 박스를 중앙에 배치 */
-    max-width: 600px; /* 최대 너비 설정 */
+    text-align: left; 
+    margin: 0 auto; 
+    max-width: 580px; 
     border: 1px solid #bebebe;
-    padding: 15px;
+    padding:10px;
     border-radius: 8px;
 }
 
 .review-item {
     margin-bottom: 20px;
+}
+
+.review-text {
+    color: #727272;
 }

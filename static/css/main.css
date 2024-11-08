@@ -1,0 +1,90 @@
+
+
+/* 메인 이미지 */
+.main-slider-promotion {
+    width: 100%;
+    overflow: hidden; /* 슬라이더 외부의 이미지 숨기기 */
+    position: relative;
+}
+
+.main-slider {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+.main-slide {
+    min-width: 100%; /* 슬라이드가 전체 화면을 차지하도록 */
+}
+
+.main-slide img {
+    width: 100%;
+    height: auto; /* 이미지 비율 유지 */
+}
+
+/* 전체상품 섹션 */
+.all_item {
+    padding: 20px 0px 20px; /* 위아래 섹션과 겹치치 않도록 간격 설정 */
+    width: 100%;
+    max-width: 600px; 
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.all_item_title{
+    display:flex;   /* title과 리뷰쓰기 버튼 정렬 */
+    justify-content: space-between;
+    color: #025036;
+}
+
+/* 상품 UI 카드 정렬 */
+.ui_grid{
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+ul{
+   padding-left: 0;
+    list-style: none;
+   display: flex;
+   justify-content: center;
+}
+
+a{
+   text-decoration: none;  
+   color: black;
+}
+
+/* 상품 UI 카드 스타일 */
+.ui_card__imgcover img{
+    display: block;
+    width: 142px; 
+    height: 142px;
+}
+
+.ui_card__imgcover, .ui_card__info{
+    flex: 1 1 142px;    /* 상품 카드 초기 크기 설정 */
+    padding-bottom: 10px;
+}
+
+.ui_card__info{
+    padding: 0px 5px 10px;
+}
+
+.ui_card__price{
+    font-weight: bold;
+}
+
+.ui_grid ul{
+    margin-top: 0;
+}
+
+.ui_card{
+    margin-right:10px;
+    border: 1px solid #e6e6e6;
+    background-color: white;
+}
+
+.ui_card:hover{
+    background-color: #e6e6e6;
+}
