@@ -2,7 +2,7 @@
 .signup-container {
     max-width: 600px;
     margin: 20px auto; /* 화면 중앙에 배치 */
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -11,12 +11,10 @@
 
 /* Styling the title */
 .signup-title {
-    font-size: 24px;
-    font-weight: bold;
     color: #333;
     text-align: center;
-    margin-bottom: 20px;
 }
+
 /* Form group layout */
 .signup-form .form-group {
     display: flex;
@@ -54,8 +52,7 @@
     border: 1px solid #006400;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    margin-left: 10px;
+    font-size: 12px;
 }
 
 /* Email domain text */
@@ -81,4 +78,7 @@
 
 .input-info {
     font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #666;
 }

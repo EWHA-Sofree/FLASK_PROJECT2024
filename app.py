@@ -78,7 +78,7 @@ def item_preview():
 def review_preview():
     # 임시 미리보기 리뷰 데이터
     review_data = {
-        "user_id": "화연",  # 작성자의 아이디
+        "user_id": "예지",  # 작성자의 아이디
         "product_name": "[사계절 햇빛차단🌟] 시어링 팔토시 핸드워머",  # 제품 이름
         "rating": 4,  # 1~5의 별점
         "review_text": "소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!\n여름에 반팔 입거나 봄가을 환절기 때 잘 착용할 것 같아요 ^ㅇ^",

@@ -13,7 +13,6 @@ body {
 
 .product-name {
     color: #666;
-    font-size: 16px;
     margin-bottom: 20px;
 }
 
@@ -21,7 +20,7 @@ body {
     align-items: center;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .user-info {
@@ -31,7 +30,6 @@ body {
 }
 
 .id-label {
-    font-weight: bold;
     color: #666;
 }
 
@@ -54,7 +52,7 @@ body {
 
 .review-image {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .review-image img {
@@ -65,14 +63,13 @@ body {
 
 .no-image-placeholder {
     width: 70%;
-    height: 200px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px dashed #ccc;
     border-radius: 5px;
     color: #666;
-    font-size: 1rem;
     margin: 0 auto;
 }
 
@@ -81,7 +78,6 @@ body {
 }
 
 .review-text {
-    font-size: 1.0rem;
     color: #333;
 }
 
