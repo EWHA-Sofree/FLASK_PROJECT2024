@@ -43,7 +43,7 @@ class DBhandler:
         user_info = {
             "id": data['username'],  # "username"으로 수정
             "pw": pw,
-            "nickname": data.get('nickname', '')  # nickname 필드가 없을 경우 기본값으로 빈 문자열 설정
+            "nickname": data.get('name', '')  # nickname 필드가 없을 경우 기본값으로 빈 문자열 설정
         }
         if self.user_duplicate_check(data['username']):  # 여기서도 "username"으로 수정
             self.db.child("user").push(user_info) 
