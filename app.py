@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, redirect, url_for, session
+from database import DBhandler 
+import hashlib
 import sys
 
 application = Flask(__name__)
+application.config["SECRET_KEY"] = "helloosp"
 
+DB = DBhandler()
 
 @application.route("/")
 def hello():
@@ -43,6 +47,39 @@ def login():
 @application.route("/sign_up")
 def sign_up():
     return render_template("sign_up.html")
+
+@application.route("/signup_post", methods=['POST']) 
+def register_user():
+    # 요청 메서드와 폼 데이터 확인
+    print("Request method:", request.method)
+    data = request.form.to_dict()
+    print("Received form data:", data)  # 전체 데이터를 딕셔너리로 출력
+
+    # 요청 메서드가 POST가 아니면 오류 반환
+    if request.method != 'POST':
+        print("Error: Not a POST request")
+        return "Request method is not POST", 400
+
+    # 비밀번호 필드가 있는지 확인
+    try:
+        pw = data['pw']
+        print("Password field:", pw)
+    except KeyError:
+        print("Error: 'pw' field is missing")  # 'pw' 필드 누락 시 오류 메시지
+        flash("비밀번호가 입력되지 않았습니다.")
+        return render_template("sign_up.html")
+
+    # 비밀번호 해시 처리
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    
+    # 데이터베이스에 사용자 등록 시도
+    if DB.insert_user(data, pw_hash):
+        return render_template("login.html") 
+    else:
+        flash("User ID already exists!")
+        return render_template("sign_up.html")
+
+
 
 @application.route("/submit_item_post", methods=["POST"])
 def reg_item_submit_post():
