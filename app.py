@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
-import sys
-
-application = Flask(__name__)
-
+from database import DBhandler
+import sys 
 
 @application.route("/")
 def hello():
@@ -49,7 +47,8 @@ def reg_item_submit_post():
     image_file = request.files["file"]
     image_file.save("static/image/{}".format(image_file.filename))
     data = request.form
-    
+    DB.insert_item(data['name'], data, image_file.filename)
+        
     print(f"Form data: {data}")
     
     return render_template(
@@ -89,3 +88,5 @@ def review_preview():
 
 if __name__ == "__main__":
     application.run(host="0.0.0.0")
+    
+DB = DBhandler()
