@@ -1,6 +1,12 @@
-from flask import Flask, render_template, request
-from database import DBhandler
-import sys 
+from flask import Flask, render_template, request, flash, redirect, url_for, session
+from database import DBhandler 
+import hashlib
+import sys
+
+application = Flask(__name__)
+application.config["SECRET_KEY"] = "helloosp"
+
+DB = DBhandler()
 
 @application.route("/")
 def hello():
@@ -26,7 +32,7 @@ def view_review_list():
 def view_mypage():
   return render_template("mypage.html")
 
-@application.route("/reg_item") #판매하기
+@application.route("/reg_item")
 def reg_item():
     return render_template("reg_item.html")
   
@@ -41,6 +47,39 @@ def login():
 @application.route("/sign_up")
 def sign_up():
     return render_template("sign_up.html")
+
+@application.route("/signup_post", methods=['POST']) 
+def register_user():
+    # 요청 메서드와 폼 데이터 확인
+    print("Request method:", request.method)
+    data = request.form.to_dict()
+    print("Received form data:", data)  # 전체 데이터를 딕셔너리로 출력
+
+    # 요청 메서드가 POST가 아니면 오류 반환
+    if request.method != 'POST':
+        print("Error: Not a POST request")
+        return "Request method is not POST", 400
+
+    # 비밀번호 필드가 있는지 확인
+    try:
+        pw = data['pw']
+        print("Password field:", pw)
+    except KeyError:
+        print("Error: 'pw' field is missing")  # 'pw' 필드 누락 시 오류 메시지
+        flash("비밀번호가 입력되지 않았습니다.")
+        return render_template("sign_up.html")
+
+    # 비밀번호 해시 처리
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    
+    # 데이터베이스에 사용자 등록 시도
+    if DB.insert_user(data, pw_hash):
+        return render_template("login.html") 
+    else:
+        flash("User ID already exists!")
+        return render_template("sign_up.html")
+
+
 
 @application.route("/submit_item_post", methods=["POST"])
 def reg_item_submit_post():
@@ -77,7 +116,7 @@ def item_preview():
 def review_preview():
     # 임시 미리보기 리뷰 데이터
     review_data = {
-        "user_id": "화연",  # 작성자의 아이디
+        "user_id": "예지",  # 작성자의 아이디
         "product_name": "[사계절 햇빛차단🌟] 시어링 팔토시 핸드워머",  # 제품 이름
         "rating": 4,  # 1~5의 별점
         "review_text": "소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!\n여름에 반팔 입거나 봄가을 환절기 때 잘 착용할 것 같아요 ^ㅇ^",
@@ -88,5 +127,3 @@ def review_preview():
 
 if __name__ == "__main__":
     application.run(host="0.0.0.0")
-    
-DB = DBhandler()

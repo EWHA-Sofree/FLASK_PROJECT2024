@@ -1,0 +1,78 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.review-list-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.heading {
+  font-size: 24px;
+  color: #035a3c;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.ui_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ui_grid__item {
+  width: 220px;
+}
+
+.ui_card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.ui_card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ui_card__imgcover img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.ui_card__info {
+  margin-top: 10px;
+}
+
+.ui_card__title {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.more-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: white;
+  background-color: #035a3c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.more-button:hover {
+  background-color: #004d2f;
+}

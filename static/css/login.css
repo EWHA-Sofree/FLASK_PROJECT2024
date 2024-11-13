@@ -2,19 +2,10 @@
 .login-container {
     max-width: 400px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-sizing: border-box; /* padding을 포함한 크기 조정 */
-}
-
-/* Styling the title */
-.login-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
 }
 
 /* Input label styling */
