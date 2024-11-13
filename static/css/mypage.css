@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding-top: 10px;
+    margin: 20px;
+    padding: 10px;
 }
 
 .mypage{
@@ -180,7 +181,6 @@ a{
 
 .my_review table{
     border-collapse: separate;  /* 테이블 셀 간격 추가 */
-    border-spacing: 8px;
 }
 
 .review_content{
@@ -200,11 +200,10 @@ a{
 }
 
 .rating{
-   float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
-    color:#035A3C;
-}
+    float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
+     color: #f5b301;
+ }
 
 .text {
    clear:left;
 }
-

@@ -121,18 +121,21 @@ body {
     padding: 20px;
     font-size: 12px;
     color: #333;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #ddd;
 }
 
 .footer-container {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap; /* 화면이 좁아지면 줄바꿈이 되도록 설정 */
+    gap: 20px; /* 두 섹션 사이의 간격 */
     max-width: 1000px;
     margin: 0 auto;
+    align-items: flex-start; /* 상단 정렬 */
 }
 
 .customer-service, .company-info {
-    width: 48%;
+    flex: 1;
+    min-width: 200px;
 }
 
 .footer h4 {

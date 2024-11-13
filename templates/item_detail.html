@@ -40,10 +40,18 @@
     <h2 class="review-title">상품에 달린 리뷰</h2>
     <div class="review-box">
         <div class="review-item">
-            <strong>아이디: 예지</strong>
+            <strong><span style="color: #666;">ID:</span> 예지</strong>
+            <div class="rating">
+                ★★★★★
+            </div>
             <div class="review-text">구매 상품: [사계절 햇빛차단☀️] 시어링 팔토시 핸드워머</div>
             <div class="separator"></div>
-            <p>겨울에 잘 사용했어요ㅎㅎ 색 배색이 이쁘고 좋았구, 쫀쫀해서 더 좋았어요 :)</p>
+            <div class="review-text">
+                <div class="review-mini-image">
+                    <img src="{{ url_for('static', filename='image/sample.jpg') }}" alt="sample-review">
+                </div>
+                <p>소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!<br>여름에 반팔 입거나 봄가을 환절기 때 잘 착용할 것 같아요 ^ㅇ^</p>
+            </div>
         </div>
     </div>
 </div>
