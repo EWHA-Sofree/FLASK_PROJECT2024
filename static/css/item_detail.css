@@ -108,7 +108,9 @@ body {
 /* 상품 정보 부분 */
 .product-description {
     margin: 10px auto; 
-    text-align: center; 
+    text-align: center;
+    line-height: 1.6; 
+    white-space: normal;
     padding: 10px;
     background-color: #ffffff;
     border: 1px solid #035A3C; 
