@@ -11,7 +11,6 @@
         <div class="info_container">
             <div class="info_header">
                 <h2>내 정보</h2>
-                <input class="btn" type="button" value="변경하기">
             </div>
             <table>
                 <tr>
@@ -32,7 +31,7 @@
     <div class="purchase_history">
         <div class="purchase_header">
             <h2>나의 구매내역</h2>
-            <input type="button" class="btn" value="리뷰쓰기">
+            <a href="#" class="more_info_btn">더보기 ></a>
         </div>
         <div class="ui_grid">
         	<ul class="ui_grid__cols--4">
@@ -46,10 +45,8 @@
                         <div class="ui_card__info">
                         <a href="#"
                         class="ui_card__title"
-                        target="_blank">[데일리템⭐]투톤 체크 스크런치 </a><br>
-                        <a href="#"
-                        class="ui_card__price"
-                        target="_blank">4,000원</a>
+                        target="_blank">[데일리템⭐]투톤 체크 스크런치 </a>
+                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
                         </div>
         		    </div>
                 </li>                                 
@@ -63,10 +60,8 @@
                         <div class="ui_card__info">
                         <a href="#"
                         class="ui_card__title"
-                        target="_blank">💡뜨개 무드등(갓+전구 set) </a><br>
-                        <a href="#"
-                        class="ui_card__price"
-                        target="_blank">11,000원</a>
+                        target="_blank">💡뜨개 무드등(갓+전구 set) </a>
+                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
                         </div>
         		    </div>
                 </li>
@@ -80,10 +75,8 @@
                         <div class="ui_card__info">
                         <a href="#"
                         class="ui_card__title"
-                        target="_blank">커스텀 자수🧶앞치마[3종류] </a><br>
-                        <a href="#"
-                        class="ui_card__price"
-                        target="_blank">23,000원</a>
+                        target="_blank">커스텀 자수🧶앞치마[3종류] </a>
+                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
                         </div>
         		    </div>
                 </li>
@@ -97,10 +90,8 @@
                         <div class="ui_card__info">
                         <a href="#"
                         class="ui_card__title"
-                        target="_blank">손뜨개 달개비🪻책갈피 </a><br>
-                        <a href="#"
-                        class="ui_card__price"
-                        target="_blank">9,500원</a>
+                        target="_blank">손뜨개 달개비🪻책갈피 </a>
+                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
                         </div>
         		    </div>
                 </li>
@@ -109,14 +100,19 @@
 
     </div>
     <div class="sales_history">
-        <h2>나의 판매내역</h2>
-        <p>최근에 판매한 상품이 없습니다.</p>
+        <div class="sales_header">
+            <h2>나의 판매내역</h2>
+            <a href="#" class="more_info_btn">더보기 ></a>
+        </div>
+        <p class="no_contents">최근에 판매한 상품이 없습니다.</p>
     </div>
-    <div class="wish-review">
         <div class="wishlist">
-            <h2>위시리스트</h2>
+            <div class="wish_header">
+                <h2>위시리스트</h2> 
+                <a href="#" class="more_info_btn">더보기 ></a>
+            </div>
             <div class="ui_grid">
-                <ul class="ui_grid__cols--2">
+                <ul class="ui_grid__cols--4">
                     <li class="ui_grid__item">
                         <div class="ui_card">
                             <div class="ui_card__imgcover">
@@ -127,7 +123,7 @@
                             <div class="ui_card__info">
                                 <a href="#"
                                 class="ui_card__title"
-                                target="_blank">뜨개 에어팟맥스 케이스 </a><br>
+                                target="_blank">뜨개 에어팟맥스 케이스 </a>
                                 <a href="#"
                                 class="ui_card__price"
                                 target="_blank">20,000원</a>
@@ -144,7 +140,41 @@
                             <div class="ui_card__info">
                                 <a href="#"
                                 class="ui_card__title"
-                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a><br>
+                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
+                                <a href="#"
+                                class="ui_card__price"
+                                target="_blank">12,000원</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ui_grid__item">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                <a href="#">
+                                <img src="{{ url_for('static', filename='image/product6.png') }}" alt="product6">
+                                </a>
+                            </div>
+                            <div class="ui_card__info">
+                                <a href="#"
+                                class="ui_card__title"
+                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
+                                <a href="#"
+                                class="ui_card__price"
+                                target="_blank">12,000원</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ui_grid__item">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                <a href="#">
+                                <img src="{{ url_for('static', filename='image/product6.png') }}" alt="product6">
+                                </a>
+                            </div>
+                            <div class="ui_card__info">
+                                <a href="#"
+                                class="ui_card__title"
+                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
                                 <a href="#"
                                 class="ui_card__price"
                                 target="_blank">12,000원</a>
@@ -152,38 +182,8 @@
                         </div>
                     </li>
                 </ul>
-              </div>
+            </div>
         </div>
-        <div class="my_review">
-            <h2>나의 리뷰</h2>
-            <table>
-                <tr>
-                <td onclick="location.href='#'">
-                    <div class="review_content">
-                        <b><span>구매상품: </span><span>손뜨개 달개비🪻책갈피</span></b>
-                        <div>              	
-                        <div class="rating">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <span class="date"> 2024.09.10.</span>
-                        </div>
-                        <p class="text">너무 아기자기하고 귀여워요ㅎ.ㅎ선물용으로 사도 좋을 것 같아용</p> 
-                    </div>
-                </td>
-                </tr>
-                <tr>
-                <td onclick="location.href='#'">
-                    <div class="review_content">
-                        <b><span>구매상품: </span><span>[데일리템⭐] 투톤 체크 스크런치</span></b><div>
-                        <div class="rating">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <span class="date"> 2024.10.12.</span></div>
-                        <p class="text">퀄리티 좋아서 재구매했어요!! 색감이 가을느낌 낭낭해서 예뻐요</p> 
-                    </div>
-                </td>
-                </tr>
-            </table>
-        </div>
-    </div>
 </div>
 </div>
 {% endblock section %}
