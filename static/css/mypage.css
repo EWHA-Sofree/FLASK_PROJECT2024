@@ -15,11 +15,19 @@
     align-items: center;
 }
 
+/* 더보기 버튼 스타일 */
+.more_info_btn{
+    margin-top: 25px;
+    height: 30px;
+    color: #035A3C;
+    font-weight: 600;
+}
+
 /* 내 정보 섹션 */
 .my_info{
     display: inline-flex;
     width: 100%;
-    border: 1px solid gray;
+    border: 1px solid #666;
 }
 
 .pfimg{
@@ -30,7 +38,7 @@
 
 .profile{
     padding: 5px;
-    border-right: 1px solid gray;
+    border-right: 1px solid #666;
     text-align: center;
 }
 
@@ -42,10 +50,8 @@
 
 .info_header{
     margin: 0px 15px 10px;
-    border-bottom: 1px solid #035A3C;
+    border-bottom: 1px solid #004d2f;
     width: 385px;
-    display: flex;  /* title과 수정하기 버튼 정렬 */
-    justify-content: space-between;
 }
 
 .info_header h2{
@@ -62,23 +68,25 @@ td{
     padding: 5px;
 }
 
-/* 버튼 스타일 */
-.btn{
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #035A3C;
+/* 리뷰쓰기 버튼 스타일 */
+.reg_btn{
+    font-size: 13px;
+    font-weight: 500;
     color: white;
-    border: 2px solid black;
+    background-color: #035A3C;
+    border: none;
     border-radius: 5px;
-    width : 100px;
-    height: 28px;
+    width : 132px;
+    height: 26px;
+    padding: 1px 8px 1px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.btn:hover{
-    background-color: #028b53;
+.reg_btn:hover{
+    background-color: #004d2f;
 }
-
 
 /* 구매내역 섹션 */
 .purchase_history{
@@ -86,7 +94,7 @@ td{
 }
 
 .purchase_header{
-    display:flex;   /* title과 리뷰쓰기 버튼 정렬 */
+    display:flex;   /* title과 더보기 버튼 정렬 */
     justify-content: space-between;
 }
 
@@ -98,7 +106,7 @@ td{
 
 ul{
    padding-left: 0;
-    list-style: none;
+   list-style: none;
    display: flex;
    justify-content: center;
 }
@@ -113,16 +121,17 @@ a{
     display: block;
     width: 142px; 
     height: 142px;
-
 }
 
 .ui_card__imgcover, .ui_card__info{
     flex: 1 1 142px;    /* 상품 카드 초기 크기 설정 */
-    padding-bottom: 10px;
+    overflow: hidden;
 }
 
 .ui_card__info{
-    padding: 0px 5px 10px;
+    padding: 10px 5px 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .ui_card__price{
@@ -137,10 +146,13 @@ a{
     margin-right:10px;
     border: 1px solid #e6e6e6;
     background-color: white;
+    cursor: pointer;
+    overflow: hidden;
 }
 
-.ui_card:hover{
-    background-color: #e6e6e6;
+.ui_card:hover img{
+    transform: scale(1.1);
+    transition-duration: 1.5s;
 }
 
 /* 판매내역 섹션 */
@@ -149,61 +161,17 @@ a{
     margin: 80px;
 }
 
-/* 위시리스트 섹션과 나의 리뷰 섹션을 수평으로 정렬 */
-.wish-review{
-    display: inline-flex;
+.sales_header{
+    display:flex;   /* title과 더보기 버튼 정렬 */
     justify-content: space-between;
 }
 
+.no_contents{
+    color:gray;
+}
+
 /* 위시리스트 섹션 */
-.wishlist{
-    flex: 1 1 290px;  /* 섹션 초기 크기 설정 */
-    padding-right: 10px;    /* 섹션 간 간격 설정 */
-}
-
-/* 나의 리뷰 섹션 */
-.my_review{
-    flex: 1 1 290px;  
-}
-
-
-.my_review td{
-    background-color: #e6e6e6;  /* 리뷰 카드 스타일 */
-    border: 1px solid #e6e6e6;  
-    border-radius: 5px;
-}
-
-.my_review td:hover{
-    background-color: white;
-    border: 1px solid #e6e6e6;
-    border-radius: 5px;
-}
-
-.my_review table{
-    border-collapse: separate;  /* 테이블 셀 간격 추가 */
-}
-
-.review_content{
-    padding: 3px;
-}
-
-
-.review_content p{
-    margin: 0;
-}
-
-.date{
-    float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
-    color: gray;
-    padding-left: 20px;
-    font-weight: 500;
-}
-
-.rating{
-    float: left;    /* 별점과 날짜를 같은 라인에 두기 위해 왼쪽 정렬 */
-     color: #f5b301;
- }
-
-.text {
-   clear:left;
+.wish_header{
+    display:flex;   /* title과 더보기 버튼 정렬 */
+    justify-content: space-between;
 }
