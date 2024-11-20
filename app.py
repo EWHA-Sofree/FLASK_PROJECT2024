@@ -19,10 +19,6 @@ def view_category_default():
 @application.route("/category/<category_name>")
 def view_category(category_name):
     return render_template("category.html", category_name=category_name)
-  
-@application.route("/item_detail")
-def view_item_detail():
-    return render_template("item_detail.html")
 
 @application.route("/reviews_list")
 def view_review_list():
@@ -159,10 +155,9 @@ def view_list():
     end_idx=per_page*(page+1)
    
     data=DB.get_items() #read the table
-    
+
     item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
-    
     tot_count=len(data)
     
     for i in range(row_count): #last row
@@ -174,10 +169,8 @@ def view_list():
     return render_template(
         "list.html",
         datas=data.items(),
-        
         row1=locals()['data_0'].items(),
         row2=locals()['data_1'].items(),
-        
         limit=per_page,
         page = page,
         page_count = int((item_counts/per_page)+1),
