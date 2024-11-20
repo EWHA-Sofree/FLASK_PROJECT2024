@@ -12,16 +12,17 @@
 
 <div class="login-container">
     <h2>회원로그인</h2>
-    <form action="{{ url_for('login') }}" method="post">
+    <form action="/login_confirm" method="post">
         <label for="username" class="input-label">ID</label>
-        <input type="text" class="input-field" placeholder="ID" name="username" required>
+        <input type="text" class="input-field" placeholder="ID" name="id" required>
 
         <label for="password" class="input-label">Password</label>
-        <input type="password" class="input-field" placeholder="Password" name="password" required>
+        <input type="password" class="input-field" placeholder="Password" name="pw" required>
 
+        <p>아이디와 비밀번호를 입력하고 로그인 버튼을 누르세요.</p>
         <div class="button-container">
             <button type="submit" class="login-btn">로그인</button>
-            <a href="{{ url_for('sign_up') }}" class="signup-link">
+            <a href="/sign_up">
                 <button type="button" class="signup-btn">회원가입</button>
             </a>
         </div>
