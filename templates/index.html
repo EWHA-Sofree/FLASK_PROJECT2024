@@ -18,10 +18,17 @@
                 <img src="{{ url_for('static', filename='image/logo.png') }}" alt="EwhaMarket Logo" class="logo">
             </a>
             <div class="header__actions">
+                {% if session['id'] %}
+                <a href="/logout" class="header__link">
+                    <img src="{{ url_for('static', filename='image/login_icon.png') }}" alt="Login Icon" class="icon">
+                    {{session['id']}}님 반갑습니다! /로그아웃
+                </a>
+                {% else %}
                 <a href="/login" class="header__link">
                     <img src="{{ url_for('static', filename='image/login_icon.png') }}" alt="Login Icon" class="icon">
                     로그인/회원가입
                 </a>
+                {% endif %}
                 <a href="/reg_item" class="header__link">
                     <img src="{{ url_for('static', filename='image/sell_icon.png') }}" alt="Sell Icon" class="icon">
                     판매하기
