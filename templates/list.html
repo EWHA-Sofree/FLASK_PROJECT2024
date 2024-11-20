@@ -1,9 +1,11 @@
-{% extends "index.html"} {% block section %} {% if total > 0 %}
+{% extends "index.html" %} 
+{% block section %} 
+{% if total > 0 %}
 <p>상품 리스트 -- 현재까지 {{total}}개 등록됨</p>
 <table>
   <tr>
     {% for key, value in row1 %}
-    <td>상품이름: {{key}}</td>
+    <td>상품이름: {{value.name}}</td>
     {% endfor %}
   </tr>
   <tr>
@@ -12,22 +14,22 @@
       onclick="location.href='/view_detail/{{key}}/';"
       style="cursor: pointer"
     >
-      <img src="static/images/{{value.img_path}}" , width="140," height="200" />
+      <img src="/static/image/{{value.img_path}}" , width="140," height="200">
     </td>
     {% endfor %}
   </tr>
   <tr>
-    {% for key, value in row1 %}
-    <td>상품이름: {{key}}</td>
+    {% for key, value in row2 %}
+    <td>상품이름: {{value.name}}</td>
     {% endfor %}
   </tr>
   <tr>
-    {% for key, value in row1 %}
+    {% for key, value in row2 %}
     <td
       onclick="location.href='/view_detail/{{key}}/';"
       style="cursor: pointer"
     >
-      <img src="static/images/{{value.img_path}}" , width="140," height="200" />
+      <img src="/static/image/{{value.img_path}}" , width="140," height="200" />
     </td>
     {% endfor %}
   </tr>
@@ -38,7 +40,7 @@
   <div class="page-nation">
     <ul>
       <li>
-        {% for i in range(page_count)%}
+        {% for i in range(page_count) %}
         <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
         {% endfor %}
       </li>
@@ -48,4 +50,5 @@
 
 {% else %}
 <p>등록된 상품이 없습니다.</p>
-{% endif %} {% endblock section %}
+{% endif %} 
+{% endblock section %}
