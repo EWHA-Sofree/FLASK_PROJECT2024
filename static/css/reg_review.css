@@ -15,12 +15,39 @@ body {
     color: #666;
     font-size: 16px;
     margin-bottom: 20px;
+    border: none;
+    background: none;
+    pointer-events: none;
+    outline: none;
+    display: inline;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+
+}
+
+fieldset {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
 /* 별점 */
 .star-rating {
     font-size: 1.5rem;
     text-align: left;
+    direction: rtl;
+    display: inline-flex;
+    margin: 0;
+    align-items: center;
+    line-height: 1;
 }
 
 .star-rating input[type="radio"] {
@@ -33,14 +60,15 @@ body {
     order: 1;
 }
 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffa500;
+}
+
 .star-rating input[type="radio"]:checked ~ label {
     color: #f5b301;
 }
 
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    color: #ffa500; 
-}
 
 /* 텍스트 입력 */
 #review-text {

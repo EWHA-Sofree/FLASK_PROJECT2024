@@ -10,7 +10,7 @@ DB = DBhandler()
 
 @application.route("/")
 def hello():
-    return render_template("main.html")  # 기존 index.html을 main.html로 변경
+    return render_template("main.html")
 
 @application.route("/category")
 def view_category_default():
@@ -31,10 +31,26 @@ def view_mypage():
 @application.route("/reg_item")
 def reg_item():
     return render_template("reg_item.html")
+
+@application.route("/reg_review/<name>/")
+def reg_review(name):
+    if "id" not in session:
+        flash("리뷰 등록 시 로그인이 필요합니다.")
+        return redirect(url_for("login"))
+    return render_template("reg_review.html", name=name)
   
-@application.route("/reg_review")
-def reg_review():
-    return render_template("reg_review.html")
+@application.route("/reg_review_submit", methods=['POST'])
+def reg_review_submit():
+    image_file=request.files["file"]
+    image_file.save("static/image/{}".format(image_file.filename))
+    data=request.form
+    user_id = session.get('id')
+    data_with_user = {
+        **data,
+        "user_id": user_id
+    }
+    review_id = DB.reg_review(data_with_user, image_file.filename)
+    return redirect(url_for('view_review_detail', review_id=review_id))
 
 @application.route("/login")
 def login():
@@ -92,8 +108,6 @@ def logout_user():
     session.clear()
     return redirect(url_for('hello'))
 
-
-
 @application.route("/submit_item_post", methods=["POST"])
 def reg_item_submit_post():
     image_file = request.files["file"]
@@ -109,35 +123,6 @@ def reg_item_submit_post():
         img_path="static/image/{}".format(image_file.filename),
     )
     
-#상품 상세, 리뷰 상세 페이지 주소로 접근 가능하게 만든 미리보기 함수
-@application.route("/item_preview")
-def item_preview():
-    # 임시 미리보기 상품상세 데이터
-    data = {
-        "name": "샘플 상품",
-        "seller": "미리보기 판매자",
-        "category": "샘플 카테고리",
-        "price": "5000",
-        "info": "이 상품은 미리보기를 위해 표시된 샘플 데이터입니다."
-    }
-    img_path = "static/image/sample.jpg"  # 미리보기용 샘플 이미지 경로
-    
-    return render_template("item_detail.html", data=data, img_path=img_path)
-  
-  
-@application.route("/review_preview")
-def review_preview():
-    # 임시 미리보기 리뷰 데이터
-    review_data = {
-        "user_id": "예지",  # 작성자의 아이디
-        "product_name": "[사계절 햇빛차단🌟] 시어링 팔토시 핸드워머",  # 제품 이름
-        "rating": 4,  # 1~5의 별점
-        "review_text": "소재가 보들보들해서 기분이 좋고 마감도 탄탄해요!\n여름에 반팔 입거나 봄가을 환절기 때 잘 착용할 것 같아요 ^ㅇ^",
-        "review_image": "image/sample.jpg"  # 미리보기용 샘플 리뷰 이미지 경로 (static 경로 지정 시 url_for 사용)
-    }
-    
-    return render_template("review_detail.html", data=review_data)
-
 if __name__ == "__main__":
     application.run(host="0.0.0.0")
 
@@ -177,10 +162,16 @@ def view_list():
         total=item_counts
     )
     
-    
 @application.route("/view_detail/<name>/")
 def view_item_detail(name):
     print("###name:", name)
     data=DB.get_item_byname(str(name))
     print("####data:", data)
     return render_template("item_detail.html", name=name, data=data)
+
+@application.route("/view_review_detail/<review_id>")
+def view_review_detail(review_id):
+    review_info = DB.get_review_byID(review_id)    
+    if not review_info:
+        return "리뷰를 찾을 수 없습니다.", 404
+    return render_template("review_detail.html", data=review_info)
