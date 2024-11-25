@@ -5,14 +5,16 @@
 
 <div class="review-container">
     <h2>리뷰 작성하기</h2>
-    <div class="product-name">상품명: {{ name }}</div>
     
-    <form class="mb-3" name="myform" id="myform" method="post" action="/reg_review" enctype="multipart/form-data">
-        
+    <form class="mb-3" name="myform" id="myform" method="post" action="/reg_review_submit" enctype="multipart/form-data">
+
+        <input class="product-name" type="text" name="name" id="name" value="{{name}}" readonly></input>
+        <br>
         <!-- 리뷰 제목 -->
         <label for="title">제목:</label>
         <input type="text" name="title" id="title" value="" placeholder="리뷰 제목을 입력하세요">
-    </br>
+        <br><br>
+        <fieldset>
         <!-- 별점 선택 -->
             <span>별점: </span>
             <div class="star-rating">
@@ -36,7 +38,7 @@
 
         <!-- 리뷰 내용 -->
         <div>
-            <textarea id="review-text" name="review" rows="5" placeholder="리뷰를 작성해주세요"></textarea>
+            <textarea class="col-auto form-control" id="review-text" name="reviewContents" rows="5" placeholder="리뷰를 작성해주세요"></textarea>
         </div>
 
         <!-- 리뷰 사진 -->

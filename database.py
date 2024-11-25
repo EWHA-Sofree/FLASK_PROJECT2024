@@ -95,10 +95,23 @@ class DBhandler:
     
     def reg_review(self, data, img_path):
         review_info ={
+            "name": data['name'],
             "title": data['title'],
-            "rate": data['reviewStar'],
+            "rate": int(data['reviewStar']),
             "review": data['reviewContents'],
-            "img_path": img_path
+            "img_path": img_path, 
+            "user_id": data['user_id']
         }
-        self.db.child("review").child(data['name']).set(review_info)
-        return True
+        result = self.db.child("review").push(review_info)
+        return result['name']
+    
+    def get_review_byID(self, review_id):
+        review = self.db.child("review").child(review_id).get()
+        return review.val() if review else None
+    
+    def get_reviews_by_name(self, name):
+        # 특정 상품(name)의 모든 리뷰 가져오기
+        reviews = self.db.child("review").order_by_child("name").equal_to(name).get()
+        if not reviews or not reviews.each():
+            return []
+        return [review.val() for review in reviews.each()]
