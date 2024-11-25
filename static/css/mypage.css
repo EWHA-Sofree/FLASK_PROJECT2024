@@ -25,47 +25,33 @@
 
 /* 내 정보 섹션 */
 .my_info{
-    display: inline-flex;
     width: 100%;
-    border: 1px solid #666;
-}
-
-.pfimg{
-    width: 130px;
-    height: 130px;
-    padding: 20px 20px 0;
-}
-
-.profile{
-    padding: 5px;
-    border-right: 1px solid #666;
-    text-align: center;
 }
 
 .info_container{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
 }
 
 .info_header{
-    margin: 0px 15px 10px;
-    border-bottom: 1px solid #004d2f;
-    width: 385px;
-}
-
-.info_header h2{
-    padding-left: 5px;
+    border-bottom: 2px solid #004d2f;
+    margin:0;
 }
 
 .info_container table{
     font-weight: 600;
     text-align: left;
-    padding: 15px 15px 25px;
+    padding-bottom: 25px;
 }
 
 td{
-    padding: 5px;
+    padding: 8px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.user_info{
+    font-weight:500;
 }
 
 /* 리뷰쓰기 버튼 스타일 */
