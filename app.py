@@ -32,9 +32,17 @@ def view_mypage():
 def reg_item():
     return render_template("reg_item.html")
   
-@application.route("/reg_review")
+@application.route("/reg_review", methods=['POST'])
 def reg_review():
-    return render_template("reg_review.html")
+    data=request.form
+    image_file=request.files["file"]
+    image_file.save("static/images/{}".format(image_file.filename))
+    DB.reg_review(data, image_file.filename)
+    return redirect(url_for('review_detail'))
+
+@application.route("/reg_review_init/<name>/")
+def reg_review_init(name):
+    return render_template("reg_review.html", name=name)
 
 @application.route("/login")
 def login():
@@ -91,8 +99,6 @@ def register_user():
 def logout_user():
     session.clear()
     return redirect(url_for('hello'))
-
-
 
 @application.route("/submit_item_post", methods=["POST"])
 def reg_item_submit_post():

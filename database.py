@@ -82,7 +82,6 @@ class DBhandler:
         items=self.db.child("item").get().val()
         return items
     
-    
     def get_item_byname(self, name):
         items = self.db.child("item").get()
         target_value=""
@@ -93,3 +92,13 @@ class DBhandler:
             if key_value == name:
                 target_value=res.val()
         return target_value
+    
+    def reg_review(self, data, img_path):
+        review_info ={
+            "title": data['title'],
+            "rate": data['reviewStar'],
+            "review": data['reviewContents'],
+            "img_path": img_path
+        }
+        self.db.child("review").child(data['name']).set(review_info)
+        return True
