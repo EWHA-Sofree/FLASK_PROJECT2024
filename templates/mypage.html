@@ -1,29 +1,40 @@
 {% extends "index.html" %}
 {% block section %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mypage.css') }}">
+
+{% with mesg = get_flashed_messages() %}
+    {% if mesg != [] %}
+        <script>alert("{{ mesg[0] }}")</script>
+    {% endif %}
+{% endwith %}
+
 <div class="wrap">
 <div class="mypage">
     <div class="my_info">
-        <div class="profile">
-            <img src="{{ url_for('static', filename='image/profile.png') }}" alt="profile" class="pfimg">
-            <h3>화연</h3>
-        </div>
         <div class="info_container">
             <div class="info_header">
                 <h2>내 정보</h2>
             </div>
             <table>
                 <tr>
+                    <td>ID</td>
+                    <td class="user_info">{{ info.id }}</td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td class="user_info">이지예</td>
+                </tr>
+                <tr>
                     <td>닉네임</td>
-                    <td>화연</td>
+                    <td class="user_info">{{ info.nickname }}</td>
                 </tr>
                 <tr>
                     <td>전화</td>
-                    <td>010-1111-2222</td>
+                    <td class="user_info">010-1111-2222</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>hyeon22@ewhain.net</td>
+                    <td class="user_info">hyeon22@ewhain.net</td>
                 </tr>
             </table>
         </div>

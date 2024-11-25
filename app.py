@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, session, jsonify
 from database import DBhandler 
 import hashlib
 import sys
@@ -26,7 +26,12 @@ def view_review_list():
 
 @application.route("/mypage")
 def view_mypage():
-  return render_template("mypage.html")
+  if 'id' in session:   # 로그인 한 경우에만 마이페이지 화면으로 이동
+    user_info = DB.get_userinfo_byid(session['id'])
+    return render_template("mypage.html",info=user_info)
+  else:
+    flash("로그인이 필요한 서비스입니다!")
+    return redirect(url_for('login'))
 
 @application.route("/reg_item")
 def reg_item():
@@ -175,3 +180,18 @@ def view_review_detail(review_id):
     if not review_info:
         return "리뷰를 찾을 수 없습니다.", 404
     return render_template("review_detail.html", data=review_info)
+
+@application.route('/show_heart/<name>/', methods=['GET'])
+def show_heart(name):
+ my_heart = DB.get_heart_byname(session['id'],name)
+ return jsonify({'my_heart': my_heart})
+
+@application.route('/like/<name>/', methods=['POST'])
+def like(name):
+ my_heart = DB.update_heart(session['id'],'Y',name)
+ return jsonify({'msg': '위시리스트에 추가했습니다!'})
+
+@application.route('/unlike/<name>/', methods=['POST'])
+def unlike(name):
+ my_heart = DB.update_heart(session['id'],'N',name)
+ return jsonify({'msg': '위시리스트에서 삭제했습니다!'})

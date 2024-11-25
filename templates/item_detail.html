@@ -3,10 +3,65 @@
 {% block section %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/item_detail.css') }}">
 <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+<script>
+    <!-- 좋아요 기능 구현 -->
+    function showHeart() {
+        $.ajax({
+            type: 'GET',
+            url: '/show_heart/{{name}}/',
+            data: {},
+            success: function (response) {
+                let my_heart = response['my_heart'];
+                if (my_heart['interested'] == 'Y')
+                {
+                    $(".wishlist-btn").css("background-color","#035A3C");
+                    $(".wishlist-btn").css("color","#fff");
+                    $(".wishlist-btn").attr("onclick","unlike()");
+                }
+                else
+                {
+                    $(".wishlist-btn").css("background-color","#f5f5f5");
+                    $(".wishlist-btn").css("color","#333");
+                    $(".wishlist-btn").attr("onclick","like()");
+                }
+            }
+            });
+    }
 
+    function like() {
+        $.ajax({
+            type: 'POST',
+            url: '/like/{{name}}/',
+            data: {
+            interested : "Y"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
+            }
+        });
+    }
+
+    function unlike() {
+        $.ajax({
+            type: 'POST',
+            url: '/unlike/{{name}}/',
+            data: {
+            interested : "N"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
+            }
+        });
+    }
+    $(document).ready(function () {
+    showHeart();
+    });
+</script>
 <div class="product-container">
     <div class="image-box">
-        <img src="{{ img_path }}" class="product-image" />
+        <img src="/static/image/{{data.img_path}}" class="product-image" />
     </div>
 
     <div class="info-box">
