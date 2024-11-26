@@ -24,14 +24,23 @@ def view_category(category_name):
 def view_review_list():
   return render_template("/reviews_list.html")
 
-@application.route("/mypage")
-def view_mypage():
-  if 'id' in session:   # 로그인 한 경우에만 마이페이지 화면으로 이동
-    user_info = DB.get_userinfo_byid(session['id'])
-    return render_template("mypage.html",info=user_info)
-  else:
-    flash("로그인이 필요한 서비스입니다!")
-    return redirect(url_for('login'))
+@application.route('/mypage')
+def mypage():
+    # 현재 로그인한 사용자 ID 가져오기
+    user_id = session.get('id')  # 세션에서 사용자 ID 가져오기
+
+    if not user_id:
+        flash("로그인이 필요한 서비스입니다.")
+        return redirect(url_for('login'))  # 로그인 페이지로 리다이렉트
+
+    # 데이터베이스에서 사용자 정보 가져오기
+    user_info = DBhandler().get_userinfo_byid(user_id)
+    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    if not user_info:
+        flash("사용자 정보를 찾을 수 없습니다.")
+        return redirect(url_for('index'))  # 메인 페이지로 리다이렉트
+
+    return render_template('mypage.html', info=user_info)
 
 @application.route("/reg_item")
 def reg_item():
@@ -89,16 +98,16 @@ def register_user():
         print("Error: Not a POST request")
         return "Request method is not POST", 400
 
-    # 비밀번호 필드가 있는지 확인
-    try:
-        pw = data['pw']
-        print("Password field:", pw)
-    except KeyError:
-        print("Error: 'pw' field is missing")  # 'pw' 필드 누락 시 오류 메시지
-        flash("비밀번호가 입력되지 않았습니다.")
-        return render_template("sign_up.html")
+    # 필수 필드 확인
+    required_fields = ['id', 'pw', 'nickname', 'email', 'phone']
+    for field in required_fields:
+        if field not in data or not data[field].strip():
+            print(f"Error: '{field}' field is missing or empty")
+            flash(f"'{field}'는 필수 입력 항목입니다.")
+            return render_template("sign_up.html")
 
     # 비밀번호 해시 처리
+    pw = data['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     
     # 데이터베이스에 사용자 등록 시도
@@ -107,6 +116,8 @@ def register_user():
     else:
         flash("User ID already exists!")
         return render_template("sign_up.html")
+    
+
     
 @application.route("/logout") 
 def logout_user():

@@ -12,12 +12,20 @@
 
 <div class="signup-container">
     <h2 class="signup-title">회원가입</h2>
+
+    <p class="required-info">*표시가 되어있는 항목은 필수 입력사항입니다.</p>
+
     <form action="/signup_post" method="post" class="signup-form">
         <div class="form-group">
-            <label for="username">아이디*</label>
-            <input type="text" id="username" name="username" required>
+            <label for="id">아이디*</label>
+            <input type="text" id="id" name="id" required>
             <span class="input-info">(영문소문자/숫자, 4~16자)</span>
             <button type="button" class="duplicate-btn">중복체크</button>
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">닉네임*</label>
+            <input type="text" id="nickname" name="nickname" required>
         </div>
         
         <div class="form-group">
@@ -32,8 +40,8 @@
         </div>
         
         <div class="form-group">
-            <label for="name">이름*</label>
-            <input type="text" id="name" name="name" required>
+            <label for="username">이름*</label>
+            <input type="text" id="username" name="username" required>
         </div>
         
         <div class="form-group">
@@ -48,7 +56,7 @@
         </div>
         
         <div class="form-group">
-            <label for="phone">전화번호</label>
+            <label for="phone">전화번호*</label>
             <input type="text" id="phone" name="phone" placeholder="010-1234-5678">
         </div>
         
