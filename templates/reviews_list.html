@@ -22,7 +22,7 @@
             <p class="ui_card__title">{{ value.title }}</p>
             <button
               class="more-button"
-              onclick="location.href='/view_review_detail/{{ key }}/';"
+              onclick="location.href='/view_review_detail/{{ key }}';"
             >
               더보기
             </button>
@@ -42,7 +42,7 @@
     <ul>
       {% for i in range(page_count) %}
       <li>
-        <a href="{{ url_for('view_review', page=i) }}" color="black">{{ i }}</a>
+        <a href="{{ url_for('view_reviews_list', page=i) }}" color="black">{{ i }}</a>
       </li>
       {% endfor %}
     </ul>

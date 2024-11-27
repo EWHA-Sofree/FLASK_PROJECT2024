@@ -121,7 +121,7 @@ class DBhandler:
         return [review.val() for review in reviews.each()]
     
     def get_reviews(self):
-        reviews=self.db.child("reveiw").get().val()
+        reviews=self.db.child("review").get().val()
         return reviews
 
     

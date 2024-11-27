@@ -44,7 +44,7 @@ def view_reviews_list():
     
     return render_template(
         "reviews_list.html",
-        datas=data.items(),
+        reviews=data,
         row1=locals().get('data_0', {}).items(),
         row2=locals().get('data_1', {}).items(),
         limit=per_page,
