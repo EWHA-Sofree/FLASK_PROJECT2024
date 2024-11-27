@@ -21,17 +21,57 @@ def view_category(category_name):
     return render_template("category.html", category_name=category_name)
 
 @application.route("/reviews_list")
-def view_review_list():
-  return render_template("/reviews_list.html")
+def view_reviews_list():
+    page = request.args.get("page", 1, type=int)
+    per_page = 8  # item count to display per page
+    per_row = 4  # item count to display per row
+    row_count = int(per_page / per_row)
+    start_idx = per_page * (page - 1)  # 페이지 계산 수정
+    end_idx = per_page * page
+    
+    # 데이터를 가져오고 None 체크
+    data = DB.get_reviews() or {}  # None이면 빈 딕셔너리로 대체
+    
+    item_counts = len(data)
+    data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
+    tot_count = len(data)
+    
+    for i in range(row_count):  # 행 별로 데이터 생성
+        if (i == row_count - 1) and (tot_count % per_row != 0):
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:])
+        else:
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
+    
+    return render_template(
+        "reviews_list.html",
+        datas=data.items(),
+        row1=locals().get('data_0', {}).items(),
+        row2=locals().get('data_1', {}).items(),
+        limit=per_page,
+        page=page,
+        page_count=(item_counts + per_page - 1) // per_page,  # 페이지 수 계산 보정
+        total=item_counts
+    )
 
-@application.route("/mypage")
-def view_mypage():
-  if 'id' in session:   # 로그인 한 경우에만 마이페이지 화면으로 이동
-    user_info = DB.get_userinfo_byid(session['id'])
-    return render_template("mypage.html",info=user_info)
-  else:
-    flash("로그인이 필요한 서비스입니다!")
-    return redirect(url_for('login'))
+
+
+@application.route('/mypage')
+def mypage():
+    # 현재 로그인한 사용자 ID 가져오기
+    user_id = session.get('id')  # 세션에서 사용자 ID 가져오기
+
+    if not user_id:
+        flash("로그인이 필요한 서비스입니다.")
+        return redirect(url_for('login'))  # 로그인 페이지로 리다이렉트
+
+    # 데이터베이스에서 사용자 정보 가져오기
+    user_info = DBhandler().get_userinfo_byid(user_id)
+    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    if not user_info:
+        flash("사용자 정보를 찾을 수 없습니다.")
+        return redirect(url_for('index'))  # 메인 페이지로 리다이렉트
+
+    return render_template('mypage.html', info=user_info)
 
 @application.route("/reg_item")
 def reg_item():
@@ -89,16 +129,16 @@ def register_user():
         print("Error: Not a POST request")
         return "Request method is not POST", 400
 
-    # 비밀번호 필드가 있는지 확인
-    try:
-        pw = data['pw']
-        print("Password field:", pw)
-    except KeyError:
-        print("Error: 'pw' field is missing")  # 'pw' 필드 누락 시 오류 메시지
-        flash("비밀번호가 입력되지 않았습니다.")
-        return render_template("sign_up.html")
+    # 필수 필드 확인
+    required_fields = ['id', 'pw', 'nickname', 'email', 'phone']
+    for field in required_fields:
+        if field not in data or not data[field].strip():
+            print(f"Error: '{field}' field is missing or empty")
+            flash(f"'{field}'는 필수 입력 항목입니다.")
+            return render_template("sign_up.html")
 
     # 비밀번호 해시 처리
+    pw = data['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     
     # 데이터베이스에 사용자 등록 시도
@@ -107,6 +147,8 @@ def register_user():
     else:
         flash("User ID already exists!")
         return render_template("sign_up.html")
+    
+
     
 @application.route("/logout") 
 def logout_user():
@@ -134,10 +176,11 @@ if __name__ == "__main__":
 
 @application.route("/list")
 def view_list():
+
+    page=request.args.get("page", 1, type=int)
     
-    page = request.args.get("page", 0, type=int)
-    per_page = 8
-    per_row = 4
+    per_page=8 # item count to display per page
+    per_row=4 # item count to display per row
     row_count=int(per_page/per_row)
 
     start_idx = per_page * page
@@ -192,3 +235,11 @@ def like(name):
 def unlike(name):
  my_heart = DB.update_heart(session['id'],'N',name)
  return jsonify({'msg': '위시리스트에서 삭제했습니다!'})
+
+
+
+
+@application.route('/dynamicurl/<varible_name>/')
+def DynamicUrl(varible_name):
+    return str(varible_name)
+

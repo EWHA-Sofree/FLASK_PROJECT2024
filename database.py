@@ -42,11 +42,15 @@ class DBhandler:
 
     def insert_user(self, data, pw): 
         user_info = {
-            "id": data['username'],  # "username"으로 수정
+            "id": data['id'], 
             "pw": pw,
-            "nickname": data.get('name', '')  # nickname 필드가 없을 경우 기본값으로 빈 문자열 설정
+            "name": data.get('name', ''), 
+            "nickname": data.get('nickname', ''),  # nickname 필드가 없을 경우 기본값으로 빈 문자열 설정
+            "email": data.get('email', ''),        # 이메일
+            "phone": data.get('phone', '')         # 전화번호
+
         }
-        if self.user_duplicate_check(data['username']):  # 여기서도 "username"으로 수정
+        if self.user_duplicate_check(data['id']): 
             self.db.child("user").push(user_info) 
             print("User data inserted:", data)
             return True
@@ -100,7 +104,7 @@ class DBhandler:
             "rate": int(data['reviewStar']),
             "review": data['reviewContents'],
             "img_path": img_path, 
-            "user_id": data['user_id']
+            "user_id": data['id']
         }
         result = self.db.child("review").push(review_info)
         return result['name']
@@ -115,6 +119,10 @@ class DBhandler:
         if not reviews or not reviews.each():
             return []
         return [review.val() for review in reviews.each()]
+    
+    def get_reviews(self):
+        reviews=self.db.child("reveiw").get().val()
+        return reviews
 
     
     def get_heart_byname(self, uid, name):
@@ -139,8 +147,19 @@ class DBhandler:
     
     def get_userinfo_byid(self, user_id):
         users = self.db.child("user").get()
+        print("Fetched users:", users.val())  # Firebase에서 가져온 전체 데이터 출력
+
         
         for user in users.each():
+            print("Checking user:", user.val())  # 각 사용자 데이터를 출력
             if user.val().get("id") == user_id:
-                return user.val()   
+                user_data = {  # **추가된 필드 반환**
+                    "id": user.val().get("id"),
+                    "name": user.val().get("name", ""),
+                    "nickname": user.val().get("nickname", ""),  # **닉네임 반환**
+                    "email": user.val().get("email", ""),        # **이메일 반환**
+                    "phone": user.val().get("phone", "")         # **전화번호 반환**
+                }
+                print("Matched user data:", user_data)  # 매칭된 사용자 데이터 출력
+                return user_data
         return None

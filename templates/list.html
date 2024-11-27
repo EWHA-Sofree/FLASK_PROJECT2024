@@ -29,7 +29,9 @@
     <ul>
       {% for i in range(page_count) %}
       <li>
-        <a href="{{ url_for('view_list', page=i) }}" style="color: black;">{{ i+1 }}</a>
+        {% for i in range(page_count) %}
+        <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
+        {% endfor %}
       </li>
       {% endfor %}
     </ul>
