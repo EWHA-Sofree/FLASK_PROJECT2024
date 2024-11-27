@@ -119,6 +119,10 @@ class DBhandler:
         if not reviews or not reviews.each():
             return []
         return [review.val() for review in reviews.each()]
+    
+    def get_reviews(self):
+        reviews=self.db.child("reveiw").get().val()
+        return reviews
 
     
     def get_heart_byname(self, uid, name):

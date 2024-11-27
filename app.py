@@ -21,8 +21,39 @@ def view_category(category_name):
     return render_template("category.html", category_name=category_name)
 
 @application.route("/reviews_list")
-def view_review_list():
-  return render_template("/reviews_list.html")
+def view_reviews_list():
+    page = request.args.get("page", 1, type=int)
+    per_page = 8  # item count to display per page
+    per_row = 4  # item count to display per row
+    row_count = int(per_page / per_row)
+    start_idx = per_page * (page - 1)  # 페이지 계산 수정
+    end_idx = per_page * page
+    
+    # 데이터를 가져오고 None 체크
+    data = DB.get_reviews() or {}  # None이면 빈 딕셔너리로 대체
+    
+    item_counts = len(data)
+    data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
+    tot_count = len(data)
+    
+    for i in range(row_count):  # 행 별로 데이터 생성
+        if (i == row_count - 1) and (tot_count % per_row != 0):
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:])
+        else:
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
+    
+    return render_template(
+        "reviews_list.html",
+        datas=data.items(),
+        row1=locals().get('data_0', {}).items(),
+        row2=locals().get('data_1', {}).items(),
+        limit=per_page,
+        page=page,
+        page_count=(item_counts + per_page - 1) // per_page,  # 페이지 수 계산 보정
+        total=item_counts
+    )
+
+
 
 @application.route('/mypage')
 def mypage():
@@ -146,7 +177,7 @@ if __name__ == "__main__":
 @application.route("/list")
 def view_list():
     
-    page=request.args.get("page", 0, type=int)
+    page=request.args.get("page", 1, type=int)
     
     per_page=8 # item count to display per page
     per_row=4 # item count to display per row
@@ -206,3 +237,11 @@ def like(name):
 def unlike(name):
  my_heart = DB.update_heart(session['id'],'N',name)
  return jsonify({'msg': '위시리스트에서 삭제했습니다!'})
+
+
+
+
+@application.route('/dynamicurl/<varible_name>/')
+def DynamicUrl(varible_name):
+    return str(varible_name)
+
