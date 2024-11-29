@@ -104,7 +104,7 @@ class DBhandler:
             "rate": int(data['reviewStar']),
             "review": data['reviewContents'],
             "img_path": img_path, 
-            "user_id": data['id']
+            "user_id": data['user_id']
         }
         result = self.db.child("review").push(review_info)
         return result['name']

@@ -203,8 +203,8 @@ def view_list():
         rows=rows,
         limit=per_page,
         page=page,
-        page_count=(item_counts + per_page - 1) // per_page,
-        total=item_counts,
+        page_count=(item_counts + per_page - 1) //per_page,
+        total=item_counts
     )
     
 @application.route("/view_detail/<name>/")
