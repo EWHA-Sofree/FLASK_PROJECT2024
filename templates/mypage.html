@@ -42,7 +42,7 @@
     <div class="purchase_history">
         <div class="purchase_header">
             <h2>나의 구매내역</h2>
-            <a href="#" class="more_info_btn">더보기 ></a>
+            <a href="/purchase_history" class="more_info_btn">더보기 ></a>
         </div>
         <div class="ui_grid">
         	<ul class="ui_grid__cols--4">
@@ -113,87 +113,42 @@
     <div class="sales_history">
         <div class="sales_header">
             <h2>나의 판매내역</h2>
-            <a href="#" class="more_info_btn">더보기 ></a>
+            <a href="sales_history" class="more_info_btn">더보기 ></a>
         </div>
         <p class="no_contents">최근에 판매한 상품이 없습니다.</p>
     </div>
         <div class="wishlist">
             <div class="wish_header">
                 <h2>위시리스트</h2> 
-                <a href="#" class="more_info_btn">더보기 ></a>
+                {% if total > 4 %}
+                <a href="/wishlist" class="more_info_btn">더보기 ></a>
+                {% endif %}
             </div>
+            {% if total > 0 %}
+            <div class="card_wrap">
+            {% for item in items %}
             <div class="ui_grid">
                 <ul class="ui_grid__cols--4">
                     <li class="ui_grid__item">
-                        <div class="ui_card">
-                            <div class="ui_card__imgcover">
-                                <a href="#">
-                                <img src="{{ url_for('static', filename='image/product5.png') }}" alt="product5">
-                                </a>
+                        <a href="/view_detail/{{ item.key }}/">
+                            <div class="ui_card">
+                                <div class="ui_card__imgcover">
+                                    <img src="/static/image/{{ item.value.img_path }}" alt="product-image">
+                                </div>
+                                <div class="ui_card__info">
+                                    <p class="ui_card__title">{{ item.value.name }}</p>
+                                    <p class="ui_card__seller">{{ item.value.seller}}</p>
+                                </div>
                             </div>
-                            <div class="ui_card__info">
-                                <a href="#"
-                                class="ui_card__title"
-                                target="_blank">뜨개 에어팟맥스 케이스 </a>
-                                <a href="#"
-                                class="ui_card__price"
-                                target="_blank">20,000원</a>
-                            </div>
-                        </div>
-                    </li>                                 
-                    <li class="ui_grid__item">
-                        <div class="ui_card">
-                            <div class="ui_card__imgcover">
-                                <a href="#">
-                                <img src="{{ url_for('static', filename='image/product6.png') }}" alt="product6">
-                                </a>
-                            </div>
-                            <div class="ui_card__info">
-                                <a href="#"
-                                class="ui_card__title"
-                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
-                                <a href="#"
-                                class="ui_card__price"
-                                target="_blank">12,000원</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ui_grid__item">
-                        <div class="ui_card">
-                            <div class="ui_card__imgcover">
-                                <a href="#">
-                                <img src="{{ url_for('static', filename='image/product6.png') }}" alt="product6">
-                                </a>
-                            </div>
-                            <div class="ui_card__info">
-                                <a href="#"
-                                class="ui_card__title"
-                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
-                                <a href="#"
-                                class="ui_card__price"
-                                target="_blank">12,000원</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ui_grid__item">
-                        <div class="ui_card">
-                            <div class="ui_card__imgcover">
-                                <a href="#">
-                                <img src="{{ url_for('static', filename='image/product6.png') }}" alt="product6">
-                                </a>
-                            </div>
-                            <div class="ui_card__info">
-                                <a href="#"
-                                class="ui_card__title"
-                                target="_blank">해파리🪼 뜨개 가방 고리 - 𝟚 𝕔𝕠𝕝𝕠𝕣 </a>
-                                <a href="#"
-                                class="ui_card__price"
-                                target="_blank">12,000원</a>
-                            </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>
+            {% endfor %}
+            </div>
+            {% else %}
+            <p class="no_contents">위시리스트에 담긴 상품이 없습니다. </p>
+            {% endif %}
         </div>
 </div>
 </div>
