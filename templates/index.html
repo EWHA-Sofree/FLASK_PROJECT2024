@@ -44,11 +44,11 @@
             <li>
                 <a style="cursor:pointer">카테고리</a>
                 <ul class="submenu">
-                    <li><a href="/category/stationery">문구</a></li>
-                    <li><a href="/list">악세서리</a></li>
-                    <li><a href="/category/digital">디지털</a></li>
-                    <li><a href="/category/clothing">의류</a></li>
-                    <li><a href="/category/homedeco">홈데코</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='문구') }}">문구</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='악세서리') }}">악세서리</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='디지털') }}">디지털</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='의류') }}">의류</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='홈데코') }}">홈데코</a></li>
                 </ul>
             
             </li>
@@ -81,6 +81,17 @@
             </div>
         </div>
     </footer>    
+
+    <script>
+        $(document).ready(function () {
+            const currentCategory = "{{ category }}"; // Flask에서 전달받은 카테고리
+            $('.submenu a').each(function () {
+                if ($(this).text().trim() === currentCategory) {
+                    $(this).addClass('active'); // 'active' 클래스를 추가
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>   
