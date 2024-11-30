@@ -163,3 +163,17 @@ class DBhandler:
                 print("Matched user data:", user_data)  # 매칭된 사용자 데이터 출력
                 return user_data
         return None
+    
+    def get_wishlist_byid(self, user_id):
+        user_data = self.db.child("heart").child(user_id).get()
+                  
+        if user_data.val() is None: return {}
+
+        item_names = []
+
+        user_data_dict = user_data.val()  # 데이터를 딕셔너리로 변환
+        if user_data_dict:  
+            for key, value in user_data_dict.items():
+                if value.get("interested") == "Y":
+                    item_names.append(key)
+            return item_names

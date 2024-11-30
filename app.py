@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from database import DBhandler 
 import hashlib
 import sys
+import math
 
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "helloosp"
@@ -53,11 +54,8 @@ def view_reviews_list():
         total=item_counts
     )
 
-
-
 @application.route('/mypage')
 def mypage():
-    # 현재 로그인한 사용자 ID 가져오기
     user_id = session.get('id')  # 세션에서 사용자 ID 가져오기
 
     if not user_id:
@@ -65,13 +63,79 @@ def mypage():
         return redirect(url_for('login'))  # 로그인 페이지로 리다이렉트
 
     # 데이터베이스에서 사용자 정보 가져오기
-    user_info = DBhandler().get_userinfo_byid(user_id)
-    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    user_info = DB.get_userinfo_byid(user_id)
+
     if not user_info:
         flash("사용자 정보를 찾을 수 없습니다.")
-        return redirect(url_for('index'))  # 메인 페이지로 리다이렉트
+        return redirect(url_for('hello'))  # 메인 페이지로 리다이렉트
 
-    return render_template('mypage.html', info=user_info)
+    wishlist = DB.get_wishlist_byid(user_id)  # 좋아요 상품 이름 리스트 가져오기
+
+    if not wishlist:
+        return render_template('mypage.html', items=[], info=user_info, total=0)
+
+    all_items = DB.get_items()
+    item_details = []
+
+    # 위시리스트에 있는 상품 필터링
+    for item_id in wishlist[:4]: 
+        if item_id in all_items:
+            item_details.append({"key": item_id, "value": all_items[item_id]}) 
+
+    return render_template(
+        'mypage.html',
+        items=item_details,  
+        total=len(wishlist),  # 전체 좋아요 상품 개수 전달
+        info=user_info  # 사용자 정보
+    )
+
+@application.route("/wishlist")
+def wishlist():
+    page = request.args.get("page", 1, type=int)
+    per_page = 8  # item count to display per page
+    per_row = 4  # item count to display per row
+    row_count = int(per_page / per_row)
+    start_idx = per_page * (page - 1)  # 페이지 계산 수정
+    end_idx = per_page * page
+
+    user_id = session.get('id')
+    all_items = DB.get_items()
+    wishlist = DB.get_wishlist_byid(user_id)
+    data = {}
+    
+    # 위시리스트에 있는 상품 필터링
+    for item_id in wishlist: 
+        if item_id in all_items:
+                data[item_id]=all_items[item_id]
+    
+    item_counts = len(data)
+    data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
+    tot_count = len(data)
+    
+    for i in range(row_count):  # 행 별로 데이터 생성
+        if (i == row_count - 1) and (tot_count % per_row != 0):
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:])
+        else:
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
+    
+    return render_template(
+        "wishlist.html",
+        wish=data,
+        row1=locals().get('data_0', {}).items(),
+        row2=locals().get('data_1', {}).items(),
+        limit=per_page,
+        page=page,
+        page_count=(item_counts + per_page - 1) // per_page,  # 페이지 수 계산 보정
+        total=item_counts
+    )
+
+@application.route("/purchase_history")
+def purchase_history():
+    return render_template("purchase_history.html")
+
+@application.route("/sales_history")
+def sales_history():
+    return render_template("sales_history.html")
 
 @application.route("/reg_item")
 def reg_item():
@@ -178,7 +242,7 @@ if __name__ == "__main__":
 def view_list():
 
     page=request.args.get("page", 1, type=int)
-    
+    category = request.args.get("category", "all")
     per_page=8 # item count to display per page
     per_row=4 # item count to display per row
     row_count=int(per_page/per_row)

@@ -148,7 +148,6 @@ body {
     color: #666;
 }
 
-
 .page-nation li{
     list-style: none;
 }
@@ -162,14 +161,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 0px 20px;
+}
+
+.page-nation ul{
+    padding:0;
+}
+
+.page-nation a:hover{
+    background-color:#cbf7db;
+    color:#028b53;
+    border-radius: 5px;
 }
 
 .page-nation a{
     display: block;
     margin: 0 3px;
     float: left;
-    border: 1px solid #e6e6e6;
     width: 28px;
     height: 28px;
     line-height: 28px;
