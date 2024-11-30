@@ -212,8 +212,6 @@ def register_user():
         flash("User ID already exists!")
         return render_template("sign_up.html")
     
-
-    
 @application.route("/logout") 
 def logout_user():
     session.clear()
@@ -242,40 +240,55 @@ if __name__ == "__main__":
 def view_list():
 
     page=request.args.get("page", 1, type=int)
-    per_page=8 # item count to display per page
-    per_row=4 # item count to display per row
+    category = request.args.get("category", "all")
+    
+    per_page=8  # item count to display per page
+    per_row=4   # item count to display per row
     row_count=int(per_page/per_row)
 
-    start_idx = per_page * page
-    end_idx = per_page * (page + 1)
-
-    data = DB.get_items()
+    start_idx = page * per_page
+    end_idx = (page+1) * per_page
     
-    item_counts = len(data)
-    data = list(data.items())[start_idx:end_idx]
+    if category=="all":         #카테고리로 DB에서 데이터 받아오기
+        data = DB.get_items()
+    else: 
+        data = DB.get_items_bycategory(category)
+        
+    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False))
 
+    item_counts = len(data)
+    
+    if item_counts<=per_page:
+        data = dict(list(data.items())[:item_counts])
+    else :    
+        data = dict(list(data.items())[start_idx:end_idx])
+        
+    tot_count = len(data)
+    
     rows = []
     for i in range(row_count):
         start_idx = i * per_row
         end_idx = start_idx + per_row
-        rows.append(dict(data[start_idx:end_idx]))
+        if i == row_count - 1 and tot_count % per_row != 0:
+            rows.append(dict(list(data.items())[start_idx:]))
+        else:
+            rows.append(dict(list(data.items())[start_idx:end_idx]))
 
     return render_template(
         "list.html",
-        datas=data,
+        datas=data.items(),
         rows=rows,
         limit=per_page,
         page=page,
-        page_count=(item_counts + per_page - 1) //per_page,
-        total=item_counts
+        page_count=int(math.ceil(item_counts/per_page)),
+        total=item_counts,
+        category=category
     )
     
-@application.route("/view_detail/<name>/")
-def view_item_detail(name):
-    print("###name:", name)
-    data=DB.get_item_byname(str(name))
-    print("####data:", data)
-    return render_template("item_detail.html", name=name, data=data)
+@application.route("/view_detail/<key>/")
+def view_item_detail(key):
+    data=DB.get_item_bykey(str(key))
+    return render_template("item_detail.html", key=key, data=data)
 
 @application.route("/view_review_detail/<review_id>")
 def view_review_detail(review_id):

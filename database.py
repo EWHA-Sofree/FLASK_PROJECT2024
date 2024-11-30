@@ -19,27 +19,10 @@ class DBhandler:
             "img_path": img_path
         }
         # Firebase에 데이터 저장 (랜덤 키 사용)
-        self.db.child("item").push(item_info)  # push()를 사용하면 고유 ID 생성
+        self.db.child("item").push(item_info)       # push()를 사용하면 고유 ID 생성
         print(f"Data saved successfully: {item_info}")
         return True
     
-    def __init__(self):
-        try:
-            # Firebase 인증 파일 로드
-            with open('./authentication/firebase_auth.json') as f:
-                config = json.load(f)
-                print("Firebase config loaded successfully.")  # 디버깅용 메시지
-            
-            # Firebase 초기화
-            firebase = pyrebase.initialize_app(config)
-            self.db = firebase.database()
-        
-        except FileNotFoundError:
-            print("Error: firebase_auth.json 파일이 없습니다. 경로를 확인하세요.")
-        
-        except json.JSONDecodeError:
-            print("Error: firebase_auth.json 파일이 올바른 형식이 아닙니다.")
-
     def insert_user(self, data, pw): 
         user_info = {
             "id": data['id'], 
@@ -83,19 +66,38 @@ class DBhandler:
         return False
 
     def get_items(self):
-        items=self.db.child("item").get().val()
+        items=self.db.child("item").get()
         return items
     
-    def get_item_byname(self, name):
+    def get_item_bykey(self, key):
         items = self.db.child("item").get()
         target_value=""
-        print("##########", name)
+        print("##########", key)
         for res in items.each():
             key_value = res.key()
             
-            if key_value == name:
+            if key_value == key:
                 target_value=res.val()
         return target_value
+    
+    def get_items_bycategory(self, cate):
+        tmps = self.db.child("item").get()
+        target_value=[]
+        target_key=[]
+        for res in tmps.each():
+            value = res.val()
+            key_value = res.key()
+            
+            if value['category'] == cate:
+                target_value.append(value)
+                target_key.append(key_value)
+        print("######target_value", target_value)
+        items={}
+        
+        for k,v in zip(target_key, target_value):
+            items[k]=v
+        
+        return items
     
     def reg_review(self, data, img_path):
         review_info ={
@@ -149,7 +151,6 @@ class DBhandler:
         users = self.db.child("user").get()
         print("Fetched users:", users.val())  # Firebase에서 가져온 전체 데이터 출력
 
-        
         for user in users.each():
             print("Checking user:", user.val())  # 각 사용자 데이터를 출력
             if user.val().get("id") == user_id:
