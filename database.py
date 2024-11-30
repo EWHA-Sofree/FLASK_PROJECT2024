@@ -20,7 +20,7 @@ class DBhandler:
         }
         # Firebase에 데이터 저장 (랜덤 키 사용)
         self.db.child("item").push(item_info)       # push()를 사용하면 고유 ID 생성
-        print(f"Data saved successfully: {item_info}")
+        #print(f"Data saved successfully: {item_info}")
         return True
     
     def insert_user(self, data, pw): 
@@ -35,14 +35,14 @@ class DBhandler:
         }
         if self.user_duplicate_check(data['id']): 
             self.db.child("user").push(user_info) 
-            print("User data inserted:", data)
+            #print("User data inserted:", data)
             return True
         else:
             return False
 
     def user_duplicate_check(self, username): 
         users = self.db.child("user").get()
-        print("Existing users:", users.val())
+        #print("Existing users:", users.val())
 
         # 첫 번째 사용자일 경우 또는 사용자가 없을 경우 True 반환
         if str(users.val()) == "None":
@@ -72,7 +72,7 @@ class DBhandler:
     def get_item_bykey(self, key):
         items = self.db.child("item").get()
         target_value=""
-        print("##########", key)
+        #print("##########", key)
         for res in items.each():
             key_value = res.key()
             
@@ -91,7 +91,7 @@ class DBhandler:
             if value['category'] == cate:
                 target_value.append(value)
                 target_key.append(key_value)
-        print("######target_value", target_value)
+        #print("######target_value", target_value)
         items={}
         
         for k,v in zip(target_key, target_value):
@@ -126,7 +126,6 @@ class DBhandler:
         reviews=self.db.child("review").get().val()
         return reviews
 
-    
     def get_heart_byname(self, uid, name):
         hearts = self.db.child("heart").child(uid).get()
         target_value=""
@@ -140,19 +139,24 @@ class DBhandler:
                 target_value=res.val()
         return target_value
     
-    def update_heart(self, user_id, isHeart, item):
+    def update_heart(self, user_id, isHeart, item, timestamp):
         heart_info ={
             "interested": isHeart
         }
+        if timestamp is not None:
+            heart_info["timestamp"] = timestamp
+        else:
+            heart_info["timestamp"] = None
+            
         self.db.child("heart").child(user_id).child(item).set(heart_info)
         return True
     
     def get_userinfo_byid(self, user_id):
         users = self.db.child("user").get()
-        print("Fetched users:", users.val())  # Firebase에서 가져온 전체 데이터 출력
+        #print("Fetched users:", users.val())  # Firebase에서 가져온 전체 데이터 출력
 
         for user in users.each():
-            print("Checking user:", user.val())  # 각 사용자 데이터를 출력
+            #print("Checking user:", user.val())  # 각 사용자 데이터를 출력
             if user.val().get("id") == user_id:
                 user_data = {  # **추가된 필드 반환**
                     "id": user.val().get("id"),
@@ -161,7 +165,7 @@ class DBhandler:
                     "email": user.val().get("email", ""),        # **이메일 반환**
                     "phone": user.val().get("phone", "")         # **전화번호 반환**
                 }
-                print("Matched user data:", user_data)  # 매칭된 사용자 데이터 출력
+                #print("Matched user data:", user_data)  # 매칭된 사용자 데이터 출력
                 return user_data
         return None
     
@@ -170,11 +174,18 @@ class DBhandler:
                   
         if user_data.val() is None: return {}
 
-        item_names = []
+        wishlist = []
 
         user_data_dict = user_data.val()  # 데이터를 딕셔너리로 변환
         if user_data_dict:  
             for key, value in user_data_dict.items():
                 if value.get("interested") == "Y":
-                    item_names.append(key)
-            return item_names
+                    wishlist.append({"item": key, "timestamp": value.get("timestamp")})
+        
+        # timestamp 기준으로 정렬 (최신 순으로 정렬)
+        sorted_wishlist = sorted(
+            wishlist, 
+            key=lambda x: x["timestamp"], 
+            reverse=True
+        )
+        return sorted_wishlist
