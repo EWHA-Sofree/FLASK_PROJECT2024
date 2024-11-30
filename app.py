@@ -3,6 +3,7 @@ from database import DBhandler
 import hashlib
 import sys
 import math
+from datetime import datetime, timezone
 
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "helloosp"
@@ -76,11 +77,11 @@ def mypage():
         return render_template('mypage.html', items=[], info=user_info, total=0)
 
     all_items = DB.get_items().val()
-    print("All Items:", all_items)
     item_details = []
 
     # 위시리스트에 있는 상품 필터링
-    for item_id in wishlist[:4]: 
+    for entry in wishlist[:4]:  # 위시리스트는 정렬된 리스트
+        item_id = entry["item"]  # item_id 가져오기
         if item_id in all_items:
             item_details.append({"key": item_id, "value": all_items[item_id]}) 
 
@@ -106,7 +107,8 @@ def wishlist():
     data = {}
     
     # 위시리스트에 있는 상품 필터링
-    for item_id in wishlist: 
+    for entry in wishlist:
+        item_id = entry["item"]
         if item_id in all_items:
                 data[item_id]=all_items[item_id]
     
@@ -301,23 +303,16 @@ def view_review_detail(review_id):
 
 @application.route('/show_heart/<name>/', methods=['GET'])
 def show_heart(name):
- my_heart = DB.get_heart_byname(session['id'],name)
+ my_heart = DB.get_heart_byname(session['id'], name)
  return jsonify({'my_heart': my_heart})
 
 @application.route('/like/<name>/', methods=['POST'])
 def like(name):
- my_heart = DB.update_heart(session['id'],'Y',name)
+ timestamp = datetime.now(timezone.utc).isoformat()
+ my_heart = DB.update_heart(session['id'],'Y', name, timestamp=timestamp)
  return jsonify({'msg': '위시리스트에 추가했습니다!'})
 
 @application.route('/unlike/<name>/', methods=['POST'])
 def unlike(name):
- my_heart = DB.update_heart(session['id'],'N',name)
+ my_heart = DB.update_heart(session['id'],'N', name, timestamp=None)
  return jsonify({'msg': '위시리스트에서 삭제했습니다!'})
-
-
-
-
-@application.route('/dynamicurl/<varible_name>/')
-def DynamicUrl(varible_name):
-    return str(varible_name)
-
