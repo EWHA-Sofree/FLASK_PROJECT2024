@@ -54,26 +54,6 @@ td{
     font-weight:500;
 }
 
-/* 리뷰쓰기 버튼 스타일 */
-.reg_btn{
-    font-size: 13px;
-    font-weight: 500;
-    color: white;
-    background-color: #035A3C;
-    border: none;
-    border-radius: 5px;
-    width : 132px;
-    height: 26px;
-    padding: 1px 8px 1px;
-    margin-top: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.reg_btn:hover{
-    background-color: #004d2f;
-}
-
 /* 구매내역 섹션 */
 .purchase_history{
     padding: 20px 0px 20px; /* 위아래 섹션과 겹치치 않도록 간격 설정 */
@@ -110,7 +90,6 @@ a{
 }
 
 .ui_card__imgcover, .ui_card__info{
-    flex: 1 1 142px;    /* 상품 카드 초기 크기 설정 */
     overflow: hidden;
 }
 
@@ -120,8 +99,10 @@ a{
     flex-direction: column;
 }
 
-.ui_card__price{
-    font-weight: bold;
+.ui_card__seller{
+    padding-top: 5px;
+    font-size: 13px;
+    color: #686868;
 }
 
 .ui_grid ul{
@@ -129,11 +110,14 @@ a{
 }
 
 .ui_card{
+    font-size: 14px;
     margin-right:10px;
     border: 1px solid #e6e6e6;
     background-color: white;
     cursor: pointer;
     overflow: hidden;
+    width: 142px;
+    height: auto;
 }
 
 .ui_card:hover img{
@@ -141,12 +125,26 @@ a{
     transition-duration: 1.5s;
 }
 
-/* 판매내역 섹션 */
-.sales_history p{
-    text-align: center;
-    margin: 80px;
+/* 리뷰쓰기 버튼 스타일 */
+.reg_btn{
+    font-weight: 500;
+    color: white;
+    background-color: #035A3C;
+    border: none;
+    border-radius: 5px;
+    width : 132px;
+    height: 26px;
+    padding: 1px 8px 1px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.reg_btn:hover{
+    background-color: #004d2f;
+}
+
+/* 판매내역 섹션 */
 .sales_header{
     display:flex;   /* title과 더보기 버튼 정렬 */
     justify-content: space-between;
@@ -154,10 +152,21 @@ a{
 
 .no_contents{
     color:gray;
+    text-align: center;
+    margin: 80px;
 }
 
 /* 위시리스트 섹션 */
 .wish_header{
-    display:flex;   /* title과 더보기 버튼 정렬 */
+    display: flex;   /* title과 더보기 버튼 정렬 */
     justify-content: space-between;
+}
+
+.card_wrap{
+    width: 105%;
+    display: inline-flex;
+}
+
+.ui_card__info p{
+    margin: 0;
 }
