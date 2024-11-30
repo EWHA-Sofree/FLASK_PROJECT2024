@@ -3,6 +3,7 @@ from database import DBhandler
 import hashlib
 import sys
 import math
+from datetime import datetime
 
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "helloosp"
@@ -74,7 +75,7 @@ def mypage():
     if not wishlist:
         return render_template('mypage.html', items=[], info=user_info, total=0)
 
-    all_items = DB.get_items()
+    all_items = DB.get_items().val()
     item_details = []
 
     # 위시리스트에 있는 상품 필터링
@@ -99,7 +100,7 @@ def wishlist():
     end_idx = per_page * page
 
     user_id = session.get('id')
-    all_items = DB.get_items()
+    all_items = DB.get_items().val()
     wishlist = DB.get_wishlist_byid(user_id)
     data = {}
     
