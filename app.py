@@ -70,11 +70,13 @@ def mypage():
         return redirect(url_for('hello'))  # 메인 페이지로 리다이렉트
 
     wishlist = DB.get_wishlist_byid(user_id)  # 좋아요 상품 이름 리스트 가져오기
+    print("Wishlist:", wishlist)
 
     if not wishlist:
         return render_template('mypage.html', items=[], info=user_info, total=0)
 
-    all_items = DB.get_items()
+    all_items = DB.get_items().val()
+    print("All Items:", all_items)
     item_details = []
 
     # 위시리스트에 있는 상품 필터링
@@ -99,7 +101,7 @@ def wishlist():
     end_idx = per_page * page
 
     user_id = session.get('id')
-    all_items = DB.get_items()
+    all_items = DB.get_items().val()
     wishlist = DB.get_wishlist_byid(user_id)
     data = {}
     
