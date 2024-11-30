@@ -242,7 +242,6 @@ if __name__ == "__main__":
 def view_list():
 
     page=request.args.get("page", 1, type=int)
-    category = request.args.get("category", "all")
     per_page=8 # item count to display per page
     per_row=4 # item count to display per row
     row_count=int(per_page/per_row)
