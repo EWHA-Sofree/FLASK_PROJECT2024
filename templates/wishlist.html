@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block section %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/wishlist.css') }}">
+
+<div class="wishlist-container">
+  <h2 class="heading">위시리스트</h2>
+  <div class="ui_grid">
+    {% if wish %}
+      {% for key, value in wish.items() %}
+      <div class="ui_grid__item">
+        <div class="ui_card" onclick="location.href='/view_detail/{{ key }}/'">
+          <div class="ui_card__imgcover">
+            <img
+              src="{{ url_for('static', filename='image/' ~ value.item_image) }}"
+              alt="리뷰 사진"
+            />
+          </div>
+          <div class="ui_card__info">
+            <p class="ui_card__title">{{ value.item_name }}</p>
+            <p class="ui_card__seller">{{ value.item_seller }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+<!-- 페이지네이션을 위한 코드 시작 -->
+<div class="page-wrap">
+  <div class="page-nation">
+    <ul>
+      <li>
+      {% for i in range(page_count) %}
+        <a href="{{ url_for('wishlist', page=i) }}" color="black">{{ i+1 }}</a>
+      {% endfor %}
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock section %}

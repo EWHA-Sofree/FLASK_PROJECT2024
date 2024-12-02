@@ -8,7 +8,7 @@
     function showHeart() {
         $.ajax({
             type: 'GET',
-            url: '/show_heart/{{name}}/',
+            url: '/show_heart/{{key}}/',
             data: {},
             success: function (response) {
                 let my_heart = response['my_heart'];
@@ -31,7 +31,7 @@
     function like() {
         $.ajax({
             type: 'POST',
-            url: '/like/{{name}}/',
+            url: '/like/{{key}}/',
             data: {
             interested : "Y"
             },
@@ -45,7 +45,7 @@
     function unlike() {
         $.ajax({
             type: 'POST',
-            url: '/unlike/{{name}}/',
+            url: '/unlike/{{key}}/',
             data: {
             interested : "N"
             },
@@ -56,7 +56,26 @@
         });
     }
     $(document).ready(function () {
-    showHeart();
+        showHeart();
+    });
+
+    function buyItem() {
+        $.ajax({
+            type: 'POST',
+            url: '/buy/{{ key }}/',
+            success: function (response) {
+                alert(response['msg']);
+                window.location.href = "/purchase_history";
+            },
+            error: function (xhr) {
+                alert('구매 중 오류가 발생했습니다. 다시 시도해주세요.');
+                console.error(xhr.responseText);
+            }
+        });
+    }
+    $(document).on('click', '.buy-btn', function () {
+        const itemKey = $(this).data('key');
+        buyItem(itemKey);
     });
 </script>
 
@@ -79,7 +98,6 @@
         <div class="buttons">
             <button class="wishlist-btn">위시리스트 ♥</button>
             <button class="buy-btn">구매하기</button>
-            <input type="button" value="리뷰 쓰기" onclick="location.href='/reg_review/{{ data.name }}/';">
         </div>
     </div>
 </div>

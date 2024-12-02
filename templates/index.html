@@ -20,9 +20,10 @@
             </a>
             <div class="header__actions">
                 {% if session['id'] %}
+                <div class="session__msg">안녕하세요, {{ session['id'] }}님!</div>
                 <a href="/logout" class="header__link">
-                    <img src="{{ url_for('static', filename='image/login_icon.png') }}" alt="Login Icon" class="icon">
-                    {{session['id']}}님 반갑습니다! /로그아웃
+                    <img src="{{ url_for('static', filename='image/logout_icon.png') }}" alt="Login Icon" class="icon">
+                    로그아웃
                 </a>
                 {% else %}
                 <a href="/login" class="header__link">
@@ -44,15 +45,15 @@
             <li>
                 <a style="cursor:pointer">카테고리</a>
                 <ul class="submenu">
-                    <li><a href="/category/stationery">문구</a></li>
-                    <li><a href="/list">악세서리</a></li>
-                    <li><a href="/category/digital">디지털</a></li>
-                    <li><a href="/category/clothing">의류</a></li>
-                    <li><a href="/category/homedeco">홈데코</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='문구') }}">문구</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='악세서리') }}">악세서리</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='디지털') }}">디지털</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='의류') }}">의류</a></li>
+                    <li><a href="{{ url_for('view_list', page=0, category='홈데코') }}">홈데코</a></li>
                 </ul>
             
             </li>
-            <li><a href="/reviews_list">리뷰 모아보기</a></li>
+            <li><a href="{{ url_for('view_reviews_list', page=0) }}">리뷰 모아보기</a></li>
             <li><a href="/mypage">마이페이지</a></li>
         </ul>
         <a href="#" class="navbar__toggleBtn">
@@ -81,6 +82,17 @@
             </div>
         </div>
     </footer>    
+
+    <script>
+        $(document).ready(function () {
+            const currentCategory = "{{ category }}"; // Flask에서 전달받은 카테고리
+            $('.submenu a').each(function () {
+                if ($(this).text().trim() === currentCategory) {
+                    $(this).addClass('active'); // 'active' 클래스를 추가
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>   

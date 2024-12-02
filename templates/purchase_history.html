@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block section %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/wishlist.css') }}">
+
+<div class="wishlist-container">
+  <h2 class="heading">구매 내역</h2>
+  <div class="ui_grid">
+    {% if purchases %}
+    {% for key, value in purchases.items() %}
+    <li class="ui_grid__item">
+        <a href="/view_detail/{{ value.item_id }}/">
+            <div class="ui_card">
+                <div class="ui_card__imgcover">
+                        <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                </div>
+                <div class="ui_card__info">
+                    <p class="ui_card__title">{{ value.item_name }}</p>
+                    {% if value.review_written %}
+                    <a href="/#">작성한 리뷰 보기</a>
+                    {% else %}
+                    <a href="{{ url_for('reg_review', purchase_id=key) }}" class="write-review-btn">리뷰 쓰기</a>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- 페이지네이션을 위한 코드 시작 -->
+<div class="page-wrap">
+  <div class="page-nation">
+    <ul>
+      <li>
+      {% for i in range(page_count) %}
+        <a href="{{ url_for('purchase_history', page=i) }}" color="black">{{ i+1 }}</a>
+      {% endfor %}
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock section %}

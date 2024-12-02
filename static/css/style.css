@@ -6,21 +6,21 @@ body {
 
 /* 상단 배너 스타일 */
 .header {
-    background-color: #035A3C; /* 초록색 배경 */
+    background-color: #035A3C;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 }
 
 .header__container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
 .logo {
-    height: 80px; /* 로고의 크기 조정 */
+    height: 80px;
 }
 
 .header__actions {
@@ -46,6 +46,14 @@ body {
 .header__link img.icon {
     width: 40px;
     height: 40px;
+}
+
+.session__msg {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-end;
 }
 
 /* 네비게이션 바 스타일 */
@@ -148,7 +156,6 @@ body {
     color: #666;
 }
 
-
 .page-nation li{
     list-style: none;
 }
@@ -162,14 +169,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 0px 20px;
+}
+
+.page-nation ul{
+    padding:0;
+}
+
+.page-nation a:hover{
+    background-color:#cbf7db;
+    color:#028b53;
+    border-radius: 5px;
 }
 
 .page-nation a{
     display: block;
     margin: 0 3px;
     float: left;
-    border: 1px solid #e6e6e6;
     width: 28px;
     height: 28px;
     line-height: 28px;
