@@ -39,76 +39,40 @@
             </table>
         </div>
     </div>
-    <div class="purchase_history">
+    <div class="purchase-history">
         <div class="purchase_header">
-            <h2>나의 구매내역</h2>
+            <h2>구매내역</h2>
+            {% if total_purchase > 4 %}
             <a href="/purchase_history" class="more_info_btn">더보기 ></a>
+            {% endif %}
         </div>
+        {% if purchases %}
         <div class="ui_grid">
-        	<ul class="ui_grid__cols--4">
-        		<li class="ui_grid__item">
-                	<div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                            <img src="{{ url_for('static', filename='image/product1.png') }}" alt="product1">
-                            </a>
+            <ul class="ui_grid__cols--4">
+                {% for key, value in purchases.items() %}
+                <li class="ui_grid__item">
+                    <a href="/view_detail/{{ value.item_id }}/">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                    <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                            </div>
+                            <div class="ui_card__info">
+                                <p class="ui_card__title">{{ value.item_name }}</p>
+                                {% if value.review_written %}
+                                <a href="/#">작성한 리뷰 보기</a>
+                                {% else %}
+                                <a href="{{ url_for('reg_review', purchase_id=key) }}" class="write-review-btn">리뷰 쓰기</a>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="ui_card__info">
-                        <a href="#"
-                        class="ui_card__title"
-                        target="_blank">[데일리템⭐]투톤 체크 스크런치 </a>
-                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='/reg_review/[데일리템⭐]투톤 체크 스크런치/';">
-                        </div>
-        		    </div>
-                </li>                                 
-        		<li class="ui_grid__item">
-                	<div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                            <img src="{{ url_for('static', filename='image/product2.png') }}" alt="product2">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                        <a href="#"
-                        class="ui_card__title"
-                        target="_blank">💡뜨개 무드등(갓+전구 set) </a>
-                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
-                        </div>
-        		    </div>
+                    </a>
                 </li>
-        		<li class="ui_grid__item">
-                	<div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                            <img src="{{ url_for('static', filename='image/product3.png') }}" alt="product3">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                        <a href="#"
-                        class="ui_card__title"
-                        target="_blank">커스텀 자수🧶앞치마[3종류] </a>
-                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
-                        </div>
-        		    </div>
-                </li>
-        		<li class="ui_grid__item">
-                	<div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                            <img src="{{ url_for('static', filename='image/product4.png') }}" alt="product4">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                        <a href="#"
-                        class="ui_card__title"
-                        target="_blank">손뜨개 달개비🪻책갈피 </a>
-                        <input type="button" value="리뷰 쓰기" class="reg_btn" onclick="location.href='#'">
-                        </div>
-        		    </div>
-                </li>
+                {% endfor %}
             </ul>
-          </div>
-
+        </div>
+        {% else %}
+        <p class="no_contents">구매내역이 없습니다.</p>
+        {% endif %}
     </div>
     <div class="sales_history">
         <div class="sales_header">
@@ -117,39 +81,39 @@
         </div>
         <p class="no_contents">최근에 판매한 상품이 없습니다.</p>
     </div>
-        <div class="wishlist">
-            <div class="wish_header">
-                <h2>위시리스트</h2> 
-                {% if total > 4 %}
-                <a href="/wishlist" class="more_info_btn">더보기 ></a>
-                {% endif %}
-            </div>
-            {% if total > 0 %}
-            <div class="card_wrap">
-            {% for item in items %}
-            <div class="ui_grid">
-                <ul class="ui_grid__cols--4">
-                    <li class="ui_grid__item">
-                        <a href="/view_detail/{{ item.key }}/">
-                            <div class="ui_card">
-                                <div class="ui_card__imgcover">
-                                    <img src="/static/image/{{ item.value.img_path }}" alt="product-image">
-                                </div>
-                                <div class="ui_card__info">
-                                    <p class="ui_card__title">{{ item.value.name }}</p>
-                                    <p class="ui_card__seller">{{ item.value.seller}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            {% endfor %}
-            </div>
-            {% else %}
-            <p class="no_contents">위시리스트에 담긴 상품이 없습니다. </p>
+    <div class="wishlist">
+        <div class="wish_header">
+            <h2>위시리스트</h2>
+            {% if total_wish > 4 %}
+            <a href="/wishlist" class="more_info_btn">더보기 ></a>
             {% endif %}
         </div>
+        
+        {% if total_wish > 0 %}
+        <div class="ui_grid">
+            <ul class="ui_grid__cols--4">
+                {% for key, value in wishes.items() %}
+                <li class="ui_grid__item">
+                    <a href="/view_detail/{{ key }}/">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                            </div>
+                            <div class="ui_card__info">
+                                <p class="ui_card__title">{{ value.item_name }}</p>
+                                <p class="ui_card__seller">{{ value.item_seller }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <p class="no_contents">위시리스트에 담긴 상품이 없습니다.</p>
+        {% endif %}
+    </div>
+    
 </div>
 </div>
 {% endblock section %}

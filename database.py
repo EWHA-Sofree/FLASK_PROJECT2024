@@ -16,7 +16,10 @@ class DBhandler:
             "price": int(data['price']),
             "info": data['info'], 
             "category": data['category'],
-            "img_path": img_path
+            "img_path": img_path, 
+            "timestamp":data['timestamp'], 
+            "user_id":data['user_id'], 
+            "user_nickname":data['user_nickname']
         }
         # Firebase에 데이터 저장 (랜덤 키 사용)
         self.db.child("item").push(item_info)       # push()를 사용하면 고유 ID 생성
@@ -27,15 +30,13 @@ class DBhandler:
         user_info = {
             "id": data['id'], 
             "pw": pw,
-            "name": data.get('name', ''), 
-            "nickname": data.get('nickname', ''),  # nickname 필드가 없을 경우 기본값으로 빈 문자열 설정
-            "email": data.get('email', ''),        # 이메일
-            "phone": data.get('phone', '')         # 전화번호
-
+            "name": data.get('username', ''), 
+            "nickname": data.get('nickname', ''),
+            "email": data.get('email', ''),
+            "phone": data.get('phone', '')
         }
         if self.user_duplicate_check(data['id']): 
             self.db.child("user").push(user_info) 
-            #print("User data inserted:", data)
             return True
         else:
             return False
@@ -71,14 +72,16 @@ class DBhandler:
     
     def get_item_bykey(self, key):
         items = self.db.child("item").get()
-        target_value=""
-        #print("##########", key)
+        if not items.each():
+            return None  # 데이터가 없을 경우 None 반환
+
+        # key와 매칭되는 값 찾기
         for res in items.each():
-            key_value = res.key()
-            
-            if key_value == key:
-                target_value=res.val()
-        return target_value
+            if res.key() == key:
+                return res.val()  # 매칭된 값 반환
+
+        return None  # 매칭되는 값이 없으면 None 반환
+
     
     def get_items_bycategory(self, cate):
         tmps = self.db.child("item").get()
@@ -99,24 +102,34 @@ class DBhandler:
         
         return items
     
-    def reg_review(self, data, img_path):
-        review_info ={
+    def reg_review(self, data, img_path, purchase_id):
+        review_info = {
             "name": data['name'],
-            "title": data['title'],
             "rate": int(data['reviewStar']),
             "review": data['reviewContents'],
-            "img_path": img_path, 
-            "user_id": data['user_id']
+            "img_path": img_path,
+            "user_id": data['user_id'],
+            "user_nickname": data['user_nickname'],
+            "timestamp": data['timestamp'],
+            "item_id": data['item_id'],
+            "purchase_id": purchase_id
         }
+        
+        # 리뷰 저장
         result = self.db.child("review").push(review_info)
+        
+        # purchases 하위 데이터 업데이트
+        self.db.child("purchases").child(data['user_id']).child(purchase_id).update({
+            "review_written": True
+        })
+
         return result['name']
     
     def get_review_byID(self, review_id):
         review = self.db.child("review").child(review_id).get()
         return review.val() if review else None
-    
+            
     def get_reviews_by_name(self, name):
-        # 특정 상품(name)의 모든 리뷰 가져오기
         reviews = self.db.child("review").order_by_child("name").equal_to(name).get()
         if not reviews or not reviews.each():
             return []
@@ -124,7 +137,7 @@ class DBhandler:
     
     def get_reviews(self):
         reviews=self.db.child("review").get().val()
-        return reviews
+        return reviews if reviews else {}
 
     def get_heart_byname(self, uid, name):
         hearts = self.db.child("heart").child(uid).get()
@@ -182,10 +195,25 @@ class DBhandler:
                 if value.get("interested") == "Y":
                     wishlist.append({"item": key, "timestamp": value.get("timestamp")})
         
-        # timestamp 기준으로 정렬 (최신 순으로 정렬)
-        sorted_wishlist = sorted(
-            wishlist, 
-            key=lambda x: x["timestamp"], 
-            reverse=True
-        )
-        return sorted_wishlist
+        return wishlist
+
+    def get_purchase_by_purchaseid(self, user_id, purchase_id):
+        purchase = self.db.child("purchases").child(user_id).child(purchase_id).get()
+        return purchase if purchase else None
+    
+    def get_purchases_byid(self, user_id):
+        purchases = self.db.child("purchases").child(user_id).get()
+        return purchases if purchases else None
+
+    def add_purchase(self, user_id, item_id, timestamp):
+        purchase_data = {
+            "item_id": item_id,
+            "timestamp": timestamp,
+            "review_written": False
+        }
+        try:
+            result = self.db.child("purchases").child(user_id).push(purchase_data)
+            return result['name']
+        except Exception as e:
+            print("Firebase 데이터 저장 중 오류 발생:", e)
+            return None

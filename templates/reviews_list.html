@@ -19,7 +19,7 @@
             />
           </div>
           <div class="ui_card__info">
-            <p class="ui_card__title">{{ value.title }}</p>
+            <p class="ui_card__title">{{ value.review }}</p>
             <button
               class="more-button"
               onclick="location.href='/view_review_detail/{{ key }}';"
@@ -41,9 +41,7 @@
   <div class="page-nation">
     <ul>
       {% for i in range(page_count) %}
-      <li>
-        <a href="{{ url_for('view_reviews_list', page=i) }}" color="black">{{ i }}</a>
-      </li>
+        <a href="{{ url_for('view_reviews_list', page=i) }}" color="black">{{ i+1 }}</a>
       {% endfor %}
     </ul>
   </div>

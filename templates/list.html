@@ -8,21 +8,21 @@
 <table>
   <!-- 데이터 순회 -->
   {% for row in rows %}
-  <tr>
-    {% for key, value in row.items() %}
-    <td>상품이름: {{ value.name }}</td>
-    {% endfor %}
-  </tr>
-  <tr>
-    {% for key, value in row.items()  %}
-    <td
-      onclick="location.href='/view_detail/{{ key }}/';"
-      style="cursor: pointer"
-    >
-      <img src="/static/image/{{ value.img_path }}" width="140" height="200">
-    </td>
-    {% endfor %}
-  </tr>
+    <tr>
+      {% for key, value in row.items() %}
+      <td>{{ value.name }}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for key, value in row.items()  %}
+      <td
+        onclick="location.href='/view_detail/{{ key }}/';"
+        style="cursor: pointer"
+      >
+        <img src="/static/image/{{ value.img_path }}" width="140" height="200">
+      </td>
+      {% endfor %}
+    </tr>
   {% endfor %}
 </table>
 

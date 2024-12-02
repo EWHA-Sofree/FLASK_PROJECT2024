@@ -7,13 +7,11 @@
     <h2>리뷰 작성하기</h2>
     
     <form class="mb-3" name="myform" id="myform" method="post" action="/reg_review_submit" enctype="multipart/form-data">
+        <input type="hidden" name="purchase_id" value="{{ purchase.get('purchase_id', '') }}">
+        <input type="hidden" name="item_id" value="{{ purchase.get('item_id', '') }}">
+        <input class="product-name" type="text" name="name" id="name" value="{{ item.get('name', '') }}">
 
-        <input class="product-name" type="text" name="name" id="name" value="{{name}}" readonly></input>
         <br>
-        <!-- 리뷰 제목 -->
-        <label for="title">제목:</label>
-        <input type="text" name="title" id="title" value="" placeholder="리뷰 제목을 입력하세요">
-        <br><br>
         <fieldset>
         <!-- 별점 선택 -->
             <span>별점: </span>
