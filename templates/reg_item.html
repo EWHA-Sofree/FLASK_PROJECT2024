@@ -3,6 +3,11 @@
 {% block section %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reg_item.css') }}">
 <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+{% with mesg = get_flashed_messages() %}
+    {% if mesg != [] %}
+        <script>alert("{{ mesg[0] }}")</script>
+    {% endif %}
+{% endwith %}
 
 <div class="reg_items_form">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">

@@ -18,6 +18,7 @@ class DBhandler:
             "category": data['category'],
             "img_path": img_path
         }
+
         # Firebase에 데이터 저장 (랜덤 키 사용)
         self.db.child("item").push(item_info)  # push()를 사용하면 고유 ID 생성
         print(f"Data saved successfully: {item_info}")

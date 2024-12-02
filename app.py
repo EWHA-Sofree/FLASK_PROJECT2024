@@ -73,9 +73,24 @@ def mypage():
 
     return render_template('mypage.html', info=user_info)
 
-@application.route("/reg_item")
+@application.route('/reg_item')
 def reg_item():
-    return render_template("reg_item.html")
+    # 현재 로그인한 사용자 ID 가져오기
+    user_id = session.get('id')  # 세션에서 사용자 ID 가져오기
+
+    if not user_id:
+        flash("로그인이 필요한 서비스입니다.")
+        return redirect(url_for('login'))  # 로그인 페이지로 리다이렉트
+
+    # 데이터베이스에서 사용자 정보 가져오기
+    user_info = DBhandler().get_userinfo_byid(user_id)
+    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    if not user_info:
+        flash("사용자 정보를 찾을 수 없습니다.")
+        return redirect(url_for('index'))  # 메인 페이지로 리다이렉트
+
+    return render_template('reg_item.html', info=user_info)
+  
 
 @application.route("/reg_review/<name>/")
 def reg_review(name):
@@ -158,17 +173,17 @@ def logout_user():
 @application.route("/submit_item_post", methods=["POST"])
 def reg_item_submit_post():
     image_file = request.files["file"]
-    image_file.save("static/image/{}".format(image_file.filename))
-    data = request.form
-    DB.insert_item(data['name'], data, image_file.filename)
-        
+    data = request.form.to_dict()  # ImmutableMultiDict를 딕셔너리로 변환
+    img_path = "static/image/{}".format(image_file.filename)
+
+    image_file.save(img_path)
+    data["img_path"] = image_file.filename  # 단순 파일명 저장
+    DB.insert_item(data['name'], data, image_file.filename)        
     print(f"Form data: {data}")
-    
+
     return render_template(
-        "item_detail.html",
-        data=data,
-        img_path="static/image/{}".format(image_file.filename),
-    )
+        "item_detail.html", data=data)
+    
     
 if __name__ == "__main__":
     application.run(host="0.0.0.0")
@@ -213,7 +228,7 @@ def view_item_detail(name):
     data=DB.get_item_byname(str(name))
     print("####data:", data)
     return render_template("item_detail.html", name=name, data=data)
-
+    
 @application.route("/view_review_detail/<review_id>")
 def view_review_detail(review_id):
     review_info = DB.get_review_byID(review_id)    
