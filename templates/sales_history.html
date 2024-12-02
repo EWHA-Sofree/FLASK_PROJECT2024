@@ -1,5 +1,49 @@
 {% extends "index.html" %}
-
 {% block section %}
-판매내역 화면 입니다. 
-{% endblock section %}
+<div class="sales-history-container">
+  <h2 class="heading">판매 내역</h2>
+
+  {% if sales %}
+    <div class="sales-grid">
+      {% for row in rows %}
+        <div class="sales-row">
+          {% for key, value in row.items() %}
+          <div class="sales-item">
+            <div class="sales-card" onclick="location.href='/view_detail/{{ key }}/'">
+              <div class="sales-card-img">
+                <img
+                  src="{{ url_for('static', filename='image/' ~ value.item_image) }}"
+                  alt="판매 상품 이미지"
+                />
+              </div>
+              <div class="sales-card-info">
+                <p class="sales-item-title">{{ value.item_name }}</p>
+                <p class="sales-item-seller">판매자: {{ value.item_seller }}</p>
+                <p class="sales-item-timestamp">등록일: {{ value.timestamp }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>판매 내역이 없습니다.</p>
+  {% endif %}
+
+  <!-- 페이지네이션 -->
+  <div class="page-wrap">
+    <div class="page-nation">
+      <ul>
+        {% for i in range(page_count) %}
+          <li>
+            <a href="{{ url_for('sales_history', page=i) }}" {% if page == i %}class="active"{% endif %}>
+              {{ i + 1 }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

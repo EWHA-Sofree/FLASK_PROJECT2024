@@ -143,14 +143,33 @@ def purchase_history():
         page_count=(total + per_page - 1) // per_page,  # 페이지 수 계산 보정
         total=total
     )
-
-@application.route("/sales_history")
+    
+@application.route('/sales_history')
 def sales_history():
-    return render_template("sales_history.html")
+    user_id = session.get('id')  # 현재 로그인한 사용자 ID 가져오기
 
-@application.route("/reg_item")
+    return render_template('sales_history.html')
+    
+@application.route('/reg_item')
 def reg_item():
-    return render_template("reg_item.html")
+    # 현재 로그인한 사용자 ID 가져오기
+    user_id = session.get('id')  # 세션에서 사용자 ID 가져오기
+
+    if not user_id:
+        flash("로그인이 필요한 서비스입니다.")
+        return redirect(url_for('login'))  # 로그인 페이지로 리다이렉트
+
+    # 데이터베이스에서 사용자 정보 가져오기
+    user_info = DBhandler().get_userinfo_byid(user_id)
+    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    if not user_info:
+        flash("사용자 정보를 찾을 수 없습니다.")
+        return redirect(url_for('index'))  # 메인 페이지로 리다이렉트
+
+    print("User info:", user_info)
+
+    return render_template('reg_item.html', info=user_info)
+  
 
 @application.route("/reg_review/<purchase_id>/")
 def reg_review(purchase_id):
@@ -255,7 +274,7 @@ def logout_user():
 def reg_item_submit_post():
     image_file = request.files["file"]
     image_file.save("static/image/{}".format(image_file.filename))
-    data_prev = request.form
+    data_prev = request.form.to_dict()  # ImmutableMultiDict를 딕셔너리로 변환
     
     user_id = session.get('id')
     user = DB.get_userinfo_byid(user_id)
@@ -263,6 +282,7 @@ def reg_item_submit_post():
     
     data = {
         **data_prev,
+        "img_path": image_file.filename, 
         "user_id": user_id,
         "user_nickname": user.get('nickname'), 
         "timestamp": timestamp
@@ -273,10 +293,8 @@ def reg_item_submit_post():
     #print(f"Form data: {data}")
     
     return render_template(
-        "item_detail.html",
-        data=data,
-        img_path="static/image/{}".format(image_file.filename),
-    )
+        "item_detail.html", data=data)
+    
     
 @application.route("/list")
 def view_list():

@@ -3,6 +3,11 @@
 {% block section %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reg_item.css') }}">
 <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+{% with mesg = get_flashed_messages() %}
+    {% if mesg != [] %}
+        <script>alert("{{ mesg[0] }}")</script>
+    {% endif %}
+{% endwith %}
 
 <div class="reg_items_form">
     <form action="/submit_item_post" method="post" enctype="multipart/form-data">
@@ -12,8 +17,8 @@
                 <textarea name="name" id="name" rows="1" cols="50" required></textarea><br><br>
         </div>
         <div>
-            <label for="seller">판매자ID </label>
-            <input type="text" name="seller" id="seller" required><br><br>
+            <label for="seller">판매자 닉네임 </label>
+            <input type="text" name="seller" id="seller" value="{{ info['nickname'] }}" readonly><br><br>
         </div>
         <div>
             <label for="price">가격(원) </label>

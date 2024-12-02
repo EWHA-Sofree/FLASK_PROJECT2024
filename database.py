@@ -21,6 +21,7 @@ class DBhandler:
             "user_id":data['user_id'], 
             "user_nickname":data['user_nickname']
         }
+
         # Firebase에 데이터 저장 (랜덤 키 사용)
         self.db.child("item").push(item_info)       # push()를 사용하면 고유 ID 생성
         #print(f"Data saved successfully: {item_info}")
