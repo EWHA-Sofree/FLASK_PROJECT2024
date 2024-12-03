@@ -27,19 +27,21 @@ class DBhandler:
         #print(f"Data saved successfully: {item_info}")
         return True
     
-    def insert_user(self, data, pw): 
+    def insert_user(self, user_info, pw_hash): 
         user_info = {
-            "id": data['id'], 
-            "pw": pw,
-            "name": data.get('username', ''), 
-            "nickname": data.get('nickname', ''),
-            "email": data.get('email', ''),
-            "phone": data.get('phone', '')
+            "id": user_info['id'], 
+            "pw": pw_hash,
+            "name": user_info.get('username', ''), 
+            "nickname": user_info.get('nickname', ''),
+            "email": user_info.get('email', ''),
+            "phone": user_info.get('phone', '')
         }
-        if self.user_duplicate_check(data['id']): 
+        print("User data to insert:", user_info)
+        if self.user_duplicate_check(user_info['id']): 
             self.db.child("user").push(user_info) 
             return True
         else:
+            print("Duplicate user detected.")
             return False
 
     def user_duplicate_check(self, username): 

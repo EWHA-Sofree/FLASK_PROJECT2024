@@ -275,21 +275,35 @@ def sign_up():
 
 @application.route("/signup_post", methods=['POST']) 
 def register_user():
-    data = request.form
+    print("Form data received:", request.form.to_dict())
+    data = request.form.to_dict()
     
-    required_fields = ['id', 'pw', 'username', 'nickname', 'email', 'phone']
+    required_fields = ['id', 'pw', 'username', 'nickname', 'email', 'phone1', 'phone2', 'phone3']
     for field in required_fields:
         if field not in data or not data[field].strip():
             print(f"Error: '{field}' field is missing or empty")
             flash(f"'{field}'는 필수 입력 항목입니다.")
             return render_template("sign_up.html")
 
+    # 전화번호 병합
+    phone = f"{data['phone1']}-{data['phone2']}-{data['phone3']}"
+
     # 비밀번호 해시 처리
     pw = data['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+
+    # 데이터베이스에 사용자 등록 정보 생성
+    user_info = {
+        "id": data['id'],
+        "pw": pw_hash,
+        "username": data['username'],
+        "nickname": data['nickname'],
+        "email": data['email'],
+        "phone": phone  # 병합된 전화번호 추가
+    }
     
     # 데이터베이스에 사용자 등록 시도
-    if DB.insert_user(data, pw_hash):
+    if DB.insert_user(user_info, pw_hash):
         return render_template("login.html") 
     else:
         flash("User ID already exists!")
@@ -486,6 +500,20 @@ def get_wishlist_items(user_id, limit=None):
         sorted_data = dict(list(sorted_data.items())[:limit])
 
     return sorted_data, len(filtered_data)
+
+@application.route("/check_duplicate", methods=["POST"])
+def check_duplicate():
+    data = request.json  # 프론트엔드에서 JSON 형식으로 데이터 받음
+    username = data.get("id")  # 입력된 아이디 가져오기
+
+    if not username:
+        return jsonify({"message": "아이디를 입력하세요.", "status": "error"}), 400
+
+    # 데이터베이스에서 중복 확인
+    if DB.user_duplicate_check(username):  # True이면 중복되지 않음
+        return jsonify({"message": "사용할 수 있는 아이디입니다.", "status": "success"})
+    else:
+        return jsonify({"message": "사용할 수 없는 아이디입니다.", "status": "error"}), 400
 
 def get_sales_items(user_id, limit=None):
     all_items = DB.get_items().val()  # 데이터베이스에서 모든 상품 데이터 가져오기

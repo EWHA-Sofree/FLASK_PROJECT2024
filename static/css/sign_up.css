@@ -1,72 +1,115 @@
-/* Centering and styling the container */
+/* 전체 컨테이너 */
 .signup-container {
     max-width: 600px;
-    margin: 20px auto; /* 화면 중앙에 배치 */
-    padding: 10px;
-    border: 1px solid #ddd;
+    margin: 40px auto;
+    background-color: white; /* 전체 배경은 흰색 */
+    padding: 20px;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    box-sizing: border-box; /* padding 포함한 크기 조정 */
+    box-sizing: border-box;
 }
 
-/* Styling the title */
-.signup-title {
-    color: #333;
-    text-align: center;
+/* 섹션 헤더 (기본정보, 추가정보, 가입하기) */
+.section-header {
+    display: flex;
+    justify-content: space-between; /* 기본정보와 *필수 간격 조정 */
+    align-items: center;
+    background-color: #035A3C; /* 이화그린 */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 섹션 구분 */
 }
 
-/* Form group layout */
+/* 폼 그룹 정렬 */
 .signup-form .form-group {
     display: flex;
-    align-items: center; /* 레이블과 입력 필드를 수직 정렬 */
+    align-items: center;
     margin-bottom: 15px;
 }
 
-/* Label styling */
 .signup-form label {
-    flex: 0 0 120px; /* 고정된 너비를 설정해 모든 레이블이 정렬되도록 */
+    flex: 0 0 150px; /* 레이블 고정 너비 */
     font-weight: bold;
+    font-size: 14px;
+    text-align: left;
     color: #333;
-    font-size: 16px;
-    text-align: left; /* 레이블을 오른쪽 정렬 */
-    margin-right: 10px; /* 레이블과 입력 필드 사이의 간격 */
+    margin-right: 10px;
 }
 
-/* Input field styling */
-.signup-form input[type="text"],
-.signup-form input[type="password"],
+.signup-form input,
 .signup-form select {
-    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+    flex: 1; /* 남은 공간을 채움 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* 전화번호 입력란 */
+.phone-input-container {
+    display: flex;
+    gap: 5px; /* 각 입력 필드 간격 */
+}
+
+.phone-input-container input {
+    width: 100px; /* 필드 너비 고정 */
+    text-align: center;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box; /* padding 포함한 크기 조정 */
+    font-size: 14px;
 }
 
-/* Duplicate check button styling */
-.signup-form .duplicate-btn {
-    padding: 8px 12px;
-    background-color: white;
-    color: #006400;
-    border: 1px solid #006400;
+/* 계좌번호 입력란 */
+.bank-account-container {
+    display: flex;
+    gap: 10px; /* 필드 간 간격 */
+}
+
+.bank-select {
+    flex: 0 0 150px; /* 은행명 선택 칸 크기 고정 */
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.account-input {
+    flex: 1; /* 남은 공간을 채움 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 중복체크 버튼 */
+.duplicate-btn {
+    background-color: #035A3C; /* 이화그린 */
+    color: white;
+    border: none;
+    padding: 6px 10px; /* 크기 조정 */
+    border-radius: 4px;
+    font-size: 12px; /* 글씨 크기 조정 */
+    font-weight: bold;
     cursor: pointer;
-    font-size: 12px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
 }
 
-/* Email domain text */
-.signup-form .email-domain {
-    margin-left: 5px;
-    font-size: 16px;
-    color: #666;
+.duplicate-btn:hover {
+    background-color: #024530; /* hover 시 더 어두운 이화그린 */
 }
 
-/* Submit button styling */
+/* 가입하기 버튼 */
 .submit-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #006400;
+    padding: 12px;
+    background-color: #035A3C; /* 이화그린 */
     color: white;
     border: none;
     border-radius: 4px;
@@ -76,16 +119,19 @@
     margin-top: 20px;
 }
 
+/* 입력 필드 옆 설명 텍스트 스타일 (영문소문자/숫자, 4~16자) */
 .input-info {
-    font-size: 12px;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #666;
+    font-size: 14px; /* 레이블과 동일한 글씨 크기 */
+    font-weight: bold; /* 레이블과 동일한 글씨 두께 */
+    color: #333; /* 레이블과 동일한 글씨 색상 */
+    margin-left: 10px; /* 입력 필드와 간격 */
 }
 
-.required-info {
-    text-align: right; /* 텍스트를 오른쪽 정렬 */
-    font-size: 14px;   /* 필요 시 폰트 크기 조정 */
-    color: #666;       /* 필요 시 텍스트 색상 변경 */
-    margin-bottom: 20px; /* 문단 하단 여백 추가 */
+/* 이메일 도메인 텍스트 (@ewhain.net) */
+.email-domain {
+    font-size: 14px; /* 레이블과 동일한 글씨 크기 */
+    font-weight: bold; /* 레이블과 동일한 글씨 두께 */
+    color: #333; /* 레이블과 동일한 글씨 색상 */
+    margin-left: 10px; /* 입력 필드와 간격 */
 }
+
