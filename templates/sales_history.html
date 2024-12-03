@@ -1,49 +1,43 @@
 {% extends "index.html" %}
+
 {% block section %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/sales_history.css') }}">
+
 <div class="sales-history-container">
-  <h2 class="heading">판매 내역</h2>
-
-  {% if sales %}
-    <div class="sales-grid">
-      {% for row in rows %}
-        <div class="sales-row">
-          {% for key, value in row.items() %}
-          <div class="sales-item">
-            <div class="sales-card" onclick="location.href='/view_detail/{{ key }}/'">
-              <div class="sales-card-img">
-                <img
-                  src="{{ url_for('static', filename='image/' ~ value.item_image) }}"
-                  alt="판매 상품 이미지"
-                />
-              </div>
-              <div class="sales-card-info">
-                <p class="sales-item-title">{{ value.item_name }}</p>
-                <p class="sales-item-seller">판매자: {{ value.item_seller }}</p>
-                <p class="sales-item-timestamp">등록일: {{ value.timestamp }}</p>
-              </div>
+  <h2 class="heading">구매 내역</h2>
+  <div class="ui_grid">
+    {% if sales %}
+    {% for key, value in sales.items() %}
+    <li class="ui_grid__item">
+        <a href="/view_detail/{{ key }}/">
+            <div class="ui_card">
+                <div class="ui_card__imgcover">
+                        <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                </div>
+                <div class="ui_card__info">
+                    <p class="ui_card__title">{{ value.item_name }}</p>
+                    <p class="ui_card__seller">{{ value.item_seller }}</p>
+                </div>
             </div>
-          </div>
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p>판매 내역이 없습니다.</p>
-  {% endif %}
-
-  <!-- 페이지네이션 -->
-  <div class="page-wrap">
-    <div class="page-nation">
-      <ul>
-        {% for i in range(page_count) %}
-          <li>
-            <a href="{{ url_for('sales_history', page=i) }}" {% if page == i %}class="active"{% endif %}>
-              {{ i + 1 }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+        </a>
+    </li>
+    {% endfor %}
   </div>
 </div>
-{% endblock %}
+
+<!-- 페이지네이션을 위한 코드 시작 -->
+<div class="page-wrap">
+  <div class="page-nation">
+    <ul>
+      <li>
+      {% for i in range(page_count) %}
+        <a href="{{ url_for('sales_history', page=i) }}" color="black">{{ i+1 }}</a>
+      {% endfor %}
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock section %}
