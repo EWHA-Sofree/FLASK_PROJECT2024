@@ -1,66 +1,71 @@
-/* Centering the login container */
-.login-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 10px;
+/* 로그인 화면 */
+h2 {
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    font-size: 24px;
+    margin-bottom: 40px;
 }
 
-/* Input label styling */
+/* 로그인 폼 */
+form {
+    width: 400px; /* 폼의 최대 너비를 제한 */
+    margin: 0 auto; /* 중앙 정렬 */
+    text-align: center;
+}
+
+/* 입력 필드 그룹 */
+.input-group {
+    margin-bottom: 20px;
+}
+
 .input-label {
     display: block;
     text-align: left;
-    margin-top: 15px;
     font-weight: bold;
     color: #333;
     font-size: 16px;
+    margin-bottom: 5px;
 }
 
-/* Input field styling */
 .input-field {
-    width: 100%; /* 컨테이너 너비에 맞춤 */
+    width: 100%;  /* 입력 필드 너비 100% */
+    max-width: 400px;  /* 최대 너비 제한 */
     padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* padding을 포함한 크기 조정 */
+    font-size: 16px;
+    margin-top: 5px;
+    box-sizing: border-box;
 }
 
-/* Button container */
+/* 버튼 컨테이너 */
 .button-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Login button styling */
+/* 로그인 버튼 스타일링 */
 .login-btn {
     width: 100px;
     padding: 10px;
-    background-color: #006400;
+    background-color: #035A3C;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-bottom: 40px; /* 푸터와 간격을 추가 */
 }
 
-/* Signup button styling */
+/* 회원가입 버튼 스타일링 */
 .signup-btn {
     width: 100px;
     padding: 10px;
     background-color: white;
-    color: #006400;
-    border: 1px solid #006400;
+    color: #035A3C;
+    border: 1px solid #035A3C;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-}
-
-/* Remove underline from signup link */
-.signup-link {
-    text-decoration: none;
+    margin-bottom: 40px; /* 푸터와 간격을 추가 */
 }
