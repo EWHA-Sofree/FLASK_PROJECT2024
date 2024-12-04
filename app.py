@@ -83,7 +83,7 @@ def mypage():
         total_wish=total_wish,
         total_purchase=total_purchase,
         total_sales=total_sales,
-        info=user_info,
+        info=user_info
     )
 
 
@@ -161,41 +161,38 @@ def purchase_history():
 
 @application.route("/sales_history")
 def sales_history():
-    user_id = session.get("id")  # 현재 로그인한 사용자 ID 가져오기
+    user_id = session.get('id')  # 현재 로그인한 사용자 ID 가져오기
     page = request.args.get("page", 0, type=int)
     per_page = 8
     per_row = 4  # item count to display per row
     row_count = int(per_page / per_row)
     start_idx = per_page * (page)  # 페이지 계산 수정
-    end_idx = per_page * (page + 1)
+    end_idx = per_page * (page+1)
 
     # 위시리스트 데이터 가져오기
     data, total = get_sales_items(user_id)
 
     data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
     tot_count = len(data)
-
+    
     for i in range(row_count):  # 행 별로 데이터 생성
         if (i == row_count - 1) and (tot_count % per_row != 0):
-            locals()[f"data_{i}"] = dict(list(data.items())[i * per_row :])
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:])
         else:
-            locals()[f"data_{i}"] = dict(
-                list(data.items())[i * per_row : (i + 1) * per_row]
-            )
-
+            locals()[f'data_{i}'] = dict(list(data.items())[i * per_row:(i + 1) * per_row])
+            
     return render_template(
-        "sales_history.html",
+        'sales_history.html',
         sales=data,
-        row1=locals().get("data_0", {}).items(),
-        row2=locals().get("data_1", {}).items(),
+        row1=locals().get('data_0', {}).items(),
+        row2=locals().get('data_1', {}).items(),
         limit=per_page,
         page=page,
         page_count=(total + per_page - 1) // per_page,  # 페이지 수 계산 보정
-        total=total,
+        total=total
     )
-
-
-@application.route("/reg_item")
+    
+@application.route('/reg_item')
 def reg_item():
     # 현재 로그인한 사용자 ID 가져오기
     user_id = session.get("id")  # 세션에서 사용자 ID 가져오기
@@ -632,4 +629,31 @@ def get_sales_items(user_id, limit=None):
 
     return sorted_data, len(filtered_data)
 
+
+def get_sales_items(user_id, limit=None):
+    all_items = DB.get_items().val()  # 데이터베이스에서 모든 상품 데이터 가져오기
+    if not all_items:
+        return {}, 0
+
+    filtered_data = {}
+
+    # 판매자가 현재 로그인한 사용자와 일치하는 상품 필터링
+    for item_id, item_data in all_items.items():
+        if item_data.get("user_id") == user_id:
+            filtered_data[item_id] = {
+                "item_name": item_data.get("name", "Unknown"),
+                "item_category": item_data.get("category", "Unknown"),
+                "item_image": item_data.get("img_path", "default.png"),
+                "item_price": item_data.get("price", 0),
+                "timestamp": item_data.get("timestamp"),
+            }
+
+    # 최신순 정렬
+    sorted_data = dict(sorted(filtered_data.items(), key=lambda x: x[1]["timestamp"], reverse=True))
+
+    # 제한된 개수 반환
+    if limit:
+        sorted_data = dict(list(sorted_data.items())[:limit])
+
+    return sorted_data, len(filtered_data)
 
