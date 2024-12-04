@@ -12,6 +12,14 @@
             <span class="id-label">닉네임:</span> 
             <span class="id-value">{{ data.user_nickname }}</span>
         </div>
+
+
+        <!-- 리뷰 제목 추가 -->
+        <div class="review-title">
+            <span class="title-value">{{ data.review_title if data.review_title else '제목 없음' }}</span>
+        </div>
+
+
         <div class="rating">
             {% for i in range(data.rate|default(0)) %}
                 ★

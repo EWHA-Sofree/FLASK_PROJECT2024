@@ -1,0 +1,90 @@
+/* 전체 컨테이너 스타일 */
+.list-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.item-count {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #555;
+}
+
+/* 아이템 그리드 */
+.item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* 아이템 카드 */
+.item-card {
+  width: 220px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 이미지 */
+.item-image {
+  display: block;
+  text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.item-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.item-image:hover img {
+  transform: scale(1.05);
+}
+
+/* 아이템 상세 정보 */
+.item-details {
+  padding: 10px;
+  text-align: center;
+}
+
+.item-title {
+  font-size: 16px; /* 폰트 크기 축소 */
+  font-weight: normal; /* 굵기 얇게 */
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.item-price {
+  font-size: 14px; /* 가격 텍스트 */
+  font-weight: bold;
+  color: #555; /* 기본 색상 */
+  margin-top: 4px;
+}
+
+
+/* 아이템 없음 */
+.no-items {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 40px;
+}
