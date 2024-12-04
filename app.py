@@ -467,8 +467,8 @@ def view_item_with_reviews(name):
     ]
 
     # 디버깅 출력
-    print(f"Filtered reviews with IDs for '{name}': {filtered_reviews}")
-    return filtered_reviews
+    #print(f"Filtered reviews with IDs for '{name}': {filtered_reviews}")
+    #return filtered_reviews
 
 @application.route("/view_review_detail/<review_id>/")
 def view_review_detail(review_id):
