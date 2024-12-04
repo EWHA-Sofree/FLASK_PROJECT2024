@@ -135,3 +135,19 @@
     margin-left: 10px; /* 입력 필드와 간격 */
 }
 
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    background-color: #ffffff; /* 흰 배경 */
+    color: red; /* 빨간색 글씨 */
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid red; /* 빨간색 경계선 */
+}
