@@ -391,7 +391,9 @@ def view_list():
     
 @application.route("/view_detail/<key>/")
 def view_item_detail(key):
+    print("###name:", key)
     data=DB.get_item_bykey(str(key))
+    print("####data:", data)
     return render_template("item_detail.html", key=key, data=data)
 
 @application.route("/view_review_detail/<review_id>")

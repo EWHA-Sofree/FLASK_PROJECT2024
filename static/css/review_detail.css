@@ -81,6 +81,15 @@ body {
     color: #333;
 }
 
+/* 제목 스타일 */
+.title-value {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333; /* 원하는 색상으로 설정 */
+    margin-top: 5px;
+}
+
+
 /* 버튼 */
 .button-container {
     text-align: right;
