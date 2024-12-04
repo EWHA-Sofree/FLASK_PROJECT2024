@@ -311,48 +311,38 @@ def sign_up():
 
 @application.route("/signup_post", methods=["POST"])
 def register_user():
-    print("Form data received:", request.form.to_dict())
     data = request.form.to_dict()
 
-    required_fields = [
-        "id",
-        "pw",
-        "username",
-        "nickname",
-        "email",
-        "phone1",
-        "phone2",
-        "phone3",
-    ]
-    for field in required_fields:
-        if field not in data or not data[field].strip():
-            print(f"Error: '{field}' field is missing or empty")
-            flash(f"'{field}'는 필수 입력 항목입니다.")
-            return render_template("sign_up.html")
+    # 중복 아이디 체크
+    username = data.get('id')
+    if DB.user_duplicate_check(username) is False:  # 아이디가 이미 존재하는 경우
+        flash("이미 사용 중인 아이디입니다.")
+        return render_template("sign_up.html")
 
     # 전화번호 병합
     phone = f"{data['phone1']}-{data['phone2']}-{data['phone3']}"
 
     # 비밀번호 해시 처리
-    pw = data["pw"]
-    pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
+    pw = data['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
 
     # 데이터베이스에 사용자 등록 정보 생성
     user_info = {
-        "id": data["id"],
+        "id": data['id'],
         "pw": pw_hash,
-        "username": data["username"],
-        "nickname": data["nickname"],
-        "email": data["email"],
-        "phone": phone,  # 병합된 전화번호 추가
+        "username": data['username'],
+        "nickname": data['nickname'],
+        "email": data['email'],
+        "phone": phone
     }
 
     # 데이터베이스에 사용자 등록 시도
     if DB.insert_user(user_info, pw_hash):
         return render_template("login.html")
     else:
-        flash("User ID already exists!")
+        flash("가입에 실패했습니다. 다시 시도해주세요.")
         return render_template("sign_up.html")
+
 
 
 @application.route("/logout")
