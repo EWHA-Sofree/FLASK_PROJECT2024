@@ -70,6 +70,18 @@ def mypage():
     sales_data, total_sales = get_sales_items(user_id, limit=4)
     wishlist, total_wish = get_wishlist_items(user_id, limit=4)
     
+    # 리뷰 데이터 추가
+    reviewable_purchase_ids = [
+        purchase_id for purchase_id, data in purchases.items() if data["review_written"]
+    ]
+    reviews = DB.get_review_by_purchase_ids(reviewable_purchase_ids)
+    
+    # purchases에 리뷰 ID만 병합
+    for purchase_id in reviewable_purchase_ids:
+        if purchase_id in reviews:
+            purchases[purchase_id]["review_id"] = reviews[purchase_id]
+
+
     return render_template(
         'mypage.html',
         wishes=wishlist,
@@ -126,6 +138,17 @@ def purchase_history():
 
     # 위시리스트 데이터 가져오기
     data, total = get_purchased_items(user_id)
+    
+    # 리뷰 데이터 추가
+    reviewable_purchase_ids = [
+        purchase_id for purchase_id, data in data.items() if data["review_written"]
+    ]
+    reviews = DB.get_review_by_purchase_ids(reviewable_purchase_ids)
+    
+    # purchases에 리뷰 ID만 병합
+    for purchase_id in reviewable_purchase_ids:
+        if purchase_id in reviews:
+            data[purchase_id]["review_id"] = reviews[purchase_id]
 
     data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
     tot_count = len(data)
@@ -210,7 +233,7 @@ def reg_review(purchase_id):
     user_id = session.get('id')
     
     # 구매 정보 가져오기
-    purchase = DB.get_purchase_by_purchaseid(user_id, purchase_id).val()
+    purchase = DB.get_purchase_by_purchaseid(user_id, purchase_id)
     if not purchase:
         flash("유효하지 않은 구매내역입니다.")
         return redirect(url_for("purchase_history"))
@@ -226,9 +249,6 @@ def reg_review(purchase_id):
     if not item:
         flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("purchase_history"))
-    
-    print(f"Purchase: {purchase}")
-    print(f"Item: {item}")
 
     return render_template("reg_review.html", purchase=purchase, item=item)
   
@@ -394,7 +414,7 @@ def view_item_detail(key):
     data=DB.get_item_bykey(str(key))
     return render_template("item_detail.html", key=key, data=data)
 
-@application.route("/view_review_detail/<review_id>")
+@application.route("/view_review_detail/<review_id>/")
 def view_review_detail(review_id):
     review_info = DB.get_review_byID(review_id)    
     if not review_info:
