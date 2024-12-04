@@ -12,56 +12,61 @@ body {
     align-items: flex-start;
     padding: 10px;
     border: 1px solid #ddd;
-    margin: 20px auto; 
+    margin: 20px auto;
     background-color: #f9f9f9;
     gap: 10px;
-    max-width: 600px; /* 최대 너비를 설정하여 중앙에 고정 */
-    width: 100%; /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
+    max-width: 600px;
+    /* 최대 너비를 설정하여 중앙에 고정 */
+    width: 100%;
+    /* 너비를 100%로 설정하여 화면 크기에 맞게 확장 */
 }
 
 .image-box {
-    margin-right: 20px;
-    flex-shrink: 0; /* 이미지 박스의 크기가 줄어들지 않도록 설정 */
+    margin-right: 10px;
+    flex-shrink: 0;
+    /* 이미지 박스의 크기가 줄어들지 않도록 설정 */
 }
 
-/* 상품 정보 사진 크기 조정 */ 
+/* 상품 정보 사진 크기 조정 */
 .product-image {
     width: 300px;
-    height: auto; /* 비율을 유지하면서 높이를 자동으로 조정 */
+    height: auto;
+    /* 비율을 유지하면서 높이를 자동으로 조정 */
 }
 
 .item-name {
-    font-size: 24px; 
+    font-size: 24px;
     font-weight: bold;
-    color: #111715; 
-    margin-bottom: 10px; 
+    color: #111715;
+    margin-bottom: 10px;
 }
 
 /* 녹색 줄 */
 .separator {
-    height: 1px;
+    height: 1.2px;
     background-color: #035A3C;
     margin: 10px 0;
 }
 
 .price {
-    font-size: 22px; 
-    font-weight: bold; 
-    color: #111715; 
-    margin-top: 30px; 
-    text-align: right; 
+    font-size: 22px;
+    font-weight: bold;
+    color: #111715;
+    margin-top: 30px;
+    text-align: right;
 
 }
 
 .info-box {
-    flex: 1; /* 정보 박스의 너비를 자유롭게 조정 */
+    flex: 1;
+    /* 정보 박스의 너비를 자유롭게 조정 */
     padding: 10px;
-    background-color: #f9f9f9; 
-    border-radius: 8px; 
+    background-color: #f9f9f9;
+    border-radius: 8px;
 }
 
 .info-box ul {
-    list-style-type: none; 
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
@@ -75,14 +80,20 @@ body {
     margin-top: 30px;
 }
 
-.wishlist-btn, .buy-btn {
-    padding: 10px 15px;
+.wishlist-btn,
+.buy-btn {
+    padding: 5px 15px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin-right: 10px;
-    border: 1px solid #035A3C; 
+    margin-right: 5px;
+    border: 1px solid #035A3C;
+    /* 크기 고정 */
+    width: 115px;
+    height: 45px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .wishlist-btn {
@@ -98,25 +109,29 @@ body {
 .info-title {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     text-align: left;
-    max-width: 600px; /* 최대 너비 설정 */
-    margin-left: auto; /* 중앙 정렬을 위한 설정 */
-    margin-right: auto; /* 중앙 정렬을 위한 설정 */
+    max-width: 600px;
+    /* 최대 너비 설정 */
+    margin-left: auto;
+    /* 중앙 정렬을 위한 설정 */
+    margin-right: auto;
+    /* 중앙 정렬을 위한 설정 */
 }
 
 /* 상품 정보 부분 */
 .product-description {
-    margin: 10px auto; 
+    margin: 10px auto;
     text-align: center;
-    line-height: 1.6; 
+    line-height: 1.6;
     white-space: normal;
     padding: 10px;
     background-color: #ffffff;
-    border: 1px solid #035A3C; 
+    border: 1px solid #035A3C;
     border-radius: 8px;
-    max-width: 600px; /* 최대 너비를 설정하여 중앙에 고정 */
-    width: 100%; 
+    max-width: 600px;
+    /* 최대 너비를 설정하여 중앙에 고정 */
+    width: 100%;
 }
 
 /* 리뷰 섹션 */
@@ -124,7 +139,7 @@ body {
     margin: 40px auto;
     max-width: 600px;
     background-color: #f5f5f5;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
     border-radius: 8px;
     text-align: center;
     border: 1px solid #f5f5f5;
@@ -139,11 +154,11 @@ body {
 }
 
 .review-box {
-    text-align: left; 
-    margin: 0 auto; 
-    max-width: 580px; 
+    text-align: left;
+    margin: 0 auto;
+    max-width: 580px;
     border: 1px solid #bebebe;
-    padding:10px;
+    padding: 10px;
     border-radius: 8px;
 }
 
@@ -158,8 +173,7 @@ body {
     margin-bottom: 10px;
 }
 
-
-.review-mini-image img{
+.review-mini-image img {
     height: 80px;
     max-width: 80px;
 }
@@ -171,8 +185,17 @@ body {
 .review-text {
     margin-bottom: 10px;
     display: flex;
-    align-items: flex-start; /* 아이템들이 위쪽에 맞춰 정렬되도록 설정 */
-    gap: 20px; /* 이미지와 텍스트 사이의 간격 설정 */
+    align-items: flex-start;
+    /* 아이템들이 위쪽에 맞춰 정렬되도록 설정 */
+    gap: 20px;
+    /* 이미지와 텍스트 사이의 간격 설정 */
     color: #727272;
-    margin: 0; /* 여백 제거 */
+    margin: 0;
+    /* 여백 제거 */
+}
+/* 녹색 줄 */
+.separator_review {
+    height: 0.5px;
+    background-color: #035A3C;
+    margin: 10px 0;
 }

@@ -217,7 +217,11 @@ class DBhandler:
 
     def get_purchase_by_purchaseid(self, user_id, purchase_id):
         purchase = self.db.child("purchases").child(user_id).child(purchase_id).get()
-        return purchase if purchase else None
+        if purchase.val():
+            purchase_data = purchase.val()
+            purchase_data['purchase_id'] = purchase_id
+            return purchase_data
+        return None
     
     def get_purchases_byid(self, user_id):
         purchases = self.db.child("purchases").child(user_id).get()
@@ -236,6 +240,17 @@ class DBhandler:
             print("Firebase 데이터 저장 중 오류 발생:", e)
             return None
         
-        
-        
-        
+    def get_review_by_purchase_ids(self, purchase_ids):
+        # Firebase에서 리뷰 데이터 가져오기
+        reviews = self.db.child("review").get().val()
+        if not reviews:
+            return {}
+
+        # purchase_ids에 해당하는 리뷰 ID만 추출
+        matched_reviews = {}
+        for review_id, review_data in reviews.items():
+            purchase_id = review_data.get("purchase_id")
+            if purchase_id in purchase_ids:
+                matched_reviews[purchase_id] = review_id  # review_id만 저장
+
+        return matched_reviews
