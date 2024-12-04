@@ -76,10 +76,33 @@
     </div>
     <div class="sales_history">
         <div class="sales_header">
-            <h2>나의 판매내역</h2>
+            <h2>판매내역</h2>
+            {% if total_sales > 4 %}
             <a href="sales_history" class="more_info_btn">더보기 ></a>
+            {% endif %}
         </div>
-        <p class="no_contents">최근에 판매한 상품이 없습니다.</p>
+        {% if sales %}
+        <div class="ui_grid">
+            <ul class="ui_grid__cols--4">
+                {% for key, value in sales.items() %}
+                <li class="ui_grid__item">
+                    <a href="/view_detail/{{ key }}/">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                    <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                            </div>
+                            <div class="ui_card__info">
+                                <p class="ui_card__title">{{ value.item_name }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <p class="no_contents">판매내역이 없습니다.</p>
+        {% endif %}
     </div>
     <div class="wishlist">
         <div class="wish_header">
