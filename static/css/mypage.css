@@ -144,6 +144,25 @@ a{
     background-color: #004d2f;
 }
 
+.view_btn {
+    font-weight: 500;
+    color: white;
+    background-color: #808080; /* 회색 배경 */
+    border: none;
+    border-radius: 5px;
+    width: 132px;
+    height: 26px;
+    padding: 1px 8px 1px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view_btn:hover {
+    background-color: #696969; /* hover 시 더 어두운 회색 */
+}
+
+
 /* 판매내역 섹션 */
 .sales_header{
     display:flex;   /* title과 더보기 버튼 정렬 */
