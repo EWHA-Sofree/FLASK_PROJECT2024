@@ -1,15 +1,27 @@
-/* 로그인 화면 */
+/* 전체 컨테이너 */
+.signup-container {
+    max-width: 400px;  /* 최대 너비 설정 */
+    margin: 40px auto;
+    background-color: white; /* 배경 흰색 */
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* 로그인 제목 */
 h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 40px;
+    text-align: left;  /* 왼쪽 정렬 */
+    font-size: 28px;    /* 글씨 크기 키움 */
+    font-weight: bold;  /* 글씨를 좀 더 두껍게 */
+    margin-left: 0px;
+    margin-bottom: 25px; /* 제목과 폼 간 간격 조정 */
 }
 
 /* 로그인 폼 */
 form {
-    width: 400px; /* 폼의 최대 너비를 제한 */
+    width: 100%; /* 폼의 너비를 최대화 */
     margin: 0 auto; /* 중앙 정렬 */
-    text-align: center;
+    text-align: left;
 }
 
 /* 입력 필드 그룹 */
@@ -17,6 +29,7 @@ form {
     margin-bottom: 20px;
 }
 
+/* 입력 필드 레이블 */
 .input-label {
     display: block;
     text-align: left;
@@ -26,9 +39,9 @@ form {
     margin-bottom: 5px;
 }
 
+/* 입력 필드 */
 .input-field {
     width: 100%;  /* 입력 필드 너비 100% */
-    max-width: 400px;  /* 최대 너비 제한 */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
