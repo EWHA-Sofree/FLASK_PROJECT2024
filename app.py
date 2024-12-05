@@ -16,7 +16,19 @@ if __name__ == "__main__":
 
 @application.route("/")
 def hello():
-    return render_template("main.html")
+    categories = ["문구", "악세서리", "디지털", "의류", "홈데코"]  
+    latest_items = []
+
+    # 각 카테고리별 최신 상품 가져오기
+    for category in categories:
+        items = DB.get_items_bycategory(category)
+        if items:
+            # 최신 상품 선택 
+            latest_key, latest_item = sorted(items.items(),key=lambda x: x[1].get("timestamp", "1970-01-01T00:00:00"),
+            reverse=True)[0]
+            latest_items.append({"key": latest_key, "data": latest_item})
+
+    return render_template("main.html", latest_items=latest_items)
 
 
 @application.route("/reviews_list")
