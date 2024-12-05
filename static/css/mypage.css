@@ -97,6 +97,7 @@ a{
     padding: 10px 5px 10px;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .ui_card__seller{
@@ -117,12 +118,29 @@ a{
     cursor: pointer;
     overflow: hidden;
     width: 142px;
-    height: auto;
+    height: 230px;
 }
 
 .ui_card:hover img{
     transform: scale(1.1);
     transition-duration: 1.5s;
+}
+
+.ui_card__info p{
+    margin: 0;
+}
+
+.ui_card__title{
+    white-space: normal;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 2; 
+}
+
+.ui_card__price{
+    font-weight: 700;
 }
 
 /* 리뷰쓰기 버튼 스타일 */
@@ -175,6 +193,11 @@ a{
     margin: 80px;
 }
 
+.sales_history .ui_card{
+    height: 220px;
+}
+
+
 /* 위시리스트 섹션 */
 .wish_header{
     display: flex;   /* title과 더보기 버튼 정렬 */
@@ -186,6 +209,6 @@ a{
     display: inline-flex;
 }
 
-.ui_card__info p{
-    margin: 0;
+.wishlist .ui_card{
+    height: 220px;
 }
