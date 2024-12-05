@@ -225,12 +225,12 @@ def reg_item():
 
     # 데이터베이스에서 사용자 정보 가져오기
     user_info = DBhandler().get_userinfo_byid(user_id)
-    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    #print("User info passed to template:", user_info)  # 전달 데이터 디버깅
     if not user_info:
         flash("사용자 정보를 찾을 수 없습니다.")
         return redirect(url_for("index"))  # 메인 페이지로 리다이렉트
 
-    print("User info:", user_info)
+    #print("User info:", user_info)
 
     return render_template("reg_item.html", info=user_info)
 
@@ -468,7 +468,7 @@ def view_item_with_reviews(name):
 
     # 디버깅 출력
     #print(f"Filtered reviews with IDs for '{name}': {filtered_reviews}")
-    #return filtered_reviews
+    return filtered_reviews
 
 @application.route("/view_review_detail/<review_id>/")
 def view_review_detail(review_id):
