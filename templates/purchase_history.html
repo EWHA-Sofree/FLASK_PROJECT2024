@@ -1,32 +1,30 @@
 {% extends "index.html" %}
 
 {% block section %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/purchase_history.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
 
-<div class="purchase-history-container">
+<div class="list-container">
   <h2 class="heading">구매 내역</h2>
-  <div class="ui_grid">
-    {% if purchases %}
+  {% if purchases %}
+  <div class="item-grid">
+
     {% for key, value in purchases.items() %}
-    <li class="ui_grid__item">
-            <div class="ui_card">
-                <div class="ui_card__imgcover">
-                  <a href="/view_detail/{{ value.item_id }}/">
-                    <img src="/static/image/{{ value.item_image }}" alt="product-image">
-                  </a>
-                </div>
-                <div class="ui_card__info">
-                    <p class="ui_card__title">{{ value.item_name }}</p>
-                    {% if value.review_written %}
-                    <button type="button" class="view_btn" onclick="location.href='/view_review_detail/{{ value.review_id }}/';">작성한 리뷰 보기</button>
-                    {% else %}
-                    <button type="button" class="reg_btn" onclick="location.href='/reg_review/{{ key }}/';">리뷰 쓰기</button>
-                    {% endif %}
-                </div>
-            </div>
-    </li>
+    <div class="item-card">
+      <div class="item-image">
+        <a href="/view_detail/{{ value.item_id }}/">
+          <img src="/static/image/{{ value.item_image }}" alt="product-image">
+        </a>
+      </div>
+      <div class="item-details">
+        <p class="item-title">{{ value.item_name }}</p>
+        {% if value.review_written %}
+        <button type="button" class="view_btn" onclick="location.href='/view_review_detail/{{ value.review_id }}/';">작성한
+          리뷰 보기</button>
+        {% else %}
+        <button type="button" class="reg_btn" onclick="location.href='/reg_review/{{ key }}/';">리뷰 쓰기</button>
+        {% endif %}
+      </div>
+    </div>
     {% endfor %}
   </div>
 </div>
@@ -36,9 +34,9 @@
   <div class="page-nation">
     <ul>
       <li>
-      {% for i in range(page_count) %}
+        {% for i in range(page_count) %}
         <a href="{{ url_for('purchase_history', page=i) }}" color="black">{{ i+1 }}</a>
-      {% endfor %}
+        {% endfor %}
       </li>
     </ul>
   </div>

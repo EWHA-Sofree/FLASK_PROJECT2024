@@ -20,24 +20,32 @@
     <!--전체상품-->
     <div class="all_item">
         <div class="all_item_title">
-            <h2>전체상품</h2>
+            <h2>카테고리별 최신 상품</h2>
         </div>
         {% if latest_items %}
         <div class="ui_grid">
             <ul class="ui_grid__cols--5">
                 {% for item in latest_items %}
                 <li class="ui_grid__item">
-                    <a href="/view_detail/{{ item['key'] }}">
+                    <div class="by_category">
+                        <a href="{{ url_for('view_list', page=0, category=item['data']['category']) }}">
+                            <span class="category_info">
+                                <p>{{item['data']['category']}}</p>
+                            </span>
+                        </a>
                         <div class="ui_card">
+                            <a href="/view_detail/{{ item['key'] }}">
+
                             <div class="ui_card__imgcover">
-                                    <img src="/static/image/{{ item['data']['img_path'] }}" alt="product-image">
+                                <img src="/static/image/{{ item['data']['img_path'] }}" alt="product-image">
                             </div>
                             <div class="ui_card__info">
                                 <p class="ui_card__title">{{ item['data']['name'] }}</p>
                                 <p class="ui_card__price">{{ item['data']['price'] }}원</p>
                             </div>
+                        </a>
                         </div>
-                    </a>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
@@ -45,7 +53,6 @@
         {% else %}
         <p class="no_contents">등록된 상품이 없습니다.</p>
         {% endif %}
-        </div>
-
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
