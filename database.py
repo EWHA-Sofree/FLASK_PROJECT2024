@@ -136,7 +136,7 @@ class DBhandler:
         # 리뷰 저장
         result = self.db.child("review").push(review_info)
         
-        # purchases 하위 데이터 업데이트
+        # purchases 하위 데이터 업데이트ㅔ
         self.db.child("purchases").child(data['user_id']).child(purchase_id).update({
             "review_written": True
         })
