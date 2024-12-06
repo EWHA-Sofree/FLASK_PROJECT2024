@@ -1,6 +1,7 @@
 /* 전체 컨테이너 스타일 */
 .list-container {
-  width: 90%;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -25,15 +26,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* 아이템 카드 */
 .item-card {
-  width: 220px;
+  width: 180px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -62,7 +62,7 @@
 
 /* 아이템 상세 정보 */
 .item-details {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -70,14 +70,18 @@
   font-size: 16px; /* 폰트 크기 축소 */
   font-weight: normal; /* 굵기 얇게 */
   color: #333;
-  margin-bottom: 8px;
+  min-height: 3em;
+  overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 2; 
 }
 
 .item-price {
   font-size: 14px; /* 가격 텍스트 */
   font-weight: bold;
   color: #555; /* 기본 색상 */
-  margin-top: 4px;
 }
 
 
@@ -87,4 +91,47 @@
   font-size: 18px;
   color: #555;
   margin-top: 40px;
+}
+
+.rating {
+  font-size: 1rem;
+  color: #f5b301;
+  text-align: center;
+
+}
+
+.reg_btn{
+  font-weight: 500;
+  color: white;
+  background-color: #035A3C;
+  border: none;
+  border-radius: 5px;
+  width : 132px;
+  height: 26px;
+  padding: 1px 8px 1px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reg_btn:hover{
+  background-color: #004d2f;
+}
+
+.view_btn {
+  font-weight: 500;
+  color: white;
+  background-color: #808080; /* 회색 배경 */
+  border: none;
+  border-radius: 5px;
+  width: 132px;
+  height: 26px;
+  padding: 1px 8px 1px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view_btn:hover {
+  background-color: #696969; /* hover 시 더 어두운 회색 */
 }

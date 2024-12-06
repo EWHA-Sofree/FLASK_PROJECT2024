@@ -24,12 +24,11 @@ body {
 }
 
 .user-info {
-    font-weight: bold;
     display: flex;
     align-items: center;
 }
 
-.id-label {
+.label {
     color: #666;
 }
 
@@ -82,13 +81,11 @@ body {
 }
 
 /* 제목 스타일 */
-.title-value {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #333; /* 원하는 색상으로 설정 */
-    margin-top: 5px;
+.review-title {
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    margin-bottom: 3px;
 }
-
 
 /* 버튼 */
 .button-container {

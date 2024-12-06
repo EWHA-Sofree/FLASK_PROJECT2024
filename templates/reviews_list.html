@@ -1,37 +1,33 @@
 {% extends "index.html" %}
 {% block section %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/reviews_list.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}" />
 
-<div class="review-list-container">
+<div class="list-container">
   <h2 class="heading">리뷰 모아보기</h2>
-  <div class="ui_grid">
+  <div class="item-grid">
     {% if reviews %}
-      {% for key, value in reviews.items() %}
-      <div class="ui_grid__item">
-        <div class="ui_card">
-          <div class="ui_card__imgcover">
-            <img
-              src="{{ url_for('static', filename='image/' ~ value.img_path) }}"
-              alt="리뷰 사진"
-            />
-          </div>
-          <div class="ui_card__info">
-            <p class="ui_card__title">{{ value.title }}</p>
-            <button
-              class="more-button"
-              onclick="location.href='/view_review_detail/{{ key }}';"
-            >
-              더보기
-            </button>
-          </div>
+    {% for key, value in reviews.items() %}
+    <a href="/view_review_detail/{{ key }}" class="item-image">
+      <div class="item-card">
+        <img src="{{ url_for('static', filename='image/' ~ value.img_path) }}" alt="리뷰 사진" />
+
+        <div class="item-details">
+          <p class="item-title">{{ value.title }}</p>
+          <div class="rating">
+            <!-- 평점을 별 형태로 표시 -->
+            {% for i in range(value.rate|default(0)) %}
+            ★
+            {% endfor %}
+            {% for i in range(5 - value.rate|default(0)) %}
+            ☆
+            {% endfor %}
+        </div>
         </div>
       </div>
-      {% endfor %}
+    </a>
+    {% endfor %}
     {% else %}
-      <p>등록된 리뷰가 없습니다.</p>
+    <p>등록된 리뷰가 없습니다.</p>
     {% endif %}
   </div>
 </div>
@@ -41,7 +37,7 @@
   <div class="page-nation">
     <ul>
       {% for i in range(page_count) %}
-        <a href="{{ url_for('view_reviews_list', page=i) }}" color="black">{{ i+1 }}</a>
+      <a href="{{ url_for('view_reviews_list', page=i) }}" color="black">{{ i+1 }}</a>
       {% endfor %}
     </ul>
   </div>

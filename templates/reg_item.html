@@ -14,14 +14,12 @@
         <h2 class="form-title">상품 판매하기</h2>
         <div>
             <label for="name">상품 이름 </label>
-                <textarea name="name" id="name" rows="1" cols="50" required></textarea><br>
+            <input type="text" name="name" id="name" required></input><br><br>
         </div>
-        <div>
-            <input type="hidden" name="seller" id="seller" value="{{ info['nickname'] }}" readonly><br>
-        </div>
+        <input type="hidden" name="seller" id="seller" value="{{ info['nickname'] }}" readonly>
         <div>
             <label for="price">가격(원) </label>
-            <input type="number" name="price" id="price" min="0" required><br><br>
+            <input type="number" name="price" id="price" min="0" step="100" required><br><br>
         </div>
         <div>
             <label for="info">상품 정보 </label><br>
