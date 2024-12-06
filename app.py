@@ -16,7 +16,19 @@ if __name__ == "__main__":
 
 @application.route("/")
 def hello():
-    return render_template("main.html")
+    categories = ["문구", "악세서리", "디지털", "의류", "홈데코"]  
+    latest_items = []
+
+    # 각 카테고리별 최신 상품 가져오기
+    for category in categories:
+        items = DB.get_items_bycategory(category)
+        if items:
+            # 최신 상품 선택 
+            latest_key, latest_item = sorted(items.items(),key=lambda x: x[1].get("timestamp", "1970-01-01T00:00:00"),
+            reverse=True)[0]
+            latest_items.append({"key": latest_key, "data": latest_item})
+
+    return render_template("main.html", latest_items=latest_items)
 
 
 @application.route("/reviews_list")
@@ -74,6 +86,17 @@ def mypage():
     purchases, total_purchase = get_purchased_items(user_id, limit=4)
     sales_data, total_sales = get_sales_items(user_id, limit=4)
     wishlist, total_wish = get_wishlist_items(user_id, limit=4)
+    
+    # 리뷰 데이터 추가
+    reviewable_purchase_ids = [
+        purchase_id for purchase_id, data in purchases.items() if data["review_written"]
+    ]
+    reviews = DB.get_review_by_purchase_ids(reviewable_purchase_ids)
+    
+    # purchases에 리뷰 ID만 병합
+    for purchase_id in reviewable_purchase_ids:
+        if purchase_id in reviews:
+            purchases[purchase_id]["review_id"] = reviews[purchase_id]
 
     return render_template(
         "mypage.html",
@@ -135,6 +158,17 @@ def purchase_history():
 
     # 위시리스트 데이터 가져오기
     data, total = get_purchased_items(user_id)
+    
+    # 리뷰 데이터 추가
+    reviewable_purchase_ids = [
+        purchase_id for purchase_id, data in data.items() if data["review_written"]
+    ]
+    reviews = DB.get_review_by_purchase_ids(reviewable_purchase_ids)
+    
+    # purchases에 리뷰 ID만 병합
+    for purchase_id in reviewable_purchase_ids:
+        if purchase_id in reviews:
+            data[purchase_id]["review_id"] = reviews[purchase_id]
 
     data = dict(list(data.items())[start_idx:end_idx])  # 슬라이싱 안전하게 처리
     tot_count = len(data)
@@ -203,12 +237,12 @@ def reg_item():
 
     # 데이터베이스에서 사용자 정보 가져오기
     user_info = DBhandler().get_userinfo_byid(user_id)
-    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    #print("User info passed to template:", user_info)  # 전달 데이터 디버깅
     if not user_info:
         flash("사용자 정보를 찾을 수 없습니다.")
         return redirect(url_for("index"))  # 메인 페이지로 리다이렉트
 
-    print("User info:", user_info)
+    #print("User info:", user_info)
 
     return render_template("reg_item.html", info=user_info)
 
@@ -222,7 +256,7 @@ def reg_review(purchase_id):
     user_id = session.get("id")
 
     # 구매 정보 가져오기
-    purchase = DB.get_purchase_by_purchaseid(user_id, purchase_id).val()
+    purchase = DB.get_purchase_by_purchaseid(user_id, purchase_id)
     if not purchase:
         flash("유효하지 않은 구매내역입니다.")
         return redirect(url_for("purchase_history"))
@@ -238,9 +272,6 @@ def reg_review(purchase_id):
     if not item:
         flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("purchase_history"))
-
-    print(f"Purchase: {purchase}")
-    print(f"Item: {item}")
 
     return render_template("reg_review.html", purchase=purchase, item=item)
 
@@ -292,48 +323,38 @@ def sign_up():
 
 @application.route("/signup_post", methods=["POST"])
 def register_user():
-    print("Form data received:", request.form.to_dict())
     data = request.form.to_dict()
 
-    required_fields = [
-        "id",
-        "pw",
-        "username",
-        "nickname",
-        "email",
-        "phone1",
-        "phone2",
-        "phone3",
-    ]
-    for field in required_fields:
-        if field not in data or not data[field].strip():
-            print(f"Error: '{field}' field is missing or empty")
-            flash(f"'{field}'는 필수 입력 항목입니다.")
-            return render_template("sign_up.html")
+    # 중복 아이디 체크
+    username = data.get('id')
+    if DB.user_duplicate_check(username) is False:  # 아이디가 이미 존재하는 경우
+        flash("이미 사용 중인 아이디입니다.")
+        return render_template("sign_up.html")
 
     # 전화번호 병합
     phone = f"{data['phone1']}-{data['phone2']}-{data['phone3']}"
 
     # 비밀번호 해시 처리
-    pw = data["pw"]
-    pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
+    pw = data['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
 
     # 데이터베이스에 사용자 등록 정보 생성
     user_info = {
-        "id": data["id"],
+        "id": data['id'],
         "pw": pw_hash,
-        "username": data["username"],
-        "nickname": data["nickname"],
-        "email": data["email"],
-        "phone": phone,  # 병합된 전화번호 추가
+        "username": data['username'],
+        "nickname": data['nickname'],
+        "email": data['email'],
+        "phone": phone
     }
 
     # 데이터베이스에 사용자 등록 시도
     if DB.insert_user(user_info, pw_hash):
         return render_template("login.html")
     else:
-        flash("User ID already exists!")
+        flash("가입에 실패했습니다. 다시 시도해주세요.")
         return render_template("sign_up.html")
+
 
 
 @application.route("/logout")
@@ -419,10 +440,12 @@ def view_list():
 
 @application.route("/view_detail/<key>/")
 def view_item_detail(key):
+
     print("###name:", key)
     data=DB.get_item_bykey(str(key))
     print("####data:", data)
     return render_template("item_detail.html", key=key, data=data)
+
     # 상품 데이터 가져오기
     data = DB.get_item_bykey(str(key))
     if not data:
@@ -462,10 +485,10 @@ def view_item_with_reviews(name):
     ]
 
     # 디버깅 출력
-    print(f"Filtered reviews with IDs for '{name}': {filtered_reviews}")
+    #print(f"Filtered reviews with IDs for '{name}': {filtered_reviews}")
     return filtered_reviews
 
-@application.route("/view_review_detail/<review_id>")
+@application.route("/view_review_detail/<review_id>/")
 def view_review_detail(review_id):
     review_info = DB.get_review_byID(review_id)
     if not review_info:

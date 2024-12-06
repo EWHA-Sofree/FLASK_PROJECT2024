@@ -11,21 +11,21 @@
     {% if purchases %}
     {% for key, value in purchases.items() %}
     <li class="ui_grid__item">
-        <a href="/view_detail/{{ value.item_id }}/">
             <div class="ui_card">
                 <div class="ui_card__imgcover">
-                        <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                  <a href="/view_detail/{{ value.item_id }}/">
+                    <img src="/static/image/{{ value.item_image }}" alt="product-image">
+                  </a>
                 </div>
                 <div class="ui_card__info">
                     <p class="ui_card__title">{{ value.item_name }}</p>
                     {% if value.review_written %}
-                    <a href="/#">작성한 리뷰 보기</a>
+                    <button type="button" class="view_btn" onclick="location.href='/view_review_detail/{{ value.review_id }}/';">작성한 리뷰 보기</button>
                     {% else %}
-                    <a href="{{ url_for('reg_review', purchase_id=key) }}" class="write-review-btn">리뷰 쓰기</a>
+                    <button type="button" class="reg_btn" onclick="location.href='/reg_review/{{ key }}/';">리뷰 쓰기</button>
                     {% endif %}
                 </div>
             </div>
-        </a>
     </li>
     {% endfor %}
   </div>

@@ -112,23 +112,25 @@
 <div class="reviews">
     <h2 class="review-title">상품에 달린 리뷰</h2>
 
-    {% if has_reviews %}
-    <div class="review-box">
-        {% for review in reviews %}
+    {% if reviews %}
+    {% for review in reviews %}
+    <div class="review-box"> <!-- 각 리뷰마다 review-box 생성 -->
         <div class="review-item">
-            <a href="{{ url_for('view_review_detail', review_id=review.review_id) }}" class="review-link" style="text-decoration: none; color: inherit;">
+            <a href="{{ url_for('view_review_detail', review_id=review.review_id) }}" class="review-link"
+                style="text-decoration: none; color: inherit;">
                 <strong>
-                <span style="color: #666;">ID:</span> {{ review.review_user }}
-            </strong>
-            <div class="rating">
-                 <!-- 평점을 별 형태로 표시 -->
-                {% for i in range(review.review_rate|default(0)) %}
+                    <span style="color: #666;">ID:</span> {{ review.review_user }}
+                </strong>
+                <div class="rating">
+                    <!-- 평점을 별 형태로 표시 -->
+                    {% for i in range(review.review_rate|default(0)) %}
                     ★
-                {% endfor %}
-                {% for i in range(5 - review.review_rate|default(0)) %}
+                    {% endfor %}
+                    {% for i in range(5 - review.review_rate|default(0)) %}
                     ☆
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
+            </a>
             <div class="separator_review"></div>
             <div class="review-text">
                 {% if review.review_image %}
@@ -139,8 +141,8 @@
                 <p>{{ review.review_text }}</p>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
     {% else %}
     <p>상품에 달린 리뷰가 없습니다.</p>
     {% endif %}

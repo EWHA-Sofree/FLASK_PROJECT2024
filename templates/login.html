@@ -10,28 +10,27 @@
     {% endif %}
 {% endwith %}
 
-<h2>회원로그인</h2>
+<div class="signup-container">
+    <h2>로그인</h2>
+    <form action="/login_confirm" method="post">
+        <div class="input-group">
+            <label for="username" class="input-label">아이디</label>
+            <input type="text" class="input-field" placeholder="ID" name="id" required>
+        </div>
 
-<!-- 로그인 폼 -->
-<form action="/login_confirm" method="post">
-    <div class="input-group">
-        <label for="username" class="input-label">아이디</label>
-        <input type="text" class="input-field" placeholder="ID" name="id" required>
-    </div>
+        <div class="input-group">
+            <label for="password" class="input-label">비밀번호</label>
+            <input type="password" class="input-field" placeholder="Password" name="pw" required>
+        </div>
 
-    <div class="input-group">
-        <label for="password" class="input-label">비밀번호</label>
-        <input type="password" class="input-field" placeholder="Password" name="pw" required>
-    </div>
-
-    <p>아이디와 비밀번호를 입력하고 로그인 버튼을 누르세요.</p>
-
-    <div class="button-container">
-        <button type="submit" class="login-btn">로그인</button>
-        <a href="/sign_up">
-            <button type="button" class="signup-btn">회원가입</button>
-        </a>
-    </div>
-</form>
+        <p>아이디와 비밀번호를 입력하고 로그인 버튼을 누르세요.</p>
+        <div class="button-container">
+            <button type="submit" class="login-btn">로그인</button>
+            <a href="/sign_up">
+                <button type="button" class="signup-btn">회원가입</button>
+            </a>
+        </div>
+    </form>
+</div>
 
 {% endblock section %}
