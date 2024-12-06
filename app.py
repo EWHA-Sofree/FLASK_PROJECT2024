@@ -300,6 +300,11 @@ def reg_review_submit():
 
 @application.route("/login")
 def login():
+    user = authenticate_user(request.form['username'], request.form['password']) # type: ignore
+    if user:
+        session['nickname'] = user.nickname  # 사용자 닉네임 저장
+        session['user_id'] = user.id         # 사용자 ID 저장
+        return redirect('/')
     return render_template("login.html")
 
 
@@ -325,11 +330,17 @@ def sign_up():
 def register_user():
     data = request.form.to_dict()
 
-    # 중복 아이디 체크
+    # 중복 체크 여부 확인
+    if data.get('duplicate_checked') != 'True':  # 중복 체크가 안된 경우
+        flash("아이디 중복체크를 해주세요!")
+        return render_template("sign_up.html")
+
+    # 아이디 중복 여부 확인
     username = data.get('id')
     if DB.user_duplicate_check(username) is False:  # 아이디가 이미 존재하는 경우
         flash("이미 사용 중인 아이디입니다.")
         return render_template("sign_up.html")
+
 
     # 전화번호 병합
     phone = f"{data['phone1']}-{data['phone2']}-{data['phone3']}"
@@ -469,7 +480,7 @@ def view_item_with_reviews(name):
     filtered_reviews = [
         {
             "review_id": review_id,
-            "review_user": review_data.get("user_id", "Unknown"),
+            "review_user": review_data.get("user_nickname", "Unknown"),
             "review_rate": review_data.get("rate", 0),
             "review_image": review_data.get("img_path", "default.png"),
             "review_text": review_data.get("review", "Unknown"),
