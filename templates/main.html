@@ -22,61 +22,29 @@
         <div class="all_item_title">
             <h2>전체상품</h2>
         </div>
+        {% if latest_items %}
         <div class="ui_grid">
-            <ul class="ui_grid__cols--4">
+            <ul class="ui_grid__cols--5">
+                {% for item in latest_items %}
                 <li class="ui_grid__item">
-                    <div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                                <img src="{{ url_for('static', filename='image/product1.png') }}" alt="product1">
-                            </a>
+                    <a href="/view_detail/{{ item['key'] }}">
+                        <div class="ui_card">
+                            <div class="ui_card__imgcover">
+                                    <img src="/static/image/{{ item['data']['img_path'] }}" alt="product-image">
+                            </div>
+                            <div class="ui_card__info">
+                                <p class="ui_card__title">{{ item['data']['name'] }}</p>
+                                <p class="ui_card__price">{{ item['data']['price'] }}원</p>
+                            </div>
                         </div>
-                        <div class="ui_card__info">
-                            <a href="#" class="ui_card__title" target="_blank">[데일리템⭐]투톤 체크 스크런치 </a><br>
-                            <a href="#" class="ui_card__price" target="_blank">4,000원</a>
-                        </div>
-                    </div>
+                    </a>
                 </li>
-                <li class="ui_grid__item">
-                    <div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                                <img src="{{ url_for('static', filename='image/product2.png') }}" alt="product2">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                            <a href="#" class="ui_card__title" target="_blank">💡뜨개 무드등(갓+전구 set) </a><br>
-                            <a href="#" class="ui_card__price" target="_blank">11,000원</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="ui_grid__item">
-                    <div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                                <img src="{{ url_for('static', filename='image/product3.png') }}" alt="product3">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                            <a href="#" class="ui_card__title" target="_blank">커스텀 자수🧶앞치마[3종류] </a><br>
-                            <a href="#" class="ui_card__price" target="_blank">23,000원</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="ui_grid__item">
-                    <div class="ui_card">
-                        <div class="ui_card__imgcover">
-                            <a href="#">
-                                <img src="{{ url_for('static', filename='image/product4.png') }}" alt="product4">
-                            </a>
-                        </div>
-                        <div class="ui_card__info">
-                            <a href="#" class="ui_card__title" target="_blank">손뜨개 달개비🪻책갈피 </a><br>
-                            <a href="#" class="ui_card__price" target="_blank">9,500원</a>
-                        </div>
-                    </div>
-                </li>
+                {% endfor %}
             </ul>
+        </div>
+        {% else %}
+        <p class="no_contents">등록된 상품이 없습니다.</p>
+        {% endif %}
         </div>
 
     </div>

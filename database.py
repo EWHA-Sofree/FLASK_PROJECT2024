@@ -127,6 +127,7 @@ class DBhandler:
             "review": data['reviewContents'],
             "img_path": img_path,
             "user_id": data['user_id'],
+            "title": data['title'],
             "user_nickname": data['user_nickname'],
             "timestamp": data['timestamp'],
             "item_id": data['item_id'],

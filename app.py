@@ -16,7 +16,19 @@ if __name__ == "__main__":
 
 @application.route("/")
 def hello():
-    return render_template("main.html")
+    categories = ["문구", "악세서리", "디지털", "의류", "홈데코"]  
+    latest_items = []
+
+    # 각 카테고리별 최신 상품 가져오기
+    for category in categories:
+        items = DB.get_items_bycategory(category)
+        if items:
+            # 최신 상품 선택 
+            latest_key, latest_item = sorted(items.items(),key=lambda x: x[1].get("timestamp", "1970-01-01T00:00:00"),
+            reverse=True)[0]
+            latest_items.append({"key": latest_key, "data": latest_item})
+
+    return render_template("main.html", latest_items=latest_items)
 
 
 @application.route("/reviews_list")
@@ -225,12 +237,12 @@ def reg_item():
 
     # 데이터베이스에서 사용자 정보 가져오기
     user_info = DBhandler().get_userinfo_byid(user_id)
-    print("User info passed to template:", user_info)  # 전달 데이터 디버깅
+    #print("User info passed to template:", user_info)  # 전달 데이터 디버깅
     if not user_info:
         flash("사용자 정보를 찾을 수 없습니다.")
         return redirect(url_for("index"))  # 메인 페이지로 리다이렉트
 
-    print("User info:", user_info)
+    #print("User info:", user_info)
 
     return render_template("reg_item.html", info=user_info)
 
@@ -288,6 +300,11 @@ def reg_review_submit():
 
 @application.route("/login")
 def login():
+    user = authenticate_user(request.form['username'], request.form['password']) # type: ignore
+    if user:
+        session['nickname'] = user.nickname  # 사용자 닉네임 저장
+        session['user_id'] = user.id         # 사용자 ID 저장
+        return redirect('/')
     return render_template("login.html")
 
 
@@ -457,7 +474,7 @@ def view_item_with_reviews(name):
     filtered_reviews = [
         {
             "review_id": review_id,
-            "review_user": review_data.get("user_id", "Unknown"),
+            "review_user": review_data.get("user_nickname", "Unknown"),
             "review_rate": review_data.get("rate", 0),
             "review_image": review_data.get("img_path", "default.png"),
             "review_text": review_data.get("review", "Unknown"),
