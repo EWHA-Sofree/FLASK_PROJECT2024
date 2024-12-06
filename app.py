@@ -300,6 +300,11 @@ def reg_review_submit():
 
 @application.route("/login")
 def login():
+    user = authenticate_user(request.form['username'], request.form['password']) # type: ignore
+    if user:
+        session['nickname'] = user.nickname  # 사용자 닉네임 저장
+        session['user_id'] = user.id         # 사용자 ID 저장
+        return redirect('/')
     return render_template("login.html")
 
 
@@ -475,7 +480,7 @@ def view_item_with_reviews(name):
     filtered_reviews = [
         {
             "review_id": review_id,
-            "review_user": review_data.get("user_id", "Unknown"),
+            "review_user": review_data.get("user_nickname", "Unknown"),
             "review_rate": review_data.get("rate", 0),
             "review_image": review_data.get("img_path", "default.png"),
             "review_text": review_data.get("review", "Unknown"),
