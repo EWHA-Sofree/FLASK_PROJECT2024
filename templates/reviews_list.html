@@ -14,7 +14,8 @@
         <img src="{{ url_for('static', filename='image/' ~ value.img_path) }}" alt="리뷰 사진" />
 
         <div class="item-details">
-          <p class="item-title">{{ value.title }}</p>
+          <p class="review-item-name"> {{ value.name }} </p>
+          <p class="review-title">{{ value.title }}</p>
           <div class="rating">
             <!-- 평점을 별 형태로 표시 -->
             {% for i in range(value.rate|default(0)) %}
@@ -23,6 +24,7 @@
             {% for i in range(5 - value.rate|default(0)) %}
             ☆
             {% endfor %}
+            <span class="rating-text">{{value.rate}}  / 5</span>
           </div>
         </div>
       </div>

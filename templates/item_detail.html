@@ -118,15 +118,12 @@
     <!-- 각 리뷰마다 review-box 생성 -->
     {% for review in reviews %}
     <div class="review-box">
+        <a href="{{ url_for('view_review_detail', review_id=review.review_id) }}" class="review-link" style="text-decoration: none; color: inherit;">
         <div class="review-item">
-            <a href="{{ url_for('view_review_detail', review_id=review.review_id) }}" class="review-link"
-                style="text-decoration: none; color: inherit;">
-                <div class="review-title">
-                    <span style="font-weight: bold;">{{ review.review_title }}</span>
-                </div>
+                <span style="font-weight: 500; font-size: 105%;">"{{ review.review_title }}"</span>
                 <div class="review-user">
-                    <span style="color: #666; font-size: 90%;">닉네임: </span>
-                    {{ review.review_user }}
+                    <span style="color: #666;">닉네임: </span>
+                    <span >{{ review.review_user }}</span>
                 </div>
                 <div class="rating">
                     {% for i in range(review.review_rate|default(0)) %}
@@ -136,7 +133,6 @@
                     ☆
                     {% endfor %}
                 </div>
-            </a>
             <div class="separator_review"></div>
             <div class="review-text">
                 {% if review.review_image %}
@@ -147,6 +143,7 @@
                 <p>{{ review.review_text }}</p>
             </div>
         </div>
+        </a>
     </div>
     {% endfor %}
 
