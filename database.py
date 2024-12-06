@@ -127,6 +127,7 @@ class DBhandler:
             "review": data['reviewContents'],
             "img_path": img_path,
             "user_id": data['user_id'],
+            "title": data['title'],
             "user_nickname": data['user_nickname'],
             "timestamp": data['timestamp'],
             "item_id": data['item_id'],
@@ -136,7 +137,7 @@ class DBhandler:
         # 리뷰 저장
         result = self.db.child("review").push(review_info)
         
-        # purchases 하위 데이터 업데이트
+        # purchases 하위 데이터 업데이트ㅔ
         self.db.child("purchases").child(data['user_id']).child(purchase_id).update({
             "review_written": True
         })
