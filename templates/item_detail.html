@@ -110,9 +110,10 @@
 
 <!-- 리뷰 박스 생성 -->
 <div class="reviews">
-    <h2 class="review-title">상품에 달린 리뷰</h2>
+    
 
     {% if reviews %}
+    <h2 class="review-title">상품 리뷰</h2>
     {% for review in reviews %}
     <div class="review-box"> <!-- 각 리뷰마다 review-box 생성 -->
         <div class="review-item">

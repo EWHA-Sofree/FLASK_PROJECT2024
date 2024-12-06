@@ -68,16 +68,8 @@ body {
   text-overflow: ellipsis; /* 말줄임표 표시 */
 }
 
-.more-button {
-  padding: 8px 16px;
-  font-size: 14px;
-  color: white;
-  background-color: #035a3c;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.more-button:hover {
-  background-color: #004d2f;
+.rating {
+  font-size: 1rem;
+  color: #f5b301;
+  text-align: left;
 }
