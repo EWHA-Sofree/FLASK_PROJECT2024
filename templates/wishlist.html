@@ -1,43 +1,54 @@
 {% extends "index.html" %}
+
 {% block section %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/wishlist.css') }}">
+  href="{{ url_for('static', filename='css/list.css') }}"
+/>
 
-<div class="wishlist-container">
+<div class="list-container">
   <h2 class="heading">위시리스트</h2>
-  <div class="ui_grid">
+  <p class="item-count">총 {{ total }}개의 상품이 있습니다.</p>
+
+  {% if total > 0 %}
+  <div class="item-grid">
     {% if wish %}
       {% for key, value in wish.items() %}
-      <div class="ui_grid__item">
-        <div class="ui_card" onclick="location.href='/view_detail/{{ key }}/'">
-          <div class="ui_card__imgcover">
-            <img
-              src="{{ url_for('static', filename='image/' ~ value.item_image) }}"
-              alt="리뷰 사진"
-            />
-          </div>
-          <div class="ui_card__info">
-            <p class="ui_card__title">{{ value.item_name }}</p>
-            <p class="ui_card__seller">{{ value.item_seller }}</p>
-          </div>
+      <div class="item-card">
+        <!-- 이미지 클릭 시 상세 페이지로 이동 -->
+        <a href="'/view_detail/{{ key }}/'" class="item-image">
+          <img
+            src="{{ url_for('static', filename='image/' ~ value.item_image) }}"
+              alt="상품 이미지"
+          />
+        </a>
+        <div class="item-details">
+          <!-- 상품 이름 -->
+          <p class="item-title">{{ value.item_name }}</p>
+          <!-- 상품 가격 표시 -->
+          <p class="item-seller">{{ value.item_seller }}</p>
         </div>
       </div>
       {% endfor %}
+      {% endif %}
   </div>
-</div>
 
-<!-- 페이지네이션을 위한 코드 시작 -->
+  <!-- 페이지네이션 -->
+<!-- 페이지네이션 -->
 <div class="page-wrap">
   <div class="page-nation">
     <ul>
-      <li>
       {% for i in range(page_count) %}
-        <a href="{{ url_for('wishlist', page=i) }}" color="black">{{ i+1 }}</a>
+      <a href="{{ url_for('wishlist', page=i) }}">
+        {{ i + 1 }}
+      </a>
       {% endfor %}
-      </li>
     </ul>
   </div>
 </div>
-{% endif %}
+
+  {% else %}
+  <p class="no-items">위시리스트에 담긴 상품이 없습니다.</p>
+  {% endif %}
+</div>
 {% endblock section %}
