@@ -325,11 +325,17 @@ def sign_up():
 def register_user():
     data = request.form.to_dict()
 
-    # 중복 아이디 체크
+    # 중복 체크 여부 확인
+    if data.get('duplicate_checked') != 'True':  # 중복 체크가 안된 경우
+        flash("아이디 중복체크를 해주세요!")
+        return render_template("sign_up.html")
+
+    # 아이디 중복 여부 확인
     username = data.get('id')
     if DB.user_duplicate_check(username) is False:  # 아이디가 이미 존재하는 경우
         flash("이미 사용 중인 아이디입니다.")
         return render_template("sign_up.html")
+
 
     # 전화번호 병합
     phone = f"{data['phone1']}-{data['phone2']}-{data['phone3']}"
