@@ -5,26 +5,25 @@
 
 <div class="review-container">
     <h2>리뷰 상세</h2>
-    <div class="product-name">{{ data.name }}</div>
-
+    <a href="/view_detail/{{ data.item_id }}" style="text-decoration: none;">
+        <div class="product-name">{{ data.name }}</div>
+    </a>
     <div class="review-user-info">
-        
-
         <div class="review-title">
-            <span class="label">제목:</span> 
+            <span class="label">제목 :</span>
             <span class="title-value">{{ data.title }}</span>
         </div>
         <div class="user-info">
-            <span class="label">닉네임:</span> 
+            <span class="label">닉네임 :</span>
             <span class="id-value">{{ data.user_nickname }}</span>
         </div>
 
         <div class="rating">
             {% for i in range(data.rate|default(0)) %}
-                ★
+            ★
             {% endfor %}
             {% for i in range(5 - data.rate|default(0)) %}
-                ☆
+            ☆
             {% endfor %}
         </div>
     </div>
@@ -33,11 +32,11 @@
 
     <div class="review-image">
         {% if data.img_path %}
-            <img src="{{ url_for('static', filename='image/' ~ data.img_path) }}" alt="리뷰 이미지">
+        <img src="{{ url_for('static', filename='image/' ~ data.img_path) }}" alt="리뷰 이미지">
         {% else %}
-            <div class="no-image-placeholder">
-                이미지가 첨부되지 않았습니다.
-            </div>
+        <div class="no-image-placeholder">
+            이미지가 첨부되지 않았습니다.
+        </div>
         {% endif %}
     </div>
 

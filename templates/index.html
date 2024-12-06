@@ -20,7 +20,7 @@
             </a>
             <div class="header__actions">
                 {% if session['id'] %}
-                <div class="session__msg">안녕하세요, {{ session['id'] }}님!</div>
+                <div class="session__msg">안녕하세요, <br> {{ session['id'] }}님!</div>
                 <a href="/logout" class="header__link">
                     <img src="{{ url_for('static', filename='image/logout_icon.png') }}" alt="Login Icon" class="icon">
                     로그아웃

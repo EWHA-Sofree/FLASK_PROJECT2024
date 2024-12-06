@@ -4,6 +4,8 @@
 
 <div class="list-container">
   <h2 class="heading">리뷰 모아보기</h2>
+  <p class="item-count">총 {{ total }}개의 리뷰가 있습니다.</p>
+
   <div class="item-grid">
     {% if reviews %}
     {% for key, value in reviews.items() %}
@@ -12,7 +14,8 @@
         <img src="{{ url_for('static', filename='image/' ~ value.img_path) }}" alt="리뷰 사진" />
 
         <div class="item-details">
-          <p class="item-title">{{ value.title }}</p>
+          <p class="review-item-name"> {{ value.name }} </p>
+          <p class="review-title">{{ value.title }}</p>
           <div class="rating">
             <!-- 평점을 별 형태로 표시 -->
             {% for i in range(value.rate|default(0)) %}
@@ -21,7 +24,8 @@
             {% for i in range(5 - value.rate|default(0)) %}
             ☆
             {% endfor %}
-        </div>
+            <span class="rating-text">{{value.rate}}  / 5</span>
+          </div>
         </div>
       </div>
     </a>
