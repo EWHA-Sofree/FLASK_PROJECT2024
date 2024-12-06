@@ -79,11 +79,16 @@
 }
 
 .item-price {
-  font-size: 14px; /* 가격 텍스트 */
+  font-size: 16px; /* 가격 텍스트 */
   font-weight: bold;
+  margin-top: 4px;
   color: #555; /* 기본 색상 */
 }
 
+.item-seller{
+  font-size: 14px;
+    color: #686868;
+}
 
 /* 아이템 없음 */
 .no-items {

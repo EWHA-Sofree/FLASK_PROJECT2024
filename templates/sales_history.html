@@ -3,41 +3,51 @@
 {% block section %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/sales_history.css') }}">
+  href="{{ url_for('static', filename='css/list.css') }}"
+/>
 
-<div class="sales-history-container">
-  <h2 class="heading">판매 내역</h2>
-  <div class="ui_grid">
-    {% if sales %}
+<div class="list-container">
+  <h2 class="heading">판매내역</h2>
+  <p class="item-count">총 {{ total }}개의 상품이 있습니다.</p>
+
+  {% if total > 0 %}
+  <div class="item-grid">
+{% if sales %}
     {% for key, value in sales.items() %}
-    <li class="ui_grid__item">
-        <a href="/view_detail/{{ key }}/">
-            <div class="ui_card">
-                <div class="ui_card__imgcover">
-                        <img src="/static/image/{{ value.item_image }}" alt="product-image">
-                </div>
-                <div class="ui_card__info">
-                    <p class="ui_card__title">{{ value.item_name }}</p>
-                    <p class="ui_card__seller">{{ value.item_seller }}</p>
-                </div>
-            </div>
+      <div class="item-card">
+        <!-- 이미지 클릭 시 상세 페이지로 이동 -->
+        <a href="/view_detail/{{ key }}/" class="item-image">
+          <img
+            src="/static/image/{{ value.item_image }}" alt="상품 이미지"
+          />
         </a>
-    </li>
-    {% endfor %}
+        <div class="item-details">
+          <!-- 상품 이름 -->
+          <p class="item-title">{{ value.item_name }}</p>
+          <!-- 상품 가격 표시 -->
+          <p class="item-price">{{ value.item_price }}원</p>
+        </div>
+      </div>
+      {% endfor %}
+  {% endif %}
   </div>
-</div>
 
-<!-- 페이지네이션을 위한 코드 시작 -->
+  <!-- 페이지네이션 -->
+<!-- 페이지네이션 -->
 <div class="page-wrap">
   <div class="page-nation">
     <ul>
-      <li>
       {% for i in range(page_count) %}
-        <a href="{{ url_for('sales_history', page=i) }}" color="black">{{ i+1 }}</a>
+      <a href="{{ url_for('sales_history', page=i) }}">
+        {{ i + 1 }}
+      </a>
       {% endfor %}
-      </li>
     </ul>
   </div>
 </div>
-{% endif %}
+
+  {% else %}
+  <p class="no-items">등록된 상품이 없습니다.</p>
+  {% endif %}
+</div>
 {% endblock section %}
