@@ -108,22 +108,27 @@
     </div>
 </div>
 
+<br><br>
+
+<h2 class="review-title">상품 리뷰</h2>
 <!-- 리뷰 박스 생성 -->
 <div class="reviews">
-    
 
-    {% if reviews %}
-    <h2 class="review-title">상품 리뷰</h2>
+{% if reviews %}
+    <!-- 각 리뷰마다 review-box 생성 -->
     {% for review in reviews %}
-    <div class="review-box"> <!-- 각 리뷰마다 review-box 생성 -->
+    <div class="review-box">
         <div class="review-item">
             <a href="{{ url_for('view_review_detail', review_id=review.review_id) }}" class="review-link"
                 style="text-decoration: none; color: inherit;">
-                <strong>
-                    <span style="color: #666;">닉네임:</span> {{ review.review_user }}
-                </strong>
+                <div class="review-title">
+                    <span style="font-weight: bold;">{{ review.review_title }}</span>
+                </div>
+                <div class="review-user">
+                    <span style="color: #666; font-size: 90%;">닉네임: </span>
+                    {{ review.review_user }}
+                </div>
                 <div class="rating">
-                    <!-- 평점을 별 형태로 표시 -->
                     {% for i in range(review.review_rate|default(0)) %}
                     ★
                     {% endfor %}
@@ -144,6 +149,7 @@
         </div>
     </div>
     {% endfor %}
+
     {% else %}
     <p>상품에 달린 리뷰가 없습니다.</p>
     {% endif %}

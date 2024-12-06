@@ -67,15 +67,15 @@
 }
 
 .item-title {
-  font-size: 16px; /* 폰트 크기 축소 */
-  font-weight: normal; /* 굵기 얇게 */
+  font-size: 16px;
+  font-weight: normal;
   color: #333;
   min-height: 3em;
   overflow: hidden; 
-    text-overflow: ellipsis; 
-    display: -webkit-box; 
-    -webkit-box-orient: vertical; 
-    -webkit-line-clamp: 2; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 2; 
 }
 
 .item-price {
@@ -87,7 +87,7 @@
 
 .item-seller{
   font-size: 14px;
-    color: #686868;
+  color: #686868;
 }
 
 /* 아이템 없음 */
@@ -106,16 +106,16 @@
 }
 
 .reg_btn{
-  font-weight: 500;
-  color: white;
-  background-color: #035A3C;
+  font-weight: 400;
   border: none;
   border-radius: 5px;
-  width : 132px;
-  height: 26px;
-  padding: 1px 8px 1px;
-  margin-top: 8px;
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding: 1px 8px;
   cursor: pointer;
+  color: white;
+  background-color: #035A3C;
   transition: background-color 0.3s;
 }
 
@@ -124,19 +124,17 @@
 }
 
 .view_btn {
-  font-weight: 500;
-  color: white;
-  background-color: #808080; /* 회색 배경 */
+  font-weight: 400;
   border: none;
   border-radius: 5px;
-  width: 132px;
-  height: 26px;
-  padding: 1px 8px 1px;
-  margin-top: 8px;
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding: 1px 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .view_btn:hover {
-  background-color: #696969; /* hover 시 더 어두운 회색 */
+  background-color: #c5c5c5;
 }

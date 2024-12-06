@@ -469,6 +469,7 @@ def view_item_with_reviews(name):
     filtered_reviews = [
         {
             "review_id": review_id,
+            "review_title": review_data.get("title", "제목없음"),
             "review_user": review_data.get("user_nickname", "Unknown"),
             "review_rate": review_data.get("rate", 0),
             "review_image": review_data.get("img_path", "default.png"),

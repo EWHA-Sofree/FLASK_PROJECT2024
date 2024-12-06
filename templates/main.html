@@ -29,9 +29,7 @@
                 <li class="ui_grid__item">
                     <div class="by_category">
                         <a href="{{ url_for('view_list', page=0, category=item['data']['category']) }}">
-                            <span class="category_info">
-                                <p>{{item['data']['category']}}</p>
-                            </span>
+                                <p class="category_info">{{item['data']['category']}}</p>
                         </a>
                         <div class="ui_card">
                             <a href="/view_detail/{{ item['key'] }}">

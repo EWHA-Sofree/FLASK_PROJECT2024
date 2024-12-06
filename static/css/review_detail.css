@@ -30,6 +30,7 @@ body {
 
 .label {
     color: #666;
+    font-size: 90%;
 }
 
 .id-value {
@@ -78,13 +79,14 @@ body {
 
 .review-text {
     color: #333;
+    text-align: start;
 }
 
 /* 제목 스타일 */
 .review-title {
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    overflow: clip; 
     margin-bottom: 3px;
+    font-size: 110%;
 }
 
 /* 버튼 */

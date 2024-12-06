@@ -4,6 +4,8 @@
 
 <div class="list-container">
   <h2 class="heading">리뷰 모아보기</h2>
+  <p class="item-count">총 {{ total }}개의 리뷰가 있습니다.</p>
+
   <div class="item-grid">
     {% if reviews %}
     {% for key, value in reviews.items() %}
@@ -21,7 +23,7 @@
             {% for i in range(5 - value.rate|default(0)) %}
             ☆
             {% endfor %}
-        </div>
+          </div>
         </div>
       </div>
     </a>
