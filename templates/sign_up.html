@@ -6,6 +6,15 @@
 <div class="signup-container">
     <h2 class="signup-title">회원가입</h2>
 
+    <!-- 플래시 메시지 출력 -->
+    <ul class="flashes">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <li class="flash-message">{{ messages[0] }}</li>
+            {% endif %}
+        {% endwith %}
+    </ul>
+
     <!-- 기본정보 섹션 -->
     <div class="section">
         <div class="section-header">
@@ -17,11 +26,12 @@
                 <input type="text" id="id" name="id" required>
                 <span class="input-info">(영문소문자/숫자, 4~16자)</span>
                 <button type="button" class="duplicate-btn" onclick="checkDuplicate()">중복체크</button>
+                <input type="hidden" id="duplicate_checked" name="duplicate_checked" value="False">
             </div>
-            
+
             <script>
                 function checkDuplicate() {
-                    const id = document.getElementById('id').value; // 입력된 아이디 가져오기
+                    const id = document.getElementById('id').value;
                     if (!id) {
                         alert("아이디를 입력하세요.");
                         return;
@@ -37,6 +47,9 @@
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message); // 서버에서 받은 메시지 출력
+                        if (data.status === 'success') {
+                            document.getElementById('duplicate_checked').value = 'True'; // 중복 체크가 완료되었음을 표시
+                        }
                     })
                     .catch(error => {
                         console.error("Error:", error);
