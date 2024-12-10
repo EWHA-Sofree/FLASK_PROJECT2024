@@ -1,4 +1,3 @@
-# 데이터베이스 연결하는 스크립트 
 import pyrebase
 import json
 
@@ -73,7 +72,6 @@ class DBhandler:
         items=self.db.child("item").get()
         return items
     
-    
     def get_item_byname(self, name):
         items = self.db.child("item").get()
         target_value=""
@@ -83,10 +81,6 @@ class DBhandler:
         if key_value == name:
             target_value=res.val()
         return target_value
-    
-    
-    
-    
     
     def get_item_bykey(self, key):
         items = self.db.child("item").get()
@@ -100,7 +94,6 @@ class DBhandler:
 
         return None  # 매칭되는 값이 없으면 None 반환
 
-    
     def get_items_bycategory(self, cate):
         tmps = self.db.child("item").get()
         target_value=[]
