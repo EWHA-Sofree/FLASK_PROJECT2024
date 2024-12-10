@@ -173,9 +173,7 @@
 
 ## 📖 기술 블로그
 
-더 자세한 개발 과정은 기술 블로그에서 확인할 수 있습니다.
-
-[기술 블로그](https://lying-chiller-8c1.notion.site/15103656e23f8088b328d055905c3b14)
+[블로그 URL](https://lying-chiller-8c1.notion.site/15103656e23f8088b328d055905c3b14)
 - [📕 개념](https://lying-chiller-8c1.notion.site/15103656e23f80c08c7ef69b75f2188b) / [⛓️ 가이드](https://lying-chiller-8c1.notion.site/15103656e23f80da8e21e698428d91d8) / [🔗 팁/디버깅](https://flannel-interest-6ec.notion.site/1522b77b3a26805ebcd2caa3b5d4f72b) / [1️⃣ 해설1](https://lying-chiller-8c1.notion.site/1-15103656e23f80b389ffd8fcf8371a29) / [2️⃣ 해설2](https://lying-chiller-8c1.notion.site/2-12103656e23f8089a91ae090b017fee0)
 
 ---
