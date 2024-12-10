@@ -1,3 +1,6 @@
+
+// 메인 슬라이더에서 3초마다 다음 슬라이드로 자동 전환하는 함수
+
 document.addEventListener("DOMContentLoaded", () => {
     const mainSlider = document.querySelector(".main-slider");
     const mainSlides = document.querySelectorAll(".main-slide");

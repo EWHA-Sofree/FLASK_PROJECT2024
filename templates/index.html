@@ -66,6 +66,7 @@
         {% endblock section %}
     </section>
 
+    <!--푸터-->
     <footer class="footer">
         <div class="footer-container">
             <div class="customer-service">
@@ -83,12 +84,13 @@
         </div>
     </footer>    
 
+    <!-- 카테고리를 표시하기 위해 서브메뉴에 'active' 클래스를 추가하는 스크립트 -->
     <script>
         $(document).ready(function () {
-            const currentCategory = "{{ category }}"; // Flask에서 전달받은 카테고리
+            const currentCategory = "{{ category }}";
             $('.submenu a').each(function () {
                 if ($(this).text().trim() === currentCategory) {
-                    $(this).addClass('active'); // 'active' 클래스를 추가
+                    $(this).addClass('active');
                 }
             });
         });
