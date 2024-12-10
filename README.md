@@ -7,23 +7,14 @@
 
 ## 📌 프로젝트 소개
 
-<div style="display: flex; align-items: center;">
-    <div style="flex: 1; text-align: center;">
-        <img src="static/image/Readme.png" alt="리드미 대문" style="width:100%">
-    </div>
-    <div style="flex: 1; padding-left:20px;">
-        <span style="color: #00462a; font-weight:bold; font-size:24px; ">Ewha Market</span><span style="font-weight:bold; font-size:20px;">은 ...</span>
-        <ul style="padding:10px 15px 0px 5px; list-style-type: none; text-align:justify;">
-            <li>
-                기존 교내의 온/오프라인에서 진행되던 학생들의 수제 아이템 거래를 더욱 안전하고 편리하게 이용할 수 있도록 개발된 마켓 웹 어플리케이션입니다. 
-            </li>
-            <br>
-            <li>
-                단순화하고 최적화된 거래 환경을 제공하여 기존의 건전한 거래 문화에 기여하기 위해 기획되었습니다.
-            </li>
-        </ul>
-    </div>
-</div>
+<p align="center">
+    <img src="static/image/Readme.png" alt="리드미 대문" width="300">
+</p>
+
+**Ewha Market**은 다음과 같은 플랫폼입니다:
+
+- 기존 교내의 온/오프라인에서 진행되던 학생들의 수제 아이템 거래를 더욱 안전하고 편리하게 이용할 수 있도록 개발되었습니다.
+- 단순, 최적화된 거래 환경을 제공하여 기존의 건전한 거래 문화에 보탬하고자 기획되었습니다.
 
 ---
 
@@ -66,14 +57,14 @@
    ```
 
 2. **가상환경 생성**  
-  Anaconda에서 Python 가상환경을 생성합니다:
+  Anaconda에서 Python 가상환경을 생성:
 
    ```bash
    conda create --name <your-environment-name>
    ```
 
 3. **가상환경 활성화**  
-  생성한 가상환경을 활성화합니다:
+  생성한 가상환경을 활성화:
 
    ```bash
    conda activate <your-environment-name>
@@ -94,7 +85,7 @@
 
 6. **브라우저에서 접속**
 
-   브라우저에서 `http://127.0.0.1:5000`으로 접속하여 애플리케이션을 확인하세요.
+   브라우저에서 `http://127.0.0.1:5000`으로 접속하여 어플리케이션 확인.
 
 ---
 
@@ -182,10 +173,8 @@
 
 ## 📖 기술 블로그
 
-더 자세한 개발 과정은 기술 블로그에서 확인하실 수 있습니다.
-
-[기술 블로그](https://lying-chiller-8c1.notion.site/15103656e23f8088b328d055905c3b14)
-- [📕 개념](https://lying-chiller-8c1.notion.site/15103656e23f80c08c7ef69b75f2188b) / [⛓️ 가이드](https://lying-chiller-8c1.notion.site/15103656e23f80da8e21e698428d91d8) / [🔗 팁/디버깅](https://flannel-interest-6ec.notion.site/1522b77b3a26805ebcd2caa3b5d4f72b) / [1️⃣ 해설1](https://lying-chiller-8c1.notion.site/1-15103656e23f80b389ffd8fcf8371a29) / [2️⃣ 해설2](https://lying-chiller-8c1.notion.site/2-12103656e23f8089a91ae090b017fee0)
+[블로그 URL](https://lying-chiller-8c1.notion.site/15103656e23f8088b328d055905c3b14)
+- [📕 개념](https://lying-chiller-8c1.notion.site/15103656e23f80c08c7ef69b75f2188b) / [⛓️ 가이드](https://lying-chiller-8c1.notion.site/15103656e23f80da8e21e698428d91d8) / [🔗 팁/디버깅](https://flannel-interest-6ec.notion.site/1522b77b3a26805ebcd2caa3b5d4f72b) / [1️⃣ 해설1-프로젝트 구조,세션](https://lying-chiller-8c1.notion.site/1-15103656e23f80b389ffd8fcf8371a29) / [2️⃣ 해설2-마이페이지](https://lying-chiller-8c1.notion.site/2-12103656e23f8089a91ae090b017fee0)
 
 ---
 
