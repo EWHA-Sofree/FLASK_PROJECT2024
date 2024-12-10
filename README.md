@@ -11,7 +11,7 @@
     <img src="static/image/Readme.png" alt="리드미 대문" width="300">
 </p>
 
-**Ewha Market**은 아래와 같은 플랫폼입니다:
+**Ewha Market**은 다음과 같은 플랫폼입니다:
 
 - 기존 교내의 온/오프라인에서 진행되던 학생들의 수제 아이템 거래를 더욱 안전하고 편리하게 이용할 수 있도록 개발되었습니다.
 - 단순, 최적화된 거래 환경을 제공하여 기존의 건전한 거래 문화에 보탬하고자 기획되었습니다.
@@ -174,7 +174,7 @@
 ## 📖 기술 블로그
 
 [블로그 URL](https://lying-chiller-8c1.notion.site/15103656e23f8088b328d055905c3b14)
-- [📕 개념](https://lying-chiller-8c1.notion.site/15103656e23f80c08c7ef69b75f2188b) / [⛓️ 가이드](https://lying-chiller-8c1.notion.site/15103656e23f80da8e21e698428d91d8) / [🔗 팁/디버깅](https://flannel-interest-6ec.notion.site/1522b77b3a26805ebcd2caa3b5d4f72b) / [1️⃣ 해설1](https://lying-chiller-8c1.notion.site/1-15103656e23f80b389ffd8fcf8371a29) / [2️⃣ 해설2](https://lying-chiller-8c1.notion.site/2-12103656e23f8089a91ae090b017fee0)
+- [📕 개념](https://lying-chiller-8c1.notion.site/15103656e23f80c08c7ef69b75f2188b) / [⛓️ 가이드](https://lying-chiller-8c1.notion.site/15103656e23f80da8e21e698428d91d8) / [🔗 팁/디버깅](https://flannel-interest-6ec.notion.site/1522b77b3a26805ebcd2caa3b5d4f72b) / [1️⃣ 해설1-프로젝트 구조,세션](https://lying-chiller-8c1.notion.site/1-15103656e23f80b389ffd8fcf8371a29) / [2️⃣ 해설2-마이페이지](https://lying-chiller-8c1.notion.site/2-12103656e23f8089a91ae090b017fee0)
 
 ---
 
